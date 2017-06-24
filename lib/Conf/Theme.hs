@@ -23,68 +23,67 @@ import qualified XMonad.Layout.Tabbed as Tabbed
 
 import qualified XMonad.Prompt as Prompt
 
-clickJustFocuses = True
-
+clickJustFocuses  = True
 focusFollowsMouse = False
 
 topBar =
   Prompt.def
-  { Tabbed.fontName = Fonts.font
+  { Tabbed.fontName            = Fonts.font
   , Tabbed.inactiveBorderColor = Colors.base03
-  , Tabbed.inactiveColor = Colors.base03
-  , Tabbed.inactiveTextColor = Colors.base03
-  , Tabbed.activeBorderColor = Colors.active
-  , Tabbed.activeColor = Colors.active
-  , Tabbed.activeTextColor = Colors.active
-  , Tabbed.urgentBorderColor = Colors.red
-  , Tabbed.urgentTextColor = Colors.yellow
-  , Tabbed.decoHeight = Sizes.topbar
+  , Tabbed.inactiveColor       = Colors.base03
+  , Tabbed.inactiveTextColor   = Colors.base03
+  , Tabbed.activeBorderColor   = Colors.active
+  , Tabbed.activeColor         = Colors.active
+  , Tabbed.activeTextColor     = Colors.active
+  , Tabbed.urgentBorderColor   = Colors.red
+  , Tabbed.urgentTextColor     = Colors.yellow
+  , Tabbed.decoHeight          = Sizes.topbar
   }
 
 tabbed =
   Prompt.def
-  { Tabbed.fontName = Fonts.font
-  , Tabbed.activeColor = Colors.active
-  , Tabbed.inactiveColor = Colors.base02
-  , Tabbed.activeBorderColor = Colors.active
+  { Tabbed.fontName            = Fonts.font
+  , Tabbed.activeColor         = Colors.active
+  , Tabbed.inactiveColor       = Colors.base02
+  , Tabbed.activeBorderColor   = Colors.active
   , Tabbed.inactiveBorderColor = Colors.base02
-  , Tabbed.activeTextColor = Colors.base03
-  , Tabbed.inactiveTextColor = Colors.base00
+  , Tabbed.activeTextColor     = Colors.base03
+  , Tabbed.inactiveTextColor   = Colors.base00
   }
 
 prompt =
   Prompt.def
-  { Prompt.font = Fonts.font
-  , Prompt.bgColor = Colors.base03
-  , Prompt.fgColor = Colors.active
-  , Prompt.fgHLight = Colors.base03
-  , Prompt.bgHLight = Colors.active
-  , Prompt.borderColor = Colors.base03
+  { Prompt.font              = Fonts.font
+  , Prompt.bgColor           = Colors.base03
+  , Prompt.fgColor           = Colors.active
+  , Prompt.fgHLight          = Colors.base03
+  , Prompt.bgHLight          = Colors.active
+  , Prompt.borderColor       = Colors.base03
   , Prompt.promptBorderWidth = 0
-  , Prompt.height = Sizes.prompt
-  , Prompt.position = Prompt.Top
+  , Prompt.height            = Sizes.prompt
+  , Prompt.position          = Prompt.Top
   }
 
 warmPrompt =
   prompt
-  { Prompt.font = Fonts.font
-  , Prompt.bgColor = Colors.yellow
-  , Prompt.fgColor = Colors.base03
+  { Prompt.font     = Fonts.font
+  , Prompt.bgColor  = Colors.yellow
+  , Prompt.fgColor  = Colors.base03
   , Prompt.position = Prompt.Top
   }
 
 hotPrompt =
   prompt
-  { Prompt.font = Fonts.font
-  , Prompt.bgColor = Colors.red
-  , Prompt.fgColor = Colors.base3
+  { Prompt.font     = Fonts.font
+  , Prompt.bgColor  = Colors.red
+  , Prompt.fgColor  = Colors.base3
   , Prompt.position = Prompt.Top
   }
 
 showWName =
   Prompt.def
-  { ShowWName.swn_font = Fonts.wideFont
-  , ShowWName.swn_fade = 0.5
+  { ShowWName.swn_font    = Fonts.wideFont
+  , ShowWName.swn_fade    = 0.5
   , ShowWName.swn_bgcolor = Colors.black
-  , ShowWName.swn_color = Colors.white
+  , ShowWName.swn_color   = Colors.white
   }
