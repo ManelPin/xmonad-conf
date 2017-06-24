@@ -1,0 +1,86 @@
+{-# LANGUAGE AllowAmbiguousTypes, DeriveDataTypeable,
+  TypeSynonymInstances, MultiParamTypeClasses #-}
+
+----------------------------------------------------------------------------
+-- |
+-- Module       : Conf.Hooks.Manage
+-- Copyright    : (c) maddy@na.ai
+-- License      : MIT
+--
+-- Maintainer   : maddy@na.ai
+-- Stability    : unstable
+-- Portability  : unportable
+--
+----------------------------------------------------------------------------
+module Conf.Hooks.Manage
+  ( manage
+  ) where
+
+import qualified Conf.Applications as Applications
+
+import qualified XMonad
+
+import qualified XMonad.Actions.SpawnOn as SpawnOn
+
+import qualified XMonad.Hooks.ManageDocks as ManageDocks
+import qualified XMonad.Hooks.ManageHelpers as ManageHelpers
+import qualified XMonad.Hooks.InsertPosition as InsertPosition
+
+import qualified XMonad.Layout.Fullscreen as Fullscreen
+
+import qualified XMonad.StackSet as StackSet
+
+import XMonad (className, doFloat, doIgnore, resource)
+import XMonad.Hooks.InsertPosition (insertPosition)
+import XMonad.Hooks.ManageHelpers
+       (doCenterFloat, doFullFloat, isDialog, isFullscreen, isInProperty)
+import XMonad ((<&&>), (<+>), (=?))
+import XMonad.Hooks.ManageHelpers ((-?>))
+
+manage :: XMonad.ManageHook
+manage
+  = manageSpecific
+  <+> ManageDocks.manageDocks
+  <+> Fullscreen.fullscreenManageHook
+  <+> SpawnOn.manageSpawn
+
+manageSpecific =
+  ManageHelpers.composeOne
+    [ resource =? "desktop_window" -?> doIgnore
+    , resource =? "stalonetray" -?> doIgnore
+    , resource =? "vlc" -?> doFloat
+    , resource =? "console" -?> tileBelowNoFocus
+    , isRole =? gtkFile -?> forceCenterFloat
+    , isRole =? "pop-up" -?> doCenterFloat
+    , isDialog -?> doCenterFloat
+    , isInProperty "_NET_WM_WINDOW_TYPE" "_NET_WM_WINDOW_TYPE_SPLASH" -?> doCenterFloat -- TODO: Cleanup into 'isSplashScreen'
+    , isFullscreen -?> doFullFloat
+    , isBrowserDialog -?> forceCenterFloat
+    , pure True -?> tileBelow -- TODO: Wtf is 'pure'?
+    , ManageHelpers.transience
+    ]
+
+isBrowserDialog
+  = isDialog
+  <&&> XMonad.className
+  =? Applications.browserClass
+
+gtkFile = "GtkFileChooserDialog"
+
+isRole = XMonad.stringProperty "WM_WINDOW_ROLE"
+
+tileBelow = insertPosition InsertPosition.Below InsertPosition.Newer
+
+tileBelowNoFocus = insertPosition InsertPosition.Below InsertPosition.Older
+
+-- TODO: Move this to another module
+forceCenterFloat :: XMonad.ManageHook
+forceCenterFloat = ManageHelpers.doFloatDep move
+  where
+    move :: StackSet.RationalRect -> StackSet.RationalRect
+    move _ = StackSet.RationalRect x y w h
+    w, h, x, y :: Rational
+    w = 1 / 3
+    h = 1 / 2
+    x = (1 - w) / 2
+    y = (1 - h) / 2
