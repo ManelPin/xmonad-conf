@@ -1,5 +1,5 @@
 #!/bin/bash
-DIR=$(pwd)
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 WORKDIR=$(mktemp -p /tmp -d xmonad-XXXXX)
 
 cp -r $DIR/* $WORKDIR
