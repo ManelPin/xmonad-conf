@@ -21,5 +21,5 @@ module Conf.Applications
 terminal     = "urxvt"
 browser      = "chromium"
 browserClass = "Google-chrome-beta"
-statusBar    = "$HOME/.local/bin/xmobar $HOME/.xmonad/xmobar.conf"
+statusBar    = "xmobar $HOME/.xmonad/xmobar.conf"
 launcher     = "rofi -matching fuzzy -modi combi -show combi -combi-modi run,drun"
