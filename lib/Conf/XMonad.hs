@@ -12,7 +12,9 @@
 -- Portability  : unportable
 --
 ----------------------------------------------------------------------------
-module Conf.XMonad where
+module Conf.XMonad
+  ( xmonad
+  ) where
 
 import qualified Conf.Applications as Applications
 import qualified Conf.Workspaces as Workspaces
@@ -33,7 +35,7 @@ import qualified Conf.Theme.Sizes as Theme.Sizes
 import qualified XMonad
 import qualified XMonad.Prompt as Prompt
 
-conf p =
+xmonad p =
   Prompt.def
   { XMonad.borderWidth        = Theme.Sizes.border
   , XMonad.clickJustFocuses   = Theme.clickJustFocuses

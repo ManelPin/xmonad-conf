@@ -25,4 +25,4 @@ main = do
     EwmhDesktops.ewmh $
     NamedActions.addDescrKeys'
       ((Bindings.Keys.modMask, XMonad.xK_F1), Bindings.Show.show) Bindings.Keys.keys $
-    Conf.XMonad.conf xmobarProc
+    Conf.XMonad.xmonad xmobarProc
