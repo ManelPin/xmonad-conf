@@ -14,6 +14,8 @@
 ----------------------------------------------------------------------------
 module Conf.Bindings.Mouse
   ( mouse
+  , clickJustFocuses
+  , focusFollowsMouse
   ) where
 
 import Conf.Bindings.Keys (modMask)
@@ -29,6 +31,9 @@ import qualified XMonad.Actions.ConstrainedResize as ConstrainedResize
 import qualified XMonad.Layout.WindowNavigation as WindowNavigation
 
 import XMonad ((.|.))
+
+clickJustFocuses  = True
+focusFollowsMouse = False
 
 mouse (XMonad.XConfig {XMonad.modMask = modMask}) =
 -- mouse (XMonad.XConfig {}) =

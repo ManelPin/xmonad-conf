@@ -38,8 +38,8 @@ import qualified XMonad.Prompt as Prompt
 xmonad p =
   Prompt.def
   { XMonad.borderWidth        = Theme.Sizes.border
-  , XMonad.clickJustFocuses   = Theme.clickJustFocuses
-  , XMonad.focusFollowsMouse  = Theme.focusFollowsMouse
+  , XMonad.clickJustFocuses   = Bindings.Mouse.clickJustFocuses
+  , XMonad.focusFollowsMouse  = Bindings.Mouse.focusFollowsMouse
   , XMonad.normalBorderColor  = Theme.Colors.normalBorder
   , XMonad.focusedBorderColor = Theme.Colors.focusedBorder
   , XMonad.manageHook         = Hooks.Manage.manage
