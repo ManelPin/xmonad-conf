@@ -11,8 +11,8 @@
 ----------------------------------------------------------------------------
 module Conf.Theme.Fonts where
 
-font = "-*-terminus-medium-*-*-*-*-160-*-*-*-*-*-*"
+font = "xft:DejaVu Sans Mono for Powerline:size=10"
 
-bigFont = "-*-terminus-medium-*-*-*-*-240-*-*-*-*-*-*"
+bigFont = "xft:DejaVu Sans Mono for Powerline:size=14"
 
 wideFont = "xft:Eurostar Black Extended:" ++ "style=Regular:pixelsize=180:hinting=true"

@@ -32,7 +32,7 @@ border :: Word.Word32
 border = 0
 
 prompt :: Word.Word32
-prompt = 20
+prompt = 50
 
 status :: Word.Word32
 status = 20
