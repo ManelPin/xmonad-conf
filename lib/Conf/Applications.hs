@@ -10,16 +10,13 @@
 -- Portability  : unportable
 --
 ----------------------------------------------------------------------------
-module Conf.Applications
-  ( terminal
-  , browser
-  , browserClass
-  , statusBar
-  , launcher
-  ) where
+module Conf.Applications where
 
-terminal     = "urxvt"
-browser      = "chromium"
-browserClass = "Google-chrome-beta"
+terminal     = "termite"
+browser      = "gtk-launch chromium"
+browserClass = "Chromium"
+passwordMgr  = "gtk-launch enpass"
+email        = "gtk-launch thunderbird"
+
 statusBar    = "xmobar $HOME/.xmonad/xmobar.conf"
 launcher     = "rofi -matching fuzzy -modi combi -show combi -combi-modi run,drun"
