@@ -11,7 +11,10 @@
 ----------------------------------------------------------------------------
 module Conf.Theme.Fonts where
 
+
 font = "xft:DejaVu Sans Mono for Powerline:size=10"
+
+titleFont = "xft:DejaVu Sans Mono for Powerline:size=8"
 
 bigFont = "xft:DejaVu Sans Mono for Powerline:size=14"
 

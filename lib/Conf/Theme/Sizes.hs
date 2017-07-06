@@ -17,16 +17,16 @@ module Conf.Theme.Sizes where
 import qualified Data.Word as Word
 
 gap:: Int
-gap = 10
+gap = 20
 
 gapSmall :: Int
-gapSmall = gap `quot` 2
+gapSmall = 10
 
 gapBig :: Int
-gapBig = gap * 2
+gapBig = 30
 
 topbar :: Word.Word32
-topbar = 10
+topbar = 20
 
 border :: Word.Word32
 border = 0

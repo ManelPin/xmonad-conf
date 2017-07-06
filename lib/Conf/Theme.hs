@@ -26,12 +26,13 @@ import qualified XMonad.Prompt as Prompt
 clickJustFocuses  = True
 focusFollowsMouse = False
 
+-- Window titles hidden
 topBar =
   Prompt.def
-  { Tabbed.fontName            = Fonts.font
-  , Tabbed.inactiveBorderColor = Colors.base03
-  , Tabbed.inactiveColor       = Colors.base03
-  , Tabbed.inactiveTextColor   = Colors.base03
+  { Tabbed.fontName            = Fonts.titleFont
+  , Tabbed.inactiveBorderColor = Colors.inactive
+  , Tabbed.inactiveColor       = Colors.inactive
+  , Tabbed.inactiveTextColor   = Colors.inactive
   , Tabbed.activeBorderColor   = Colors.active
   , Tabbed.activeColor         = Colors.active
   , Tabbed.activeTextColor     = Colors.active
@@ -42,7 +43,7 @@ topBar =
 
 tabbed =
   Prompt.def
-  { Tabbed.fontName            = Fonts.font
+  { Tabbed.fontName            = Fonts.titleFont
   , Tabbed.activeColor         = Colors.active
   , Tabbed.inactiveColor       = Colors.base02
   , Tabbed.activeBorderColor   = Colors.active
