@@ -56,7 +56,7 @@ manageSpecific =
     , isInProperty "_NET_WM_WINDOW_TYPE" "_NET_WM_WINDOW_TYPE_SPLASH" -?> doCenterFloat -- TODO: Cleanup into 'isSplashScreen'
     , isFullscreen -?> doFullFloat
     , isBrowserDialog -?> forceCenterFloat
-    , pure True -?> tileBelow -- TODO: Wtf is 'pure'?
+    , pure True -?> tileBelow
     , ManageHelpers.transience
     ]
 
