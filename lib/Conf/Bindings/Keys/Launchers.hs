@@ -24,9 +24,12 @@ import XMonad (spawn)
 import XMonad.Util.NamedActions (addName)
 
 launchers c = subKeys "Launchers" c
-  [ ("M-<Space>",  addName "Launcher" $ spawn Apps.launcher)
-  , ("M-<Return>", addName "Terminal" $ spawn Apps.terminal)
-  , ("M-\\",       addName "Browser"  $ spawn Apps.browser)
+  [ ("M-<Space>",  addName "Launcher"          $ spawn Apps.launcher)
+  , ("M-<Return>", addName "Terminal"          $ spawn Apps.terminal)
+  , ("M-\\",       addName "Browser"           $ spawn Apps.browser)
+  , ("M-p",        addName "Password Manager"  $ spawn Apps.passwordMgr)
+  , ("M-e",        addName "Email"             $ spawn Apps.email)
+
   , ("M-s s",      addName "Cancel submap" $ return ())
   , ("M-s M-s",    addName "Cancel submap" $ return ())
   ]
