@@ -15,14 +15,15 @@ module Conf.Layouts.Tabs
   ( tabs
   ) where
 
-import qualified Conf.Theme as Theme
---
+import Conf.Layouts.Internal (addTopBar, named)
 
-import qualified XMonad.Layout.Renamed as Renamed
+import qualified Conf.Theme as Theme
+
+import Conf.Theme.Gaps (bigGaps)
+
 import qualified XMonad.Layout.Simplest as Simplest
 import qualified XMonad.Layout.Tabbed as Tabbed
 
-import XMonad.Layout.NoFrillsDecoration (noFrillsDeco)
 import XMonad.Hooks.ManageDocks (avoidStruts)
 
 tabs
@@ -30,9 +31,5 @@ tabs
   $ avoidStruts
   $ addTopBar
   $ Tabbed.addTabs Tabbed.shrinkText Theme.tabbed
+  $ bigGaps
   $ Simplest.Simplest
-
-named n = Renamed.renamed [(Renamed.Replace n)]
-
--- TODO: This is duplicated in Layouts.Flex. Move to separate package
-addTopBar = noFrillsDeco Tabbed.shrinkText Theme.topBar

@@ -15,12 +15,26 @@ module Conf.Projects
   , dynamicProjects
   ) where
 
-import qualified Conf.Workspaces
+import qualified Conf.Workspaces as WS
 
-import qualified XMonad
-import qualified XMonad.Actions.DynamicProjects as DynamicProjects
+-- import qualified XMonad.Layout.IndependentScreens as IndependentScreens
+
+-- import qualified XMonad
+
+import XMonad.Actions.DynamicProjects
 
 projects :: [DynamicProjects.Project]
-projects = []
+projects =
+  [ Project { projectName      = WS.foo
+            , projectDirectory = "~/"
+            , projectStartHook = Nothing
+            }
+
+  , Project { projectName      = WS.bar
+            , projectDirectory = "~/naai/api/"
+            , projectStartHook = Nothing
+            }
+
+  ]
 
 dynamicProjects = DynamicProjects.dynamicProjects projects

@@ -19,6 +19,7 @@ module Conf.Hooks.Layout
 import qualified Conf.Theme as Theme
 import qualified Conf.Layouts.Flex as Layouts.Flex
 import qualified Conf.Layouts.Tabs as Layouts.Tabs
+import qualified Conf.Layouts.DS as Layouts.DS
 
 import qualified XMonad
 
@@ -46,7 +47,8 @@ layout
   $ mirrorToggle
   $ reflectToggle
   $ Layouts.Flex.flex
-  ||| Layouts.Tabs.tabs
+    ||| Layouts.Tabs.tabs
+    ||| Layouts.DS.ds
 
 showWorkspaceName = showWName' Theme.showWName
 

@@ -9,13 +9,19 @@
 -- Portability  : unportable
 --
 ----------------------------------------------------------------------------
-module Conf.Theme.Fonts where
+module Conf.Theme.Fonts
+  ( font
+  , titleFont
+  -- , tabFont
+  , bigFont
+  , wideFont
+  ) where
 
+dejaVu   = "xft:DejaVu Sans Mono for Powerline:hinting=true"
+euroStar = "xft:Eurostar Black Extended:hinting=true"
 
-font = "xft:DejaVu Sans Mono for Powerline:size=10"
-
-titleFont = "xft:DejaVu Sans Mono for Powerline:size=8"
-
-bigFont = "xft:DejaVu Sans Mono for Powerline:size=14"
-
-wideFont = "xft:Eurostar Black Extended:" ++ "style=Regular:pixelsize=180:hinting=true"
+font      = dejaVu   ++ ":size=10"
+titleFont = dejaVu   ++ ":size=8"
+-- tabFont   = dejaVu   ++ ":style=Bold:size=8"
+bigFont   = dejaVu   ++ ":size=14"
+wideFont  = euroStar ++ ":style=Regular:pixelsize=180"

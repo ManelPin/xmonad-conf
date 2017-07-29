@@ -42,24 +42,26 @@ windows c = subKeys "Windows" c
     , ("C-;",             addName "Swap tab U"      swapU)
     , ("M-C-S-m",         addName "Combo swap"      comboSwap)
     ]
-  ++ zipM  "M-C-" "Merge w/sublayout"        dirKeys   dirs mergeSub
-  ++ zipM' "M-"   "Navigate window"          dirKeys   dirs windowGo True
-  ++ zipM' "C-"   "Move window"              dirKeys   dirs windowSwap True
-  ++ zipM' "M-"   "Navigate screen"          arrowKeys dirs screenGo True
-  ++ zipM' "M-C-" "Move window to screen"    arrowKeys dirs windowToScreen True
-  ++ zipM' "M-S-" "Swap workspace to screen" arrowKeys dirs screenSwap True
+  ++ zipM  "M-C-"   "Merge w/sublayout"        dirKeys   dirs mergeSub
+  ++ zipM' "M-"     "Navigate window"          dirKeys   dirs windowGo       True
+  ++ zipM' "C-"     "Move window"              dirKeys   dirs windowSwap     True
+  ++ zipM' "M-S-"   "Navigate screen"          dirKeys   dirs screenGo       True
+  ++ zipM' "M-S-C-" "Move window to screen"    dirKeys   dirs windowToScreen True
+  ++ zipM' "M-"     "Swap workspace to screen" arrowKeys dirs screenSwap     True
   )
 
 killAll = confirmPrompt hotPrompt "kill all" $ WithAll.killAll
 
 navD = bindOn LD
-  [ ("Tabs", XMonad.windows     StackSet.focusDown)
-  , ("",     SubLayouts.onGroup StackSet.focusDown')
+  [ ("Tabs",      XMonad.windows     StackSet.focusDown)
+  , ("DS Tabbed", XMonad.windows     StackSet.focusDown)
+  , ("",          SubLayouts.onGroup StackSet.focusDown')
   ]
 
 navU = bindOn LD
-  [ ("Tabs", XMonad.windows     StackSet.focusUp)
-  , ("",     SubLayouts.onGroup StackSet.focusUp')
+  [ ("Tabs",      XMonad.windows     StackSet.focusUp)
+  , ("DS Tabbed", XMonad.windows     StackSet.focusUp)
+  , ("",          SubLayouts.onGroup StackSet.focusUp')
   ]
 
 swapD = XMonad.windows StackSet.swapDown

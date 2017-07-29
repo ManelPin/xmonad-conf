@@ -30,37 +30,49 @@ focusFollowsMouse = False
 topBar =
   Prompt.def
   { Tabbed.fontName            = Fonts.titleFont
+
   , Tabbed.inactiveBorderColor = Colors.inactive
   , Tabbed.inactiveColor       = Colors.inactive
   , Tabbed.inactiveTextColor   = Colors.inactive
+
   , Tabbed.activeBorderColor   = Colors.active
   , Tabbed.activeColor         = Colors.active
   , Tabbed.activeTextColor     = Colors.active
+
   , Tabbed.urgentBorderColor   = Colors.red
   , Tabbed.urgentTextColor     = Colors.yellow
+
   , Tabbed.decoHeight          = Sizes.topbar
   }
 
 tabbed =
   Prompt.def
   { Tabbed.fontName            = Fonts.titleFont
+
+  , Tabbed.inactiveColor       = Colors.inactive
+  , Tabbed.inactiveBorderColor = Colors.inactive
+  , Tabbed.inactiveTextColor   = Colors.active
+
   , Tabbed.activeColor         = Colors.active
-  , Tabbed.inactiveColor       = Colors.base02
   , Tabbed.activeBorderColor   = Colors.active
-  , Tabbed.inactiveBorderColor = Colors.base02
-  , Tabbed.activeTextColor     = Colors.base03
-  , Tabbed.inactiveTextColor   = Colors.base00
+  , Tabbed.activeTextColor     = Colors.inactive
+
+  , Tabbed.decoHeight          = Sizes.tabbar
   }
 
 prompt =
   Prompt.def
   { Prompt.font              = Fonts.font
+
   , Prompt.bgColor           = Colors.base03
+  , Prompt.bgHLight          = Colors.active
+
   , Prompt.fgColor           = Colors.active
   , Prompt.fgHLight          = Colors.base03
-  , Prompt.bgHLight          = Colors.active
+
   , Prompt.borderColor       = Colors.base03
   , Prompt.promptBorderWidth = 0
+
   , Prompt.height            = Sizes.prompt
   , Prompt.position          = Prompt.Top
   }
@@ -68,16 +80,20 @@ prompt =
 warmPrompt =
   prompt
   { Prompt.font     = Fonts.font
+
   , Prompt.bgColor  = Colors.yellow
   , Prompt.fgColor  = Colors.base03
+
   , Prompt.position = Prompt.Top
   }
 
 hotPrompt =
   prompt
   { Prompt.font     = Fonts.font
+
   , Prompt.bgColor  = Colors.red
-  , Prompt.fgColor  = Colors.base3
+  , Prompt.fgColor  = Colors.base01
+
   , Prompt.position = Prompt.Top
   }
 
@@ -85,6 +101,7 @@ showWName =
   Prompt.def
   { ShowWName.swn_font    = Fonts.wideFont
   , ShowWName.swn_fade    = 0.5
-  , ShowWName.swn_bgcolor = Colors.black
-  , ShowWName.swn_color   = Colors.white
+
+  , ShowWName.swn_bgcolor = Colors.base02
+  , ShowWName.swn_color   = Colors.blue
   }

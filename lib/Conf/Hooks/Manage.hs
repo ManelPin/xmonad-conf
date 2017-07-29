@@ -17,6 +17,7 @@ module Conf.Hooks.Manage
   ) where
 
 import qualified Conf.Applications as Applications
+import qualified Conf.NamedScratchpads as NamedScratchpads
 
 import qualified XMonad
 
@@ -43,6 +44,7 @@ manage
   <+> ManageDocks.manageDocks
   <+> Fullscreen.fullscreenManageHook
   <+> SpawnOn.manageSpawn
+  <+> NamedScratchpads.manage
 
 manageSpecific =
   ManageHelpers.composeOne

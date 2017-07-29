@@ -16,6 +16,8 @@ module Conf.Hooks.HandleEvent
   ( handleEvent
   ) where
 
+import qualified Conf.Hooks.StatusBars as StatusBars
+
 import qualified XMonad
 
 import qualified XMonad.Hooks.FadeWindows as FadeWindows
@@ -32,3 +34,4 @@ handleEvent
   <+> FadeWindows.fadeWindowsEventHook
   <+> XMonad.handleEventHook def
   <+> Fullscreen.fullscreenEventHook
+  <+> StatusBars.eventHook

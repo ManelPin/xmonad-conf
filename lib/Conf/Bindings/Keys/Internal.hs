@@ -21,6 +21,9 @@ import qualified XMonad.Util.NamedActions as NamedActions
 
 import XMonad.Layout.WindowNavigation (Direction2D(D, U, L, R))
 
+modMask = XMonad.mod4Mask
+modSym  = XMonad.xK_Super_L
+
 subKeys str conf ks = NamedActions.subtitle str : EZConfig.mkNamedKeymap conf ks
 
 zipM  m nm ks as f   = zipWith (\k d -> (m ++ k, NamedActions.addName nm $ f d)) ks as

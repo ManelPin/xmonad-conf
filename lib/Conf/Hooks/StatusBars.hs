@@ -3,7 +3,7 @@
 
 ----------------------------------------------------------------------------
 -- |
--- Module       : Conf.Hooks.Startup
+-- Module       : Conf.Hooks.StatusBars
 -- Copyright    : (c) maddy@na.ai
 -- License      : MIT
 --
@@ -12,20 +12,26 @@
 -- Portability  : unportable
 --
 ----------------------------------------------------------------------------
-module Conf.Hooks.Startup
-  ( startup
+module Conf.Hooks.StatusBars
+  ( startupHook
+  , eventHook
   ) where
 
 import qualified Conf.Applications as Apps
-import qualified Conf.Hooks.StatusBars as StatusBars
 
 import qualified XMonad
 import qualified XMonad.Hooks.DynamicBars as DynamicBars
 import qualified XMonad.Util.Run as Run
-import qualified XMonad.Util.Cursor as Cursor
 
-startup
- = do
-  Cursor.setDefaultCursor Cursor.xC_left_ptr
-  StatusBars.startupHook
-  return ()
+startupHook = DynamicBars.dynStatusBarStartup   statusBarStart statusBarClean
+eventHook   = DynamicBars.dynStatusBarEventHook statusBarStart statusBarClean
+
+statusBarStart :: DynamicBars.DynamicStatusBar
+statusBarStart (XMonad.S id) = Run.spawnPipe $
+  Apps.statusBar ++ " -x " ++ show id ++ " " ++ Apps.statusBarConf
+
+statusBarClean :: DynamicBars.DynamicStatusBarCleanup
+statusBarClean = return ()
+  -- do
+  -- Run.unsafeSpawn $ "killall " ++ Apps.statusBar
+  -- return ()

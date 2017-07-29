@@ -13,39 +13,45 @@ module Conf.Theme.Colors where
 
 ---- Color Classes
 
-normalBorder  = black
+normalBorder  = base03
 focusedBorder = active
-active        = blue
+active        = skyblue
 activeWarn    = red
 inactive      = base02
-focus         = blue
-unfocus       = base02
+focus         = skyblue
+unfocus       = base03
 
 ---- Named Colors
 
-base03  = color8
-base02  = color0
-base01  = color10
-base00  = color11
-base0   = color12
-base1   = color14
-base2   = color7
-base3   = color15
+base03  = color11 -- Background Darkest
+base02  = color0  -- Background Dark
+
+base01  = color15 -- Content Darkest
+base00  = color7  -- Content Dark
+
+base0   = color13 -- Content Light
+base1   = white   -- Content Lightest
+
+base2   = color10 -- Background Light
+base3   = color8  -- Background Lightest
+
+teal    = color14
+cyan    = color6
+skyblue = color4
+blue    = color12
+
+yellow  = color3
 orange  = color9
 red     = color1
-magenta = color5
-violet  = color13
-blue    = color4
-cyan    = color6
 green   = color2
-yellow  = color3
+violet  = color5
 
 ---- Raw colors
 
 -- Nord
 
-black   = "2E3440"
-white   = "D8DEE9"
+black   = "#000000"
+white   = "#FFFFFF"
 
 color0  = "#3B4252"
 color1  = "#BF616A"
@@ -56,33 +62,10 @@ color5  = "#B48EAD"
 color6  = "#88C0D0"
 color7  = "#E5E9F0"
 color8  = "#4C566A"
-color9  = "#BF616A"
-color10 = "#A3BE8C"
-color11 = "#EBCB8B"
-color12 = "#81A1C1"
-color13 = "#B48EAD"
+color9  = "#D08770"
+color10 = "#434C5E"
+color11 = "#2E3440"
+color12 = "#5E81AC"
+color13 = "#ECEFF4"
 color14 = "#8FBCBB"
-color15 = "#ECEFF4"
-
-{-
-
--- Solarized
-
-color0 =  "#073642" -- base02
-color1 =  "#dc322f" -- red
-color2 =  "#859900" -- green
-color3 =  "#b58900" -- yellow
-color4 =  "#268bd2" -- blue
-color5 =  "#d33682" -- magenta
-color6 =  "#2aa198" -- cyan
-color7 =  "#eee8d5" -- base2
-color8 =  "#002b36" -- base03
-color9 =  "#cb4b16" -- orange
-color10 = "#586e75" -- base01
-color11 = "#657b83" -- base00
-color12 = "#839496" -- base0
-color13 = "#6c71c4" -- violet
-color14 = "#93a1a1" -- base1
-color15 = "#fdf6e3" -- base3
-
--}
+color15 = "#D8DEE9"

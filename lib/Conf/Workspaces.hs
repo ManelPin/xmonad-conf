@@ -12,19 +12,9 @@
 -- Portability  : unportable
 --
 ----------------------------------------------------------------------------
-module Conf.Workspaces
-  ( workspaces
-  , workspaceMap
-  ) where
+module Conf.Workspaces where
 
-import Data.Map (Map)
-import qualified Data.Map as Map
+foo = "1:FOO"
+bar = "2:BAR"
 
-workspaceMap :: Map String String
-workspaceMap = Map.fromList
-  [ ("general", "GEN")
-  , ("work", "WRK")
-  ]
-
-workspaces :: [String]
-workspaces = Map.elems workspaceMap
+workspaces = [foo, bar]

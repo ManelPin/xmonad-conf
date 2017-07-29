@@ -28,6 +28,9 @@ gapBig = 30
 topbar :: Word.Word32
 topbar = 20
 
+tabbar :: Word.Word32
+tabbar = 40
+
 border :: Word.Word32
 border = 0
 

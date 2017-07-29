@@ -35,6 +35,7 @@ import XMonad ((.|.))
 clickJustFocuses  = True
 focusFollowsMouse = False
 
+-- TODO: Clean up this mess
 mouse (XMonad.XConfig {XMonad.modMask = modMask}) =
 -- mouse (XMonad.XConfig {}) =
   Map.fromList $
