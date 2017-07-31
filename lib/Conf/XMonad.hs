@@ -39,7 +39,7 @@ import qualified XMonad
 import qualified XMonad.Prompt as Prompt
 
 -- xmonad n =
-xmonad =
+xmonad bars =
   Prompt.def
   { XMonad.borderWidth        = Theme.Sizes.border
   , XMonad.clickJustFocuses   = Bindings.Mouse.clickJustFocuses
@@ -49,7 +49,7 @@ xmonad =
   , XMonad.manageHook         = Hooks.Manage.manage
   , XMonad.handleEventHook    = Hooks.HandleEvent.handleEvent
   , XMonad.layoutHook         = Hooks.Layout.layout
-  , XMonad.logHook            = Hooks.Log.log
+  , XMonad.logHook            = Hooks.Log.log bars
   , XMonad.modMask            = Bindings.Keys.modMask
   , XMonad.mouseBindings      = Bindings.Mouse.mouse
   , XMonad.startupHook        = Hooks.Startup.startup

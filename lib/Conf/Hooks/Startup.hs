@@ -17,15 +17,15 @@ module Conf.Hooks.Startup
   ) where
 
 import qualified Conf.Applications as Apps
-import qualified Conf.Hooks.StatusBars as StatusBars
+-- import qualified Conf.Hooks.StatusBars as StatusBars
 
 import qualified XMonad
-import qualified XMonad.Hooks.DynamicBars as DynamicBars
+-- import qualified XMonad.Hooks.DynamicBars as DynamicBars
 import qualified XMonad.Util.Run as Run
 import qualified XMonad.Util.Cursor as Cursor
 
 startup
  = do
   Cursor.setDefaultCursor Cursor.xC_left_ptr
-  StatusBars.startupHook
+  -- StatusBars.startupHook
   return ()

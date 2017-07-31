@@ -34,4 +34,4 @@ handleEvent
   <+> FadeWindows.fadeWindowsEventHook
   <+> XMonad.handleEventHook def
   <+> Fullscreen.fullscreenEventHook
-  <+> StatusBars.eventHook
+  -- <+> StatusBars.eventHook
