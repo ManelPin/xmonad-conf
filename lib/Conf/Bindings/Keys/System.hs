@@ -80,8 +80,8 @@ xm_rebuild_restart = spawn "$HOME/git/xmonad-conf/build.sh -r" -- TODO: Don't di
 xm_quit = confirmPrompt hotPrompt "Quit XMonad" $ io (exitWith ExitSuccess)
 
 sys_lock     = spawn "system lock"
-sys_reboot   = confirmPrompt hotPrompt "Reboot System"   $ spawn "system reboot"
-sys_shutdown = confirmPrompt hotPrompt "Shutdown System" $ spawn "system shutdown"
+sys_reboot   = confirmPrompt hotPrompt "Reboot System"   $ spawn "reboot"
+sys_shutdown = confirmPrompt hotPrompt "Shutdown System" $ spawn "shutdown -t now"
 
 backlight_up   = spawn "displayctl -n int up"
 backlight_down = spawn "displayctl -n int down"
