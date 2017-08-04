@@ -35,25 +35,22 @@ import qualified Conf.Theme.Colors as Theme.Colors
 import qualified Conf.Theme.Sizes as Theme.Sizes
 
 import qualified XMonad
--- import qualified XMonad.Layout.IndependentScreens as IndependentScreens
-import qualified XMonad.Prompt as Prompt
+import qualified XMonad.Layout.IndependentScreens as IndependentScreens
 
--- xmonad n =
 xmonad bars =
-  Prompt.def
-  { XMonad.borderWidth        = Theme.Sizes.border
-  , XMonad.clickJustFocuses   = Bindings.Mouse.clickJustFocuses
-  , XMonad.focusFollowsMouse  = Bindings.Mouse.focusFollowsMouse
-  , XMonad.normalBorderColor  = Theme.Colors.normalBorder
-  , XMonad.focusedBorderColor = Theme.Colors.focusedBorder
-  , XMonad.manageHook         = Hooks.Manage.manage
-  , XMonad.handleEventHook    = Hooks.HandleEvent.handleEvent
-  , XMonad.layoutHook         = Hooks.Layout.layout
-  , XMonad.logHook            = Hooks.Log.log bars
-  , XMonad.modMask            = Bindings.Keys.modMask
-  , XMonad.mouseBindings      = Bindings.Mouse.mouse
-  , XMonad.startupHook        = Hooks.Startup.startup
-  , XMonad.terminal           = Applications.terminal
-  , XMonad.workspaces         = Workspaces.workspaces
-  -- , XMonad.workspaces         = IndependentScreens.withScreens n Workspaces.workspaces
-  }
+  XMonad.def
+    { XMonad.borderWidth        = Theme.Sizes.border
+    , XMonad.clickJustFocuses   = Bindings.Mouse.clickJustFocuses
+    , XMonad.focusFollowsMouse  = Bindings.Mouse.focusFollowsMouse
+    , XMonad.normalBorderColor  = Theme.Colors.normalBorder
+    , XMonad.focusedBorderColor = Theme.Colors.focusedBorder
+    , XMonad.manageHook         = Hooks.Manage.manage
+    , XMonad.handleEventHook    = Hooks.HandleEvent.handleEvent
+    , XMonad.layoutHook         = Hooks.Layout.layout
+    , XMonad.logHook            = Hooks.Log.log bars
+    , XMonad.modMask            = Bindings.Keys.modMask
+    , XMonad.mouseBindings      = Bindings.Mouse.mouse
+    , XMonad.startupHook        = Hooks.Startup.startup
+    , XMonad.terminal           = Applications.terminal
+    , XMonad.workspaces         = IndependentScreens.withScreens (XMonad.S $ length bars) Workspaces.workspaces
+    }

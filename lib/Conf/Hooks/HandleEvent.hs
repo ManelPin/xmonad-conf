@@ -30,7 +30,7 @@ import XMonad.Prompt (def)
 import XMonad ((<+>))
 
 handleEvent
-  = ManageDocks.docksEventHook
+  =   ManageDocks.docksEventHook
   <+> FadeWindows.fadeWindowsEventHook
   <+> XMonad.handleEventHook def
   <+> Fullscreen.fullscreenEventHook

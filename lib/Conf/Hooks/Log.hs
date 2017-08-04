@@ -14,19 +14,21 @@
 ----------------------------------------------------------------------------
 module Conf.Hooks.Log
   ( log
-  , FocusPipe
-  , WorkspacesPipe
-  , XMobarOption
-  , xmobarCommand
-  , getTempFifo
   , initBars
+  -- , shutdownHandler
   ) where
 
 import Prelude hiding (log)
+
+import Control.Exception
+        ( throw
+        , SomeException(SomeException)
+        )
 import Control.Monad
         ( replicateM
         , forM_
         , forM
+        , foldM
         )
 import Codec.Binary.UTF8.String
         ( decodeString
@@ -47,6 +49,8 @@ import System.Posix.Files
         , unionFileModes
         )
 
+import qualified GHC.IO.Handle
+
 import qualified Conf.Theme.Colors as Colors
 import qualified Conf.Hooks.Fade as Hooks.Fade
 
@@ -62,37 +66,42 @@ import qualified XMonad.Util.NamedScratchpad as NamedScratchpad
 
 import XMonad.Util.Run
         ( unsafeSpawn
+        , hPutStrLn
+        , spawnPipe
         )
 
-type FocusPipe      = FilePath
-type WorkspacesPipe = FilePath
-data XMobarOption   = XMobarOption XMonad.ScreenId FocusPipe WorkspacesPipe
+type Pipe         = FilePath
+-- type Handle       = GHC.IO.Handle.Handle
+data XMobarOption = XMobarOption XMonad.ScreenId Pipe --Handle
 
 log bars
  = do
   FadeWindows.fadeWindowsLogHook Hooks.Fade.fade
   EwmhDesktops.ewmhDesktopsLogHook
-  forM_ bars $ \(XMobarOption sid foc wss) -> do
-    let ppFoc = ppFocus      foc sid
-    let ppWss = ppWorkspaces wss sid
-    DynamicLog.dynamicLogWithPP ppFoc
-    DynamicLog.dynamicLogWithPP ppWss
+  -- forM_ bars $ \(XMobarOption sid pipe handle) -> do
+  forM_ bars $ \(XMobarOption sid pipe) -> do
+    -- let ppFoc = ppFocus      foc sid
+    let pp = ppWorkspaces pipe sid
+    -- DynamicLog.dynamicLogWithPP ppFoc
+    DynamicLog.dynamicLogWithPP pp
 
-ppFocus :: FilePath -> XMonad.ScreenId -> DynamicLog.PP
-ppFocus foc (XMonad.S sid) =
-  IndependentScreens.whenCurrentOn (XMonad.S sid)
-    DynamicLog.def
-      { DynamicLog.ppCurrent = DynamicLog.xmobarColor Colors.orange  "" . DynamicLog.wrap "[" "]"
-      , DynamicLog.ppTitle   = DynamicLog.xmobarColor Colors.orange  "" . DynamicLog.shorten 50
-      , DynamicLog.ppOrder   = \(_:_:title:_) -> [title]
-      , DynamicLog.ppOutput  = appendFile foc . decodeString . (++ "\n")
-      -- , DynamicLog.ppOutput  = appendFile "$HOME/.local/tmp/xmonad-foc" . decodeString . (++ "\n")
-      }
+-- ppFocus :: FilePath -> XMonad.ScreenId -> DynamicLog.PP
+-- ppFocus foc (XMonad.S sid) =
+--   IndependentScreens.whenCurrentOn (XMonad.S sid)
+--     DynamicLog.def
+--       { DynamicLog.ppCurrent = DynamicLog.xmobarColor Colors.orange  "" . DynamicLog.wrap "[" "]"
+--       , DynamicLog.ppTitle   = DynamicLog.xmobarColor Colors.orange  "" . DynamicLog.shorten 50
+--       , DynamicLog.ppOrder   = \(_:_:title:_) -> [title]
+--       , DynamicLog.ppOutput  = appendFile foc . decodeString . (++ "\n")
+--       -- , DynamicLog.ppOutput  = appendFile "$HOME/.local/tmp/xmonad-foc" . decodeString . (++ "\n")
+--       }
 
 
+-- ppWorkspaces :: GHC.IO.Handle.Handle -> XMonad.ScreenId -> DynamicLog.PP
 ppWorkspaces :: FilePath -> XMonad.ScreenId -> DynamicLog.PP
-ppWorkspaces wss (XMonad.S sid) =
-  IndependentScreens.marshallPP (XMonad.S sid)
+-- ppWorkspaces handle (XMonad.S sid) =
+ppWorkspaces pipe (XMonad.S sid) =
+  -- IndependentScreens.marshallPP (XMonad.S sid)
     DynamicLog.def
       { DynamicLog.ppCurrent         = DynamicLog.xmobarColor Colors.green   "" . DynamicLog.wrap "[" "]"
       , DynamicLog.ppVisible         = DynamicLog.xmobarColor Colors.skyblue "" . DynamicLog.wrap "(" ")"
@@ -103,32 +112,61 @@ ppWorkspaces wss (XMonad.S sid) =
       , DynamicLog.ppWsSep           = DynamicLog.xmobarColor Colors.base02  "" " / "
       , DynamicLog.ppSep             = DynamicLog.xmobarColor Colors.base02  "" "  |  "
       , DynamicLog.ppHiddenNoWindows = const ""
-      , DynamicLog.ppOrder           = \(ws:_:_:_) -> [ws]
-      , DynamicLog.ppOutput          = appendFile wss . decodeString . (++ "\n")
+      , DynamicLog.ppOrder           = id -- \(ws:_:_:_) -> [ws]
+      -- , DynamicLog.ppOutput          = hPutStrLn handle --appendFile pipe . decodeString . (++ "\n")
+      , DynamicLog.ppOutput          = appendFile pipe . decodeString . (++ "\n")
       -- , DynamicLog.ppOutput  = appendFile "$HOME/.local/tmp/xmonad-wss" . decodeString . (++ "\n")
+      , DynamicLog.ppSort            = fmap
+                                        (NamedScratchpad.namedScratchpadFilterOutWorkspace .)
+                                        (DynamicLog.ppSort DynamicLog.def)
       }
 
-initBars --numScreens
+initBars :: IO [XMobarOption]
+initBars
   = do
     numScreens <- IndependentScreens.countScreens
     barOptions <- forM [0 .. numScreens - 1] $ \sid -> do
-                    foc <- getTempFifo ("xmobar-foc-" ++ show sid ++ "-")
-                    wss <- getTempFifo ("xmobar-wss-" ++ show sid ++ "-")
-                    return $ XMobarOption sid foc wss
-    mapM_ (unsafeSpawn . xmobarCommand) barOptions
+                    pipe <- getTempFifo "xmobar-"
+                    -- handle <- spawnPipe (xmobarCommand sid pipe)
+                    return $ XMobarOption sid pipe --handle
+    -- mapM_ (unsafeSpawn . xmobarCommand) barOptions
+    spawnPipe $ initCommand barOptions
     return barOptions
 
-xmobarCommand :: XMobarOption -> String
-xmobarCommand (XMobarOption (XMonad.S sid) foc wss) =
-  "\
-  \xmobar \
-    \ -x " ++ show sid ++ "\
-    \ -C '[Run PipeReader \"" ++ foc ++ "\" \"focus\", \
-         \Run PipeReader \"" ++ wss ++ "\" \"workspaces\"]' \
-    \ $HOME/.xmonad/xmobar.conf"
+-- killBars :: [XMobarOption] -> IO ()
+-- killBars bars
+--   = do
+--     forM_ bars $ \(XMobarOption sid pipe handle) -> do
+--       hClose handle
+--
+-- shutdownHandler :: [XMobarOption] -> SomeException -> IO ()
+-- shutdownHandler bars e
+--   = do
+--     killBars bars
+--     unsafeSpawn "dunstify -u critical 'XMonad' 'shutdownHandler called'"
+--     throw e
 
-statusBarConf = "$HOME/.xmonad/xmobar.conf"
+initCommand :: [XMobarOption] -> String
+initCommand xs = "$HOME/.xmonad/initbars.sh " ++ (unwords $ xmobarCommands xs)
+  -- where concatx x1 x2 = x1 ++ " " ++ x2
 
+xmobarCommands :: [XMobarOption] -> [String]
+xmobarCommands = map xmobarCommand'
+
+-- xmobarCommand :: XMonad.ScreenId -> Pipe -> String
+-- xmobarCommand (XMonad.S sid) pipe =
+--   "xmobar -x " ++ show sid ++ " -C '[Run PipeReader \"" ++ (show sid) ++ ":" ++ pipe ++ "\" \"pipe\"]' $HOME/.xmonad/xmobar.conf"
+
+xmobarCommand' :: XMobarOption -> String
+xmobarCommand' (XMobarOption (XMonad.S sid) pipe) =
+  show sid ++ " " ++ pipe
+  -- "xmobar -x " ++ show sid ++ " -C \'[Run PipeReader \\\"" ++ (show sid) ++ ":" ++ pipe ++ "\\\" \\\"pipe\\\"]\' $HOME/.xmonad/xmobar.conf &"
+  -- "xmobar -x " ++ show sid ++ " -C '[Run PipeReader \"" ++ (show sid) ++ ":" ++ pipe ++ "\" \"pipe\"]' $HOME/.xmonad/xmobar.conf"
+
+-- xmobarCommand :: XMobarOption -> String
+-- xmobarCommand (XMobarOption (XMonad.S sid) pipe) =
+--   "xmobar -x " ++ show sid ++ " -C '[Run PipeReader \"" ++ (show sid) ++ ":" ++ pipe ++ "\" \"pipe\"]' $HOME/.xmonad/xmobar.conf"
+--
 -- TODO: Move out of module
 getTempFifo :: String -> IO FilePath
 getTempFifo prefix = do
@@ -137,44 +175,5 @@ getTempFifo prefix = do
   hClose h
   removeFile tmpFile
   createNamedPipe tmpFile $ unionFileModes ownerReadMode ownerWriteMode
+  -- appendFile tmpFile "foo"
   return tmpFile
-
--- -- dyLogUnfocus :: XMonad.ScreenId -> DynamicLog.PP
--- -- dyLogUnfocus n =
--- dyLogUnfocus :: DynamicLog.PP
--- dyLogUnfocus =
---   -- IndependentScreens.marshallPP n
---   DynamicLog.def
---     -- Workspaces
---     { DynamicLog.ppCurrent         = DynamicLog.xmobarColor Colors.green   "" . DynamicLog.wrap "[" "]"
---     , DynamicLog.ppVisible         = DynamicLog.xmobarColor Colors.skyblue "" . DynamicLog.wrap "(" ")"
---     , DynamicLog.ppUrgent          = DynamicLog.xmobarColor Colors.red     "" . DynamicLog.wrap " " " "
---     , DynamicLog.ppHidden          = DynamicLog.xmobarColor Colors.blue    ""
---     , DynamicLog.ppHiddenNoWindows = const ""
---
---     -- Main
---     , DynamicLog.ppTitle           = DynamicLog.xmobarColor Colors.green   "" . DynamicLog.shorten 50
---     , DynamicLog.ppLayout          = DynamicLog.xmobarColor Colors.violet  ""
---
---     -- Seps
---     , DynamicLog.ppWsSep           = DynamicLog.xmobarColor Colors.base02  "" " / "
---     , DynamicLog.ppSep             = DynamicLog.xmobarColor Colors.base02  "" "  |  "
---
---     -- Mods
---     , DynamicLog.ppOrder           = id
---     , DynamicLog.ppExtras          = []
---     , DynamicLog.ppSort            = fmap
---                                       (NamedScratchpad.namedScratchpadFilterOutWorkspace .)
---                                       (DynamicLog.ppSort DynamicLog.def)
---     }
---
--- dyLogFocus :: DynamicLog.PP
--- dyLogFocus =
--- -- dyLogFocus :: XMonad.ScreenId -> DynamicLog.PP
--- -- dyLogFocus n =
---   -- dyLogUnfocus n
---   dyLogUnfocus
---     { DynamicLog.ppCurrent = DynamicLog.xmobarColor Colors.orange "" . DynamicLog.wrap "[" "]"
---     , DynamicLog.ppTitle   = DynamicLog.xmobarColor Colors.orange "" . DynamicLog.shorten 50
---     }
-
