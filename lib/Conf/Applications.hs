@@ -43,6 +43,12 @@ task = printf "termite -c $HOME/.config/termite-task/config -d $HOME/task --clas
 taskClass :: String
 taskClass = "Termite_TASK"
 
+weechat :: String
+weechat = printf "termite -c $HOME/.config/termite-weechat/config -d $HOME --class='%s' -e \"zsh -c '. $HOME/.zshrc;weechat'\"" weechatClass
+
+weechatClass :: String
+weechatClass = "Termite_WEECHAT"
+
 dirciple :: String
 dirciple = "$HOME/bin/gds"
 

@@ -45,6 +45,12 @@ namedScratchpads =
        (className Apps.slackClass)
        float3_4x3_4
 
+  -- Weechat
+  , NS Apps.weechatClass
+       Apps.weechat
+       (className Apps.weechatClass)
+       float3_4x3_4
+
   -- Tasks
   , NS Apps.taskClass
        Apps.task
