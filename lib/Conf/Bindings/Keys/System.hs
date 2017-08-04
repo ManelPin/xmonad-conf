@@ -16,8 +16,6 @@ module Conf.Bindings.Keys.System
   ( system
   ) where
 
-import qualified XMonad
-
 import Conf.Theme (hotPrompt)
 import Conf.Bindings.Keys.Internal (subKeys)
 

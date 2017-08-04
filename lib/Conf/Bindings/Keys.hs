@@ -27,8 +27,6 @@ import Conf.Bindings.Keys.Workspaces (workspaces)
 import Conf.Bindings.Keys.Resize (resize)
 import Conf.Bindings.Keys.Commands (commands)
 
-import qualified XMonad
-
 import XMonad.Util.NamedActions ((^++^))
 
 modMask = Internal.modMask

@@ -23,7 +23,6 @@ import qualified Conf.Applications as Apps
 import Conf.Theme.Gaps (gaps, spacing)
 
 import qualified XMonad.Layout.ComboP as ComboP
-import qualified XMonad.Layout.Renamed as Renamed
 import qualified XMonad.Layout.Simplest as Simplest
 import qualified XMonad.Layout.Tabbed as Tabbed
 import qualified XMonad.Layout.TwoPane as TwoPane
@@ -31,13 +30,6 @@ import qualified XMonad.Layout.TwoPane as TwoPane
 import XMonad.Hooks.ManageDocks (avoidStruts)
 
 import XMonad.Layout.WindowNavigation (windowNavigation)
-
-
---
-import XMonad.Layout.NoFrillsDecoration (noFrillsDeco)
-import qualified XMonad.Layout.Renamed as Renamed
-
---
 
 ds
   = named "DS Tabbed"

@@ -16,8 +16,6 @@ module Conf.Hooks.HandleEvent
   ( handleEvent
   ) where
 
-import qualified Conf.Hooks.StatusBars as StatusBars
-
 import qualified XMonad
 
 import qualified XMonad.Hooks.FadeWindows as FadeWindows
@@ -25,13 +23,10 @@ import qualified XMonad.Hooks.ManageDocks as ManageDocks
 
 import qualified XMonad.Layout.Fullscreen as Fullscreen
 
-import XMonad.Prompt (def)
-
 import XMonad ((<+>))
 
 handleEvent
   =   ManageDocks.docksEventHook
   <+> FadeWindows.fadeWindowsEventHook
-  <+> XMonad.handleEventHook def
+  <+> XMonad.handleEventHook XMonad.def
   <+> Fullscreen.fullscreenEventHook
-  -- <+> StatusBars.eventHook

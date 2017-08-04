@@ -15,20 +15,13 @@
 module Conf.Hooks.Log
   ( log
   , initBars
-  -- , shutdownHandler
   ) where
 
 import Prelude hiding (log)
 
-import Control.Exception
-        ( throw
-        , SomeException(SomeException)
-        )
 import Control.Monad
-        ( replicateM
-        , forM_
+        ( forM_
         , forM
-        , foldM
         )
 import Codec.Binary.UTF8.String
         ( decodeString
@@ -49,8 +42,6 @@ import System.Posix.Files
         , unionFileModes
         )
 
-import qualified GHC.IO.Handle
-
 import qualified Conf.Theme.Colors as Colors
 import qualified Conf.Hooks.Fade as Hooks.Fade
 
@@ -66,23 +57,17 @@ import qualified XMonad.Util.NamedScratchpad as NamedScratchpad
 
 import XMonad.Util.Run
         ( unsafeSpawn
-        , hPutStrLn
-        , spawnPipe
         )
 
 type Pipe         = FilePath
--- type Handle       = GHC.IO.Handle.Handle
-data XMobarOption = XMobarOption XMonad.ScreenId Pipe --Handle
+data XMobarOption = XMobarOption XMonad.ScreenId Pipe
 
 log bars
  = do
   FadeWindows.fadeWindowsLogHook Hooks.Fade.fade
   EwmhDesktops.ewmhDesktopsLogHook
-  -- forM_ bars $ \(XMobarOption sid pipe handle) -> do
   forM_ bars $ \(XMobarOption sid pipe) -> do
-    -- let ppFoc = ppFocus      foc sid
     let pp = ppWorkspaces pipe sid
-    -- DynamicLog.dynamicLogWithPP ppFoc
     DynamicLog.dynamicLogWithPP pp
 
 -- ppFocus :: FilePath -> XMonad.ScreenId -> DynamicLog.PP
@@ -97,10 +82,8 @@ log bars
 --       }
 
 
--- ppWorkspaces :: GHC.IO.Handle.Handle -> XMonad.ScreenId -> DynamicLog.PP
 ppWorkspaces :: FilePath -> XMonad.ScreenId -> DynamicLog.PP
--- ppWorkspaces handle (XMonad.S sid) =
-ppWorkspaces pipe (XMonad.S sid) =
+ppWorkspaces pipe (XMonad.S _) =
   -- IndependentScreens.marshallPP (XMonad.S sid)
     DynamicLog.def
       { DynamicLog.ppCurrent         = DynamicLog.xmobarColor Colors.green   "" . DynamicLog.wrap "[" "]"
@@ -127,46 +110,20 @@ initBars
     numScreens <- IndependentScreens.countScreens
     barOptions <- forM [0 .. numScreens - 1] $ \sid -> do
                     pipe <- getTempFifo "xmobar-"
-                    -- handle <- spawnPipe (xmobarCommand sid pipe)
-                    return $ XMobarOption sid pipe --handle
-    -- mapM_ (unsafeSpawn . xmobarCommand) barOptions
-    spawnPipe $ initCommand barOptions
+                    return $ XMobarOption sid pipe
+    unsafeSpawn $ initCommand barOptions
     return barOptions
-
--- killBars :: [XMobarOption] -> IO ()
--- killBars bars
---   = do
---     forM_ bars $ \(XMobarOption sid pipe handle) -> do
---       hClose handle
---
--- shutdownHandler :: [XMobarOption] -> SomeException -> IO ()
--- shutdownHandler bars e
---   = do
---     killBars bars
---     unsafeSpawn "dunstify -u critical 'XMonad' 'shutdownHandler called'"
---     throw e
 
 initCommand :: [XMobarOption] -> String
 initCommand xs = "$HOME/.xmonad/initbars.sh " ++ (unwords $ xmobarCommands xs)
-  -- where concatx x1 x2 = x1 ++ " " ++ x2
 
 xmobarCommands :: [XMobarOption] -> [String]
-xmobarCommands = map xmobarCommand'
+xmobarCommands = map xmobarCommand
 
--- xmobarCommand :: XMonad.ScreenId -> Pipe -> String
--- xmobarCommand (XMonad.S sid) pipe =
---   "xmobar -x " ++ show sid ++ " -C '[Run PipeReader \"" ++ (show sid) ++ ":" ++ pipe ++ "\" \"pipe\"]' $HOME/.xmonad/xmobar.conf"
-
-xmobarCommand' :: XMobarOption -> String
-xmobarCommand' (XMobarOption (XMonad.S sid) pipe) =
+xmobarCommand :: XMobarOption -> String
+xmobarCommand (XMobarOption (XMonad.S sid) pipe) =
   show sid ++ " " ++ pipe
-  -- "xmobar -x " ++ show sid ++ " -C \'[Run PipeReader \\\"" ++ (show sid) ++ ":" ++ pipe ++ "\\\" \\\"pipe\\\"]\' $HOME/.xmonad/xmobar.conf &"
-  -- "xmobar -x " ++ show sid ++ " -C '[Run PipeReader \"" ++ (show sid) ++ ":" ++ pipe ++ "\" \"pipe\"]' $HOME/.xmonad/xmobar.conf"
 
--- xmobarCommand :: XMobarOption -> String
--- xmobarCommand (XMobarOption (XMonad.S sid) pipe) =
---   "xmobar -x " ++ show sid ++ " -C '[Run PipeReader \"" ++ (show sid) ++ ":" ++ pipe ++ "\" \"pipe\"]' $HOME/.xmonad/xmobar.conf"
---
 -- TODO: Move out of module
 getTempFifo :: String -> IO FilePath
 getTempFifo prefix = do
@@ -175,5 +132,4 @@ getTempFifo prefix = do
   hClose h
   removeFile tmpFile
   createNamedPipe tmpFile $ unionFileModes ownerReadMode ownerWriteMode
-  -- appendFile tmpFile "foo"
   return tmpFile

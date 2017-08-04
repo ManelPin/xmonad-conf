@@ -18,8 +18,6 @@ module Conf.Bindings.Mouse
   , focusFollowsMouse
   ) where
 
-import Conf.Bindings.Keys (modMask)
-
 import qualified Data.Map as Map
 
 import qualified XMonad

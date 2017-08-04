@@ -26,7 +26,7 @@ import qualified XMonad.Actions.WithAll as WithAll
 import qualified XMonad.Layout.ComboP as ComboP
 import qualified XMonad.Layout.SubLayouts as SubLayouts
 
-import XMonad (spawn, sendMessage)
+import XMonad (sendMessage)
 import XMonad.Actions.CopyWindow (kill1)
 import XMonad.Actions.ConditionalKeys (bindOn, XCond(LD))
 import XMonad.Actions.Navigation2D (windowGo, windowSwap, screenGo, windowToScreen, screenSwap)

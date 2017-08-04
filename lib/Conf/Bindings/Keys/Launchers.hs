@@ -56,7 +56,7 @@ launchers c = subKeys "Launchers" c
   ]
 
 rrc a c = raiseNextMaybe (spawn a) (className c)
-rrt a c = raiseNextMaybe (spawn a) (title     c)
+-- rrt a c = raiseNextMaybe (spawn a) (title     c)
 
 className n = ManageHook.className =? n
-title     n = ManageHook.title     =? n
+-- title     n = ManageHook.title     =? n

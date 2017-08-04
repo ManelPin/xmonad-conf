@@ -16,13 +16,15 @@ module Conf.Bindings.Keys.Commands
   ( commands
   ) where
 
-import Conf.Bindings.Keys.Internal (subKeys, tryMsgR)
+import Conf.Bindings.Keys.Internal
+        ( subKeys
+        )
 
-import XMonad (X, io)
-import XMonad.Actions.Commands (runCommand, defaultCommands, workspaceCommands, screenCommands)
-import XMonad.Util.NamedActions (addName)
-
-import Control.Monad ((>>=))
+-- import XMonad (X, io)
+-- import XMonad.Actions.Commands (runCommand, defaultCommands, workspaceCommands, screenCommands)
+-- import XMonad.Util.NamedActions (addName)
+--
+-- import Control.Monad ((>>=))
 
 commands c = subKeys "Commands" c
   [ --( "M-S-/", addName "Show command menu" $ cmds >>= runCommand)

@@ -23,9 +23,6 @@ import qualified Conf.Layouts.DS as Layouts.DS
 
 import qualified XMonad
 
-import qualified XMonad.Hooks.ManageDocks as ManageDocks
-import qualified XMonad.Hooks.ManageHelpers as ManageHelpers
-
 import qualified XMonad.Layout.MultiToggle as MultiToggle
 import qualified XMonad.Layout.MultiToggle.Instances as MultiToggle.Instances
 import qualified XMonad.Layout.Reflect as Reflect

@@ -30,7 +30,6 @@ import qualified Conf.Hooks.Layout as Hooks.Layout
 import qualified Conf.Hooks.Log as Hooks.Log
 import qualified Conf.Hooks.Startup as Hooks.Startup
 
-import qualified Conf.Theme as Theme
 import qualified Conf.Theme.Colors as Theme.Colors
 import qualified Conf.Theme.Sizes as Theme.Sizes
 

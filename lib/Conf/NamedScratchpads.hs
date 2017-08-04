@@ -21,8 +21,13 @@ import qualified Conf.Applications as Apps
 import qualified XMonad.StackSet as StackSet
 
 import XMonad.Util.NamedScratchpad
-  (NamedScratchpad(NS), defaultFloating, customFloating, namedScratchpadAction, namedScratchpadManageHook)
-import qualified XMonad.ManageHook as ManageHook --(title, className, stringProperty)
+        ( NamedScratchpad(NS)
+        , customFloating
+        , namedScratchpadAction
+        , namedScratchpadManageHook
+        )
+
+import qualified XMonad.ManageHook as ManageHook
 
 import XMonad.ManageHook ((=?))
 

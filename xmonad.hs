@@ -1,36 +1,14 @@
--- import Control.Monad
---         ( forM
---         , replicateM
---         )
-
--- import Control.Exception
---         ( catch
---         -- , throw
---         -- , SomeException(SomeException)
---         )
-
 import qualified Conf.XMonad
--- import qualified Conf.Applications
 
-import Conf.Hooks.Log
-        ( initBars
-        -- , shutdownHandler
-        )
-
--- import qualified Conf.Projects import qualified Conf.XMonad
 import qualified Conf.Layouts.Nav2D
 import qualified Conf.Bindings.Keys as Bindings.Keys
 import qualified Conf.Bindings.Show as Bindings.Show
+import qualified Conf.Hooks.Log as Hooks.Log
 
 import qualified XMonad
 import qualified XMonad.Actions.Navigation2D as Navigation2D
 import qualified XMonad.Hooks.EwmhDesktops as EwmhDesktops
--- import qualified XMonad.Layout.IndependentScreens as IndependentScreens
 import qualified XMonad.Util.NamedActions as NamedActions
-
--- import XMonad.Util.Run
---         ( unsafeSpawn
---         )
 
 opts bars =
   -- Conf.Projects.dynamicProjects $
@@ -41,6 +19,5 @@ opts bars =
 
 main
   = do
-    bars <- initBars
+    bars <- Hooks.Log.initBars
     XMonad.xmonad $ opts bars
-    -- (XMonad.xmonad $ opts bars) `catch` (shutdownHandler bars)

@@ -4,8 +4,9 @@ tmpbase="/tmp"
 installdir="$HOME/.xmonad"
 restart=0
 buildonly=0
+warn=""
 
-while getopts "t:i:br" opt; do
+while getopts "t:i:brw" opt; do
 	case $opt in
 		t)
 			tmpbase=$OPTARG
@@ -15,6 +16,9 @@ while getopts "t:i:br" opt; do
 			;;
 		b)
 			buildonly=1
+			;;
+		w)
+			warn="-W"
 			;;
 		r)
 			restart=1
@@ -34,7 +38,8 @@ cp -r $DIR/* $WORKDIR
 echo "Building xmonad.hs..."
 
 cd $WORKDIR
-ghc --make $WORKDIR/xmonad.hs -i -ilib -dynamic -fforce-recomp -main-is main -v0 -o $WORKDIR/xmonad-x86_64-linux 2>&1 >$WORKDIR/build.log
+
+ghc --make $WORKDIR/xmonad.hs $warn -i -ilib -dynamic -fforce-recomp -main-is main -v0 -o $WORKDIR/xmonad-x86_64-linux 2>&1 >$WORKDIR/build.log
 code=$?
 
 if [[ $code != 0 ]]; then
