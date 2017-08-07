@@ -5,7 +5,11 @@ while test ${#} -gt 0
 do
   sid=$1
   shift
-	pipe=$1
+	focusPipe=$1
 	shift
-	xmobar -x $sid -C "[Run PipeReader \"$sid:$pipe\" \"pipe\"]" $basedir/xmobar.conf &
+	workspacesPipe=$1
+	shift
+	xmobar -x $sid -C \
+		"[Run PipeReader \"$sid:$focusPipe\" \"focusPipe\", Run PipeReader \"$sid:$workspacesPipe\" \"workspacesPipe\"]" \
+		$basedir/xmobar.conf &
 done

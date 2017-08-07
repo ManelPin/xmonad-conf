@@ -66,7 +66,6 @@ toggleLast = CycleWS.toggleWS' ["NSP"] -- Ignore NSP (Named Scratchpad)
 
 -- cycleRecent = CycleRecentWS.cycleRecentWS [modSym] XMonad.xK_o XMonad.xK_i
 
-
 viewWs    = withNthWorkspace StackSet.view
 moveWinWs = withNthWorkspace StackSet.shift
 copyWinWs = withNthWorkspace CopyWindow.copy
