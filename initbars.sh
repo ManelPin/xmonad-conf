@@ -10,6 +10,6 @@ do
 	workspacesPipe=$1
 	shift
 	xmobar -x $sid -C \
-		"[Run PipeReader \"$sid:$focusPipe\" \"focusPipe\", Run PipeReader \"$sid:$workspacesPipe\" \"workspacesPipe\"]" \
+		"[Run PipeReader \"$focusPipe\" \"focusPipe\", Run PipeReader \"$sid:$workspacesPipe\" \"workspacesPipe\"]" \
 		$basedir/xmobar.conf &
 done
