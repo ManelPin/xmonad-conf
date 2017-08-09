@@ -14,8 +14,26 @@
 ----------------------------------------------------------------------------
 module Conf.Workspaces where
 
-foo = "1:FOO"
-bar = "2:BAR"
+import Data.List
+        ( transpose
+        )
 
--- workspaces = [foo, bar]
-workspaces = map show [1..5]
+screenMain :: [String]
+screenMain = [ "Web", "Dev", "Dev", "Dev", "Misc" ]
+
+screenVert :: [String]
+screenVert = [ "Soc", "Dev", "Dev", "Dev", "Misc" ]
+
+workspaces :: Int -> [String]
+workspaces sc = concat . transpose $ zipWith fmt [0..] (wss sc)
+
+fmt :: Int -> [String] -> [String]
+fmt sid ws = zipWith (\a b -> show sid ++ "_" ++ show b ++ ":" ++ a) ws [1..]
+
+wss :: Int -> [[String]]
+wss sc
+  | sc == 1 = [screenMain]
+  | sc == 2 = [screenMain, screenMain]
+  | sc == 3 = [screenMain, screenVert, screenMain]
+  | otherwise = take sc $ repeat screenMain
+

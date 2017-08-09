@@ -23,6 +23,9 @@ import Control.Monad
         ( forM_
         , forM
         )
+import Data.List
+        ( sortBy
+        )
 import Codec.Binary.UTF8.String
         ( decodeString
         )
@@ -109,13 +112,13 @@ ppFocus pipe sid =
 ppWorkspaces' :: DynamicLog.PP
 ppWorkspaces' =
     DynamicLog.def
-      { DynamicLog.ppCurrent         = xmobarColor Colors.green   "" . DynamicLog.wrap "[" "]"
-      , DynamicLog.ppVisible         = xmobarColor Colors.cyan "" . DynamicLog.wrap "(" ")"
-      , DynamicLog.ppLayout          = xmobarColor Colors.violet  ""
-      , DynamicLog.ppUrgent          = xmobarColor Colors.red     "" . DynamicLog.wrap " " " "
-      , DynamicLog.ppHidden          = xmobarColor Colors.skyblue    ""
-      , DynamicLog.ppHiddenNoWindows = xmobarColor Colors.blue    ""
+      { DynamicLog.ppCurrent         = xmobarColor Colors.orange  "" . DynamicLog.wrap "[" "]"
+      , DynamicLog.ppVisible         = xmobarColor Colors.green   "" . DynamicLog.wrap "(" ")"
+      , DynamicLog.ppUrgent          = xmobarColor Colors.red     "" . DynamicLog.wrap "#" "#"
+      , DynamicLog.ppHidden          = xmobarColor Colors.cyan    "" . DynamicLog.wrap " " " "
+      , DynamicLog.ppHiddenNoWindows = xmobarColor Colors.blue    "" . DynamicLog.wrap " " " "
       , DynamicLog.ppWsSep           = xmobarColor Colors.base02  "" "/"
+      , DynamicLog.ppLayout          = xmobarColor Colors.violet  ""
       , DynamicLog.ppOrder           = \(ws:_layout:_title:_) -> [ws]
       }
 
@@ -132,10 +135,11 @@ ppWorkspaces pipe sid =
       }
 
 wsFilter :: XMonad.ScreenId -> [WindowSpace] -> [WindowSpace]
-wsFilter s = pScreens . vScreens . namedScratchpadFilterOutWorkspace where
+wsFilter s = pScreens . vSort . vScreens . namedScratchpadFilterOutWorkspace where
     onScreen ws = unmarshallS (tag ws) == s
     vScreens    = map unmarshallWindowSpace . filter onScreen
     pScreens    = map (marshallWindowSpace s)
+    vSort       = sortBy (\a b -> compare (tag a) (tag b))
 
 initBars :: IO [XMobarOption]
 initBars

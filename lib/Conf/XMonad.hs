@@ -34,7 +34,6 @@ import qualified Conf.Theme.Colors as Theme.Colors
 import qualified Conf.Theme.Sizes as Theme.Sizes
 
 import qualified XMonad
-import qualified XMonad.Layout.IndependentScreens as IndependentScreens
 
 xmonad bars =
   XMonad.def
@@ -51,5 +50,5 @@ xmonad bars =
     , XMonad.mouseBindings      = Bindings.Mouse.mouse
     , XMonad.startupHook        = Hooks.Startup.startup
     , XMonad.terminal           = Applications.terminal
-    , XMonad.workspaces         = IndependentScreens.withScreens (XMonad.S $ length bars) Workspaces.workspaces
+    , XMonad.workspaces         = Workspaces.workspaces $ length bars
     }
