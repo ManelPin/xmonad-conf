@@ -3,8 +3,8 @@ basedir=$(dirname $0)
 pkill "xmobar"
 while test ${#} -gt 0
 do
-  sid=$1
-  shift
+	sid=$1
+	shift
 	focusPipe=$1
 	shift
 	workspacesPipe=$1
