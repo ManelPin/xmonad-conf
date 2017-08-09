@@ -50,6 +50,12 @@ namedScratchpads =
        (className Apps.slackClass)
        float3_4x3_4
 
+  -- Discord
+  , NS Apps.discordClass
+       Apps.discord
+       (className Apps.discordClass)
+       float3_4x3_4
+
   -- Weechat
   , NS Apps.weechatClass
        Apps.weechat

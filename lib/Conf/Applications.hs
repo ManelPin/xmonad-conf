@@ -49,6 +49,12 @@ weechat = printf "termite -c $HOME/.config/termite-weechat/config -d $HOME --cla
 weechatClass :: String
 weechatClass = "Termite_WEECHAT"
 
+discord :: String
+discord = "discord"
+
+discordClass :: String
+discordClass = "discord"
+
 dirciple :: String
 dirciple = "$HOME/bin/gds"
 

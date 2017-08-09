@@ -48,6 +48,7 @@ launchers c = subKeys "Launchers" c
   , ("M-/",               addName "Terminal Scratchpad"     $ NS.action Apps.terminalClass)
   , ("M-s",               addName "Slack Scratchpad"        $ NS.action Apps.slackClass)
   , ("M-c",               addName "Weechat Scratchpad"      $ NS.action Apps.weechatClass)
+  , ("M-S-c",             addName "Discord Scratchpad"      $ NS.action Apps.discordClass)
   , ("M-t",               addName "Task Scratchpad"         $ NS.action Apps.taskClass)
   , ("M-<XF86AudioPlay>", addName "Music Player Scratchpad" $ NS.action Apps.musicClass)
 

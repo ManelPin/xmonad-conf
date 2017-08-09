@@ -26,7 +26,6 @@ import qualified XMonad.Prompt as Prompt
 
 import qualified XMonad.Actions.CopyWindow as CopyWindow
 import qualified XMonad.Actions.CycleWS as CycleWS
--- import qualified XMonad.Actions.CycleRecentWS as CycleRecentWS
 import qualified XMonad.Actions.DynamicProjects as DynamicProjects
 
 import qualified XMonad.Util.NamedScratchpad as NamedScratchpad
@@ -41,7 +40,6 @@ workspaces c = subKeys "Workspaces & Projects" c
     , ( "M-`",   addName "Next non-empty workspace" nextNonEmptyWS)
     , ( "M-S-`", addName "Prev non-empty workspace" prevNonEmptyWS)
     , ( "M-a",   addName "Toggle last workspace"    toggleLast)
-    -- , ( "M-o",   addName "Cycle recent workspaces"  cycleRecent)
   ]
   ++ zipM "M-"     "View      ws" wsKeys [0 ..] viewWs
   ++ zipM "C-"     "Move w to ws" wsKeys [0 ..] moveWinWs
@@ -62,9 +60,7 @@ prevNonEmptyWS =
 getSortByIndexNoSP =
   fmap (. NamedScratchpad.namedScratchpadFilterOutWorkspace) WorkspaceCompare.getSortByIndex
 
-toggleLast = CycleWS.toggleWS' ["NSP"] -- Ignore NSP (Named Scratchpad)
-
--- cycleRecent = CycleRecentWS.cycleRecentWS [modSym] XMonad.xK_o XMonad.xK_i
+toggleLast = CycleWS.toggleWS' ["0_NSP"] -- Ignore NSP (Named Scratchpad)
 
 viewWs    = withNthWorkspace StackSet.view
 moveWinWs = withNthWorkspace StackSet.shift

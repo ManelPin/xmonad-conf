@@ -47,19 +47,9 @@ import qualified Conf.Hooks.Fade as Hooks.Fade
 
 import qualified XMonad
 
--- import qualified XMonad.Layout.IndependentScreens as IndependentScreens
-import XMonad.Layout.IndependentScreens
-        ( PhysicalWorkspace
-        , VirtualWorkspace
-        , countScreens
-        , whenCurrentOn
-        )
-
 import qualified XMonad.Hooks.DynamicLog as DynamicLog
 import qualified XMonad.Hooks.EwmhDesktops as EwmhDesktops
 import qualified XMonad.Hooks.FadeWindows as FadeWindows
-
-import qualified XMonad.Util.NamedScratchpad as NamedScratchpad
 
 import XMonad.Core
         ( X
@@ -79,15 +69,24 @@ import XMonad.Hooks.DynamicLog as DynamicLog
         , shorten
         )
 
-import Control.Arrow
-        ( (***)
+import XMonad.Layout.IndependentScreens
+        ( countScreens
+        , whenCurrentOn
+        , unmarshall
+        , unmarshallS
+        , unmarshallWindowSpace
+        , marshallWindowSpace
+        )
+
+import XMonad.Util.NamedScratchpad
+        ( namedScratchpadFilterOutWorkspace
         )
 
 type FocusPipe      = FilePath
 type WorkspacesPipe = FilePath
 data XMobarOption   = XMobarOption XMonad.ScreenId FocusPipe WorkspacesPipe
 
-log :: [XMobarOption] -> XMonad.X ()
+log :: [XMobarOption] -> X ()
 log bars
  = do
   FadeWindows.fadeWindowsLogHook Hooks.Fade.fade
@@ -97,80 +96,46 @@ log bars
     DynamicLog.dynamicLogWithPP $ ppWorkspaces workspacesPipe sid
 
 ppFocus :: FilePath -> XMonad.ScreenId -> DynamicLog.PP
-ppFocus pipe (XMonad.S sid) =
-  whenCurrentOn (XMonad.S sid)
+ppFocus pipe sid =
+  whenCurrentOn sid
     DynamicLog.def
-      { DynamicLog.ppTitle  = xmobarColor "green" "" . shorten 45
-      , DynamicLog.ppOrder  = \(_ws:_layout:title:_) -> [title]
-      , DynamicLog.ppOutput = appendFile pipe . decodeString . (++ "\n")
+      { DynamicLog.ppTitle   = xmobarColor Colors.green   "" . DynamicLog.shorten 50
+      , DynamicLog.ppLayout  = xmobarColor Colors.violet  ""
+      , DynamicLog.ppSep     = xmobarColor Colors.base02  "" " | "
+      , DynamicLog.ppOrder   = \(_ws:layout:title:_) -> [title, layout]
+      , DynamicLog.ppOutput  = appendFile pipe . decodeString . (++ "\n")
+      }
+
+ppWorkspaces' :: DynamicLog.PP
+ppWorkspaces' =
+    DynamicLog.def
+      { DynamicLog.ppCurrent         = xmobarColor Colors.green   "" . DynamicLog.wrap "[" "]"
+      , DynamicLog.ppVisible         = xmobarColor Colors.cyan "" . DynamicLog.wrap "(" ")"
+      , DynamicLog.ppLayout          = xmobarColor Colors.violet  ""
+      , DynamicLog.ppUrgent          = xmobarColor Colors.red     "" . DynamicLog.wrap " " " "
+      , DynamicLog.ppHidden          = xmobarColor Colors.skyblue    ""
+      , DynamicLog.ppHiddenNoWindows = xmobarColor Colors.blue    ""
+      , DynamicLog.ppWsSep           = xmobarColor Colors.base02  "" "/"
+      , DynamicLog.ppOrder           = \(ws:_layout:_title:_) -> [ws]
       }
 
 ppWorkspaces :: FilePath -> XMonad.ScreenId -> DynamicLog.PP
 ppWorkspaces pipe sid =
-  -- IndependentScreens.marshallPP (XMonad.S sid)
-    DynamicLog.def
-      { DynamicLog.ppCurrent         = xmobarColor "green" ""
-      , DynamicLog.ppVisible         = xmobarColor "white" ""
-      , DynamicLog.ppHiddenNoWindows = xmobarColor "#006666" ""
-      , DynamicLog.ppOrder           = \(ws:_layout:_title:_) -> [ws]
-      , DynamicLog.ppSort            = wsSort sid
+    ppWorkspaces'
+      { DynamicLog.ppCurrent         = DynamicLog.ppCurrent ppWorkspaces' . snd . unmarshall
+      , DynamicLog.ppVisible         = DynamicLog.ppVisible ppWorkspaces' . snd . unmarshall
+      , DynamicLog.ppUrgent          = DynamicLog.ppUrgent  ppWorkspaces' . snd . unmarshall
+      , DynamicLog.ppHidden          = DynamicLog.ppHidden  ppWorkspaces' . snd . unmarshall
+      , DynamicLog.ppHiddenNoWindows = DynamicLog.ppHiddenNoWindows ppWorkspaces' . snd . unmarshall
+      , DynamicLog.ppSort            = fmap (do return $ wsFilter sid) (DynamicLog.ppSort ppWorkspaces')
       , DynamicLog.ppOutput          = appendFile pipe . decodeString . (++ "\n")
       }
 
-wsSort :: XMonad.ScreenId -> X ([WindowSpace] -> [WindowSpace])
-wsSort s
-  = do
-    -- return $ map unmarshallWindowSpace --marshallSort s id
-    return $ unmarshallFilter s --marshallSort s id
-
-unmarshallFilter :: XMonad.ScreenId -> ([WindowSpace] -> [WindowSpace])
--- marshallSort s vSort = pScreens . vSort . vScreens where
--- marshallSort s vSort = vSort . vScreens where
-unmarshallFilter s = map unmarshallWindowSpace . filter onScreen --vScreens
-  where
+wsFilter :: XMonad.ScreenId -> [WindowSpace] -> [WindowSpace]
+wsFilter s = pScreens . vScreens . namedScratchpadFilterOutWorkspace where
     onScreen ws = unmarshallS (tag ws) == s
-    -- onScreen ws = True
-    -- vScreens    = map unmarshallWindowSpace . filter onScreen
-    -- pScreens    = map (marshallWindowSpace s)
-
--- | Convert the tag of the 'WindowSpace' from a 'PhysicalWorkspace' to a 'VirtualWorkspace'.
-unmarshallWindowSpace :: WindowSpace -> WindowSpace
-unmarshallWindowSpace ws = ws { tag = unmarshallW (tag ws) }
-
--- Unmarshall, returning just the Virtual tag
-unmarshallW :: PhysicalWorkspace -> VirtualWorkspace
-unmarshallW = snd . unmarshall
-
--- Unmarshall, returning just the ScreenId
-unmarshallS :: PhysicalWorkspace -> XMonad.ScreenId
-unmarshallS = fst . unmarshall
-
--- Convert a PhysicalWorkspace to a VirtualWorkspace plus its Xinerama ScreenID
-unmarshall  :: PhysicalWorkspace -> (XMonad.ScreenId, VirtualWorkspace)
-unmarshall  = ((XMonad.S . read) *** drop 1) . break (=='_')
-
--- -- If vSort is a function that sorts WindowSpaces with virtual names,
--- -- then marshallSort s vSort is a function which sorts WindowSpaces with
--- -- physical names in an analogous way -- but keeps
--- -- only the spaces on screen s.
--- marshallSort :: XMonad.ScreenId -> ([WindowSpace] -> [WindowSpace]) -> ([WindowSpace] -> [WindowSpace])
--- -- marshallSort s vSort = pScreens . vSort . vScreens where
--- -- marshallSort s vSort = vSort . vScreens where
--- marshallSort s vSort = vScreens where
---     -- onScreen ws = True
---     -- onScreen ws = unmarshallS (tag ws) == s
---     -- vScreens    = map unmarshallWindowSpace . filter onScreen
---     vScreens    = map unmarshallWindowSpace
---     -- pScreens    = map (marshallWindowSpace s)
-
-marshallWindowSpace :: XMonad.ScreenId -> WindowSpace -> WindowSpace
-marshallWindowSpace s ws = ws { tag = marshall s  (tag ws) }
-
-marshall :: XMonad.ScreenId -> VirtualWorkspace -> PhysicalWorkspace
-marshall (XMonad.S sc) vws = show sc ++ '_':vws
-
-
----
+    vScreens    = map unmarshallWindowSpace . filter onScreen
+    pScreens    = map (marshallWindowSpace s)
 
 initBars :: IO [XMobarOption]
 initBars
@@ -192,7 +157,6 @@ xmobarCommands = map xmobarCommand
 xmobarCommand :: XMobarOption -> String
 xmobarCommand (XMobarOption (XMonad.S sid) focusPipe workspacesPipe) =
   unwords [show sid, focusPipe, workspacesPipe]
-  -- show sid ++ " " ++ focusPipe ++
 
 -- TODO: Move out of module
 getTempFifo :: String -> IO FilePath
@@ -203,26 +167,3 @@ getTempFifo prefix = do
   removeFile tmpFile
   createNamedPipe tmpFile $ unionFileModes ownerReadMode ownerWriteMode
   return tmpFile
-
-
--- ppWorkspaces :: FilePath -> XMonad.ScreenId -> DynamicLog.PP
--- ppWorkspaces pipe (XMonad.S sid) =
---   -- IndependentScreens.marshallPP (XMonad.S sid)
---     DynamicLog.def
---       { DynamicLog.ppCurrent         = DynamicLog.xmobarColor Colors.green   "" . DynamicLog.wrap "[" "]"
---       , DynamicLog.ppVisible         = DynamicLog.xmobarColor Colors.skyblue "" . DynamicLog.wrap "(" ")"
---       , DynamicLog.ppTitle           = DynamicLog.xmobarColor Colors.green   "" . DynamicLog.shorten 50
---       , DynamicLog.ppLayout          = DynamicLog.xmobarColor Colors.violet  ""
---       , DynamicLog.ppUrgent          = DynamicLog.xmobarColor Colors.red     "" . DynamicLog.wrap " " " "
---       , DynamicLog.ppHidden          = DynamicLog.xmobarColor Colors.blue    ""
---       , DynamicLog.ppWsSep           = DynamicLog.xmobarColor Colors.base02  "" " / "
---       , DynamicLog.ppSep             = DynamicLog.xmobarColor Colors.base02  "" "  |  "
---       , DynamicLog.ppHiddenNoWindows = const ""
---       , DynamicLog.ppOrder           = id -- \(ws:_:_:_) -> [ws]
---       -- , DynamicLog.ppOutput          = hPutStrLn handle --appendFile pipe . decodeString . (++ "\n")
---       , DynamicLog.ppOutput          = appendFile pipe . decodeString . (++ "\n")
---       -- , DynamicLog.ppOutput  = appendFile "$HOME/.local/tmp/xmonad-wss" . decodeString . (++ "\n")
---       , DynamicLog.ppSort            = fmap
---                                         (NamedScratchpad.namedScratchpadFilterOutWorkspace .)
---                                         (DynamicLog.ppSort DynamicLog.def)
---       }
