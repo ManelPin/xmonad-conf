@@ -105,7 +105,7 @@ ppFocus pipe sid =
       { DynamicLog.ppTitle   = xmobarColor Colors.green   "" . DynamicLog.shorten 50
       , DynamicLog.ppLayout  = xmobarColor Colors.violet  ""
       , DynamicLog.ppSep     = xmobarColor Colors.base02  "" " | "
-      , DynamicLog.ppOrder   = \(_ws:layout:title:_) -> [title, layout]
+      , DynamicLog.ppOrder   = \(_ws:layout:title:_) -> [layout, title]
       , DynamicLog.ppOutput  = appendFile pipe . decodeString . (++ "\n")
       }
 
