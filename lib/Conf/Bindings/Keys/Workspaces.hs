@@ -24,8 +24,6 @@ import Data.List
 
 import Conf.Bindings.Keys.Internal
         ( subKeys
-        , zipM
-        , wsKeys
         )
 
 import Conf.Theme
@@ -37,7 +35,6 @@ import qualified XMonad.Core as Core
 import qualified XMonad.StackSet as StackSet
 import qualified XMonad.Prompt as Prompt
 
-import qualified XMonad.Actions.CopyWindow as CopyWindow
 import qualified XMonad.Actions.CycleWS as CycleWS
 
 import qualified XMonad.Layout.IndependentScreens as IndependentScreens
@@ -49,6 +46,7 @@ import qualified XMonad.Util.WorkspaceCompare as WorkspaceCompare
 
 import XMonad.Actions.DynamicWorkspaces
         ( withNthWorkspace
+        , renameWorkspace
         )
 
 import XMonad.Layout.IndependentScreens
@@ -63,6 +61,7 @@ workspaces c = subKeys "Workspaces & Projects" c
   ( [ ( "M-`",   addName "Next non-empty workspace" nextNonEmptyWS)
     , ( "M-S-`", addName "Prev non-empty workspace" prevNonEmptyWS)
     , ( "M-a",   addName "Toggle last workspace"    toggleLast)
+    , ( "M-r",   addName "Rename workspace"         renameWs)
     ]
   ++ [ ("M-" ++ show i, addName "View ws" $ XMonad.windows $ IndependentScreens.onCurrentScreen StackSet.view w)
      | (i, w) <- zip [0..9] (workspaces' c) ]
@@ -70,12 +69,13 @@ workspaces c = subKeys "Workspaces & Projects" c
      | (i, w) <- zip [0..9] (workspaces' c) ]
   )
 
+renameWs = renameWorkspace warmPrompt
+
 workspaces' :: XMonad.XConfig l -> [VirtualWorkspace]
 workspaces' = nub . sortWS . map IndependentScreens.unmarshallW . filterWS . XMonad.workspaces
-
-filterWS = filter (/="0_NSP")
-
-sortWS = sortBy (\a b -> compare a b)
+  where
+    filterWS = filter (/="0_NSP")
+    sortWS = sortBy (\a b -> compare a b)
 
 nextNonEmptyWS =
   CycleWS.findWorkspace getSortByIndexNoSP Prompt.Next CycleWS.HiddenNonEmptyWS 1 >>= \t ->
