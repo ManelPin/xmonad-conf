@@ -37,7 +37,7 @@ import XMonad.Layout.WindowNavigation (windowNavigation)
 import XMonad.Layout.LayoutCombinators ((|||))
 
 flex
-  = trimNamed 5 "Flex"
+  = trimNamed 5 "F"
   $ avoidStruts
   $ windowNavigation
   $ addTopBar
@@ -49,5 +49,5 @@ flex
 layouts
   = gaps
   $ spacing
-  $ (trimSuffixed 1 "Wide BSP" $ hiddenWindows emptyBSP)
-  ||| (suffixed "Std 1/2" $ ResizableTall.ResizableTall 1 (1 / 20) (1 / 2) [])
+  $ (trimSuffixed 1 "W BSP" $ hiddenWindows emptyBSP)
+  ||| (suffixed "S 1/2" $ ResizableTall.ResizableTall 1 (1 / 20) (1 / 2) [])

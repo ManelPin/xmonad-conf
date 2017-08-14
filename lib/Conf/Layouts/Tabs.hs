@@ -27,7 +27,7 @@ import qualified XMonad.Layout.Tabbed as Tabbed
 import XMonad.Hooks.ManageDocks (avoidStruts)
 
 tabs
-  = named "Tabs"
+  = named "T"
   $ avoidStruts
   $ addTopBar
   $ Tabbed.addTabs Tabbed.shrinkText Theme.tabbed

@@ -32,7 +32,7 @@ import XMonad.Hooks.ManageDocks (avoidStruts)
 import XMonad.Layout.WindowNavigation (windowNavigation)
 
 ds
-  = named "DS Tabbed"
+  = named "DST" -- Dirciple Tabbed
   $ avoidStruts
   $ windowNavigation
   $ ComboP.combineTwoP
