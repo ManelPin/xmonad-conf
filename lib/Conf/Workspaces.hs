@@ -12,7 +12,10 @@
 -- Portability  : unportable
 --
 ----------------------------------------------------------------------------
-module Conf.Workspaces where
+module Conf.Workspaces
+  ( workspaces
+  )
+where
 
 import Data.List
         ( transpose
@@ -28,7 +31,7 @@ workspaces :: Int -> [String]
 workspaces sc = concat . transpose $ zipWith fmt [0..] (wss sc)
 
 fmt :: Int -> [String] -> [String]
-fmt sid ws = zipWith (\a b -> show sid ++ "_" ++ show b ++ ":" ++ a) ws [1..]
+fmt sid ws = zipWith (\wsname wsnum -> show sid ++ "_" ++ show wsnum ++ ":" ++ wsname) ws [1..]
 
 wss :: Int -> [[String]]
 wss sc
