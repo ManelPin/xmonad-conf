@@ -47,7 +47,7 @@ layout c = subKeys "Layout Management" c
   , ( "M-<Tab>",   addName "Cycle all layouts"           cycleAll)
   , ( "M-C-<Tab>", addName "Cycle sublayout"             cycleSub)
 
-  , ( "M-S-d",     addName "Select layout 'DS'"          selectDS)
+  -- , ( "M-S-d",     addName "Select layout 'DS'"          selectDS)
 
   , ( "M-y",       addName "Float tiled w"               floatTiled)
   , ( "M-S-y",     addName "Tile all floating w"         tileFloating)
@@ -78,7 +78,7 @@ reset c      = XMonad.setLayout   $ XMonad.layoutHook c
 cycleAll     = XMonad.sendMessage XMonad.NextLayout
 cycleSub     = SubLayouts.toSubl  XMonad.NextLayout
 
-selectDS     = XMonad.sendMessage $ LayoutCombinators.JumpToLayout "Flex Std 2/3"
+-- selectDS     = XMonad.sendMessage $ LayoutCombinators.JumpToLayout "Flex Std 2/3"
 
 floatTiled   = XMonad.withFocused toggleFloat
 tileFloating = WithAll.sinkAll
