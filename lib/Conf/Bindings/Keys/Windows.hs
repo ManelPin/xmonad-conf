@@ -21,12 +21,13 @@ import Conf.Bindings.Keys.Internal (subKeys, zipM, zipM', dirKeys, arrowKeys, di
 import Conf.Theme (hotPrompt)
 
 import qualified XMonad
+import qualified XMonad.Operations as Operations
 import qualified XMonad.StackSet as StackSet
 import qualified XMonad.Actions.WithAll as WithAll
 import qualified XMonad.Layout.ComboP as ComboP
 import qualified XMonad.Layout.SubLayouts as SubLayouts
 
-import XMonad (sendMessage)
+import XMonad (sendMessage, screenWorkspace, whenJust)
 import XMonad.Actions.CopyWindow (kill1)
 import XMonad.Actions.ConditionalKeys (bindOn, XCond(LD))
 import XMonad.Actions.Navigation2D (windowGo, windowSwap, screenGo, windowToScreen, screenSwap)
@@ -41,6 +42,10 @@ windows c = subKeys "Windows" c
     , ("C-'",             addName "Swap tab D"      swapD)
     , ("C-;",             addName "Swap tab U"      swapU)
     , ("M-C-S-m",         addName "Combo swap"      comboSwap)
+
+    , ("M-<KP_Left>",     addName "Select left screen"   $ selectScreen 1)
+    , ("M-<KP_Begin>",    addName "Select main screen"   $ selectScreen 0)
+    , ("M-<KP_Down>",     addName "Select bottom screen" $ selectScreen 2)
     ]
   ++ zipM  "M-C-"   "Merge w/sublayout"        dirKeys   dirs mergeSub
   ++ zipM' "M-"     "Navigate window"          dirKeys   dirs windowGo       True
@@ -63,6 +68,8 @@ navU = bindOn LD
   , ("DS Tabbed", XMonad.windows     StackSet.focusUp)
   , ("",          SubLayouts.onGroup StackSet.focusUp')
   ]
+
+selectScreen sid = screenWorkspace sid >>= flip whenJust (Operations.windows . StackSet.view)
 
 swapD = XMonad.windows StackSet.swapDown
 swapU = XMonad.windows StackSet.swapUp
