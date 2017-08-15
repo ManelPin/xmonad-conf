@@ -34,7 +34,7 @@ import qualified XMonad.Layout.MultiToggle.Instances as MultiToggle.Instances
 import qualified XMonad.Layout.Gaps as Gaps
 import qualified XMonad.Layout.Spacing as Spacing
 import qualified XMonad.Layout.SubLayouts as SubLayouts
-import qualified XMonad.Layout.LayoutCombinators as LayoutCombinators
+-- import qualified XMonad.Layout.LayoutCombinators as LayoutCombinators
 import qualified XMonad.Layout.WindowNavigation as WindowNavigation
 
 import qualified XMonad.Util.Paste as Paste

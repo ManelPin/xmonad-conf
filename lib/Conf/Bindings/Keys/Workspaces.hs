@@ -45,8 +45,8 @@ import qualified XMonad.Util.NamedScratchpad as NamedScratchpad
 import qualified XMonad.Util.WorkspaceCompare as WorkspaceCompare
 
 import XMonad.Actions.DynamicWorkspaces
-        ( withNthWorkspace
-        , renameWorkspace
+        -- ( withNthWorkspace
+        ( renameWorkspace
         )
 
 import XMonad.Layout.IndependentScreens
