@@ -43,9 +43,9 @@ windows c = subKeys "Windows" c
     , ("C-;",             addName "Swap tab U"      swapU)
     , ("M-C-S-m",         addName "Combo swap"      comboSwap)
 
-    , ("M-<KP_Left>",     addName "Select left screen"   $ selectScreen 1)
-    , ("M-<KP_Begin>",    addName "Select main screen"   $ selectScreen 0)
-    , ("M-<KP_Down>",     addName "Select bottom screen" $ selectScreen 2)
+    , ("M-<KP_End>",      addName "Select left screen"   $ selectScreen 1)
+    , ("M-<KP_Down>",     addName "Select main screen"   $ selectScreen 0)
+    , ("M-<KP_Insert>",   addName "Select bottom screen" $ selectScreen 2)
     ]
   ++ zipM  "M-C-"   "Merge w/sublayout"        dirKeys   dirs mergeSub
   ++ zipM' "M-"     "Navigate window"          dirKeys   dirs windowGo       True
