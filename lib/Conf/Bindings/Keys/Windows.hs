@@ -64,9 +64,9 @@ navD = bindOn LD
   ]
 
 navU = bindOn LD
-  [ ("T",    XMonad.windows     StackSet.focusUp)
-  , ("DS T", XMonad.windows     StackSet.focusUp)
-  , ("",     SubLayouts.onGroup StackSet.focusUp')
+  [ ("T",   XMonad.windows     StackSet.focusUp)
+  , ("DST", XMonad.windows     StackSet.focusUp)
+  , ("",    SubLayouts.onGroup StackSet.focusUp')
   ]
 
 selectScreen sid = screenWorkspace sid >>= flip whenJust (Operations.windows . StackSet.view)
