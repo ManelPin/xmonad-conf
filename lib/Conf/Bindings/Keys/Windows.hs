@@ -58,15 +58,15 @@ windows c = subKeys "Windows" c
 killAll = confirmPrompt hotPrompt "kill all" $ WithAll.killAll
 
 navD = bindOn LD
-  [ ("Tabs",      XMonad.windows     StackSet.focusDown)
-  , ("DS Tabbed", XMonad.windows     StackSet.focusDown)
-  , ("",          SubLayouts.onGroup StackSet.focusDown')
+  [ ("T",   XMonad.windows     StackSet.focusDown)
+  , ("DST", XMonad.windows     StackSet.focusDown)
+  , ("",    SubLayouts.onGroup StackSet.focusDown')
   ]
 
 navU = bindOn LD
-  [ ("Tabs",      XMonad.windows     StackSet.focusUp)
-  , ("DS Tabbed", XMonad.windows     StackSet.focusUp)
-  , ("",          SubLayouts.onGroup StackSet.focusUp')
+  [ ("T",    XMonad.windows     StackSet.focusUp)
+  , ("DS T", XMonad.windows     StackSet.focusUp)
+  , ("",     SubLayouts.onGroup StackSet.focusUp')
   ]
 
 selectScreen sid = screenWorkspace sid >>= flip whenJust (Operations.windows . StackSet.view)
