@@ -13,6 +13,7 @@
 ----------------------------------------------------------------------------
 module Conf.Layouts.Tabs
   ( tabs
+  , name
   ) where
 
 import Conf.Layouts.Internal (addTopBar, named)
@@ -26,8 +27,10 @@ import qualified XMonad.Layout.Tabbed as Tabbed
 
 import XMonad.Hooks.ManageDocks (avoidStruts)
 
+name = "T"
+
 tabs
-  = named "T"
+  = named name
   $ avoidStruts
   $ addTopBar
   $ Tabbed.addTabs Tabbed.shrinkText Theme.tabbed

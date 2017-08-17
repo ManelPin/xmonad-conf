@@ -13,6 +13,7 @@
 ----------------------------------------------------------------------------
 module Conf.Layouts.DS
   ( ds
+  , name
   ) where
 
 import Conf.Layouts.Internal (addTopBar, named)
@@ -31,8 +32,10 @@ import XMonad.Hooks.ManageDocks (avoidStruts)
 
 import XMonad.Layout.WindowNavigation (windowNavigation)
 
+name = "DST"
+
 ds
-  = named "DST" -- Dirciple Tabbed
+  = named name -- Dirciple Tabbed
   $ avoidStruts
   $ windowNavigation
   $ ComboP.combineTwoP
