@@ -79,7 +79,7 @@ xm_quit = confirmPrompt hotPrompt "Quit XMonad" $ io (exitWith ExitSuccess)
 
 sys_lock     = spawn "system lock"
 sys_reboot   = confirmPrompt hotPrompt "Reboot System"   $ spawn "reboot"
-sys_shutdown = confirmPrompt hotPrompt "Shutdown System" $ spawn "reboot -p"
+sys_shutdown = confirmPrompt hotPrompt "Shutdown System" $ spawn "poweroff"
 
 backlight_up   = spawn "displayctl -n int up"
 backlight_down = spawn "displayctl -n int down"
