@@ -94,3 +94,9 @@ statusBar = "xmobar"
 
 statusBarConf :: String
 statusBarConf = "$HOME/.xmonad/xmobar.conf"
+
+screencast :: String
+screencast = "peek"
+
+screencastClass :: String
+screencastClass = "Peek"

@@ -16,6 +16,8 @@ module Conf.Bindings.Keys.System
   ( system
   ) where
 
+import qualified Conf.Applications as Apps
+
 import Conf.Theme (hotPrompt)
 import Conf.Bindings.Keys.Internal (subKeys)
 
@@ -70,6 +72,12 @@ system c = subKeys "System" c
   , ( "<XF86AudioPrev>",   addName "Audio Prev"       audio_prev)
   , ( "<XF86AudioNext>",   addName "Audio Next"       audio_next)
   , ( "S-<XF86AudioPlay>", addName "Audio Favorite"   audio_fav)
+
+  , ( "M-S-1", addName "Screenshot All"             scrot_all)
+  , ( "M-S-2", addName "Screenshot Current Window"  scrot_foc_win)
+  , ( "M-S-3", addName "Screenshot Current Display" scrot_foc_disp)
+  , ( "M-S-4", addName "Screenshot Interactive"     scrot_int)
+  , ( "M-S-5", addName "Screencast"                 scast)
   ]
 
 xm_restart         = spawn "xmonad --restart"
@@ -101,3 +109,10 @@ audio_play = spawn "audioctl player play-pause"
 audio_prev = spawn "audioctl player previous"
 audio_next = spawn "audioctl player next"
 audio_fav  = spawn "audioctl player favorite"
+
+scrot_all      = spawn "screenshot -nx"
+scrot_foc_win  = spawn "screenshot -nxw"
+scrot_foc_disp = spawn "screenshot -nxd"
+scrot_int      = spawn "screenshot -nxi"
+
+scast     = spawn $ Apps.screencast

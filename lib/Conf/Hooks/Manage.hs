@@ -16,7 +16,7 @@ module Conf.Hooks.Manage
   ( manage
   ) where
 
-import qualified Conf.Applications as Applications
+import qualified Conf.Applications as Apps
 import qualified Conf.NamedScratchpads as NamedScratchpads
 
 import qualified XMonad
@@ -48,7 +48,9 @@ manage
 
 manageSpecific =
   ManageHelpers.composeOne
-    [ resource =? "desktop_window" -?> doIgnore
+    [ className =? Apps.screencastClass -?> doCenterFloat
+    -- Lines below need cleanup
+    , resource =? "desktop_window" -?> doIgnore
     , resource =? "stalonetray" -?> doIgnore
     , resource =? "vlc" -?> doFloat
     , resource =? "console" -?> tileBelowNoFocus
@@ -65,7 +67,7 @@ manageSpecific =
 isBrowserDialog
   = isDialog
   <&&> XMonad.className
-  =? Applications.browserClass
+  =? Apps.browserClass
 
 gtkFile = "GtkFileChooserDialog"
 
