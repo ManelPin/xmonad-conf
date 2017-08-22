@@ -14,11 +14,6 @@ module Conf.Applications where
 
 import Text.Printf
 
--- import qualified GHC.IO.Handle as Handle
-
--- import qualified XMonad
--- import qualified XMonad.Util.Run as Run
-
 terminal :: String
 terminal = printf "termite --class='%s'" terminalClass
 
@@ -99,12 +94,3 @@ statusBar = "xmobar"
 
 statusBarConf :: String
 statusBarConf = "$HOME/.xmonad/xmobar.conf"
-
--- statusBarPerScreen :: (Show s, Integral s) => s -> String
--- statusBarPerScreen s = "xmobar -x " ++ show s ++ " $HOME/.xmonad/xmobar.conf"
---
--- spawnStatusBar :: (Show s, Integral s, XMonad.MonadIO m) => s -> m Handle.Handle
--- spawnStatusBar s = Run.spawnPipe $ statusBarPerScreen s
---
--- spawnStatusBars :: (Show sc, Integral sc, XMonad.MonadIO m) => sc -> m [Handle.Handle]
--- spawnStatusBars sc = mapM spawnStatusBar [0..(sc - 1)]
