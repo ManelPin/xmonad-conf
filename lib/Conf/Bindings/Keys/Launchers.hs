@@ -35,14 +35,14 @@ launchers c = subKeys "Launchers" c
   , ("M-d",        addName "Dirciple" $ spawn Apps.dirciple)
   , ("M-v",        addName "Editor"   $ spawn Apps.editor)
   , ("M-\\",       addName "Browser"  $ spawn Apps.browser)
-  , ("M-e",        addName "Email"    $ spawn Apps.email)
+  -- , ("M-e",        addName "Email"    $ spawn Apps.email)
 
   -- Only launch if not already running, otherwise cycle through matching applications
   , ("M-S-<Return>", addName "Select or Launch Terminal" $ rrc Apps.terminal Apps.terminalClass)
   , ("M-S-v",        addName "Select or Launch Editor"   $ rrc Apps.editor   Apps.editorClass)
   , ("M-S-d",        addName "Select or Launch Dirciple" $ rrc Apps.dirciple Apps.dircipleClass)
   , ("M-S-\\",       addName "Select or Launch Browser"  $ rrc Apps.browser  Apps.browserClass)
-  , ("M-S-e",        addName "Select or Launch Email"    $ rrc Apps.email    Apps.emailClass)
+  -- , ("M-S-e",        addName "Select or Launch Email"    $ rrc Apps.email    Apps.emailClass)
 
   -- NamedScratchpads
   , ("M-p",               addName "Password Manager"        $ NS.action Apps.passwordMgrClass)
