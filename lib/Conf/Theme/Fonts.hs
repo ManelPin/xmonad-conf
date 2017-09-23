@@ -26,12 +26,13 @@ getFontPx f s = f ++ ":pixelsize=" ++ (show s)
 withStyle :: String -> String -> String
 withStyle f s = f ++ ":style=" ++ s
 
-dejaVu   = "xft:DejaVu Sans Mono for Powerline:hinting=true"
-euroStar = "xft:Eurostar Black Extended:hinting=true"
+inputMono = "xft:InputMono Nerd Font:hinting=true"
+-- dejaVu    = "xft:DejaVu Sans Mono for Powerline:hinting=true"
+euroStar  = "xft:Eurostar Black Extended:hinting=true"
 
-font      = getFont dejaVu 8 --dejaVu   ++ ":size=10"
-titleFont = getFont dejaVu 8 -- dejaVu   ++ ":size=8"
+font      = getFont inputMono 8 --dejaVu   ++ ":size=10"
+titleFont = getFont inputMono 8 -- dejaVu   ++ ":size=8"
 -- tabFont   = dejaVu   ++ ":style=Bold:size=8"
-bigFont   = getFont dejaVu 14 --dejaVu   ++ ":size=14"
+bigFont   = getFont inputMono 14 --dejaVu   ++ ":size=14"
 -- wideFont  = euroStar ++ ":style=Regular:pixelsize=180"
 wideFont  = getFontPx (withStyle euroStar "Regular") 180
