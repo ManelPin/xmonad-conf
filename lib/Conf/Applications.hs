@@ -12,25 +12,25 @@
 ----------------------------------------------------------------------------
 module Conf.Applications where
 
-import Text.Printf
+import Text.Printf (printf)
 
 terminal :: String
-terminal = printf "termite --class='%s'" terminalClass
+terminal = printf "kitty --class %s" terminalClass
 
 terminalClass :: String
-terminalClass = "Termite_TERM"
+terminalClass = "kitty_TERM"
 
 terminalScratch :: String
-terminalScratch = printf "termite --class='%s'" terminalScratchClass
+terminalScratch = printf "kitty --class %s" terminalScratchClass
 
 terminalScratchClass :: String
-terminalScratchClass = "Termite_SCRATCH"
+terminalScratchClass = "kitty_SCRATCH"
 
 editor :: String
-editor = printf "termite --class='%s' -e \"zsh -c '. $HOME/.zshrc;$HOME/bin/nvim'\"" editorClass
+editor = printf "kitty --class %s zsh -c '. $HOME/.zshrc;$HOME/bin/nvim'" editorClass
 
 editorClass :: String
-editorClass = "Termite_EDITOR"
+editorClass = "kitty_EDITOR"
 
 task :: String
 task = printf "termite -c $HOME/.config/termite-task/config -d $HOME/task --class='%s' -e \"zsh -c 'export HISTFILE=.taskhistory;export ZDOTDIR=$HOME/.task;zsh'\"" taskClass
@@ -51,10 +51,10 @@ discordClass :: String
 discordClass = "discord"
 
 dirciple :: String
-dirciple = "$HOME/bin/gds"
+dirciple = printf "kitty --config $HOME/.config/kitty/kitty.conf --config $HOME/.config/kitty-ds/kitty.conf --class %s zsh -c '. $HOME/.zshrc;$HOME/git/dirciple/index.js'" dircipleClass
 
 dircipleClass :: String
-dircipleClass = "Termite_DS"
+dircipleClass = "kitty_DS"
 
 email :: String
 email = "gtk-launch thunderbird"
