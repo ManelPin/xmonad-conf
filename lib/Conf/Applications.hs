@@ -81,10 +81,10 @@ musicClass :: String
 musicClass = "MellowPlayer"
 
 passwordMgr :: String
-passwordMgr = "gtk-launch enpass"
+passwordMgr = "chromium --app=chrome-extension://khgocmkkpikpnmmkgmdnfckapcdkgfaf/popup/popup.html"
 
 passwordMgrClass :: String
-passwordMgrClass = "Enpass"
+passwordMgrClass = "khgocmkkpikpnmmkgmdnfckapcdkgfaf__popup_popup.html"
 
 launcher :: String
 launcher = "rofi -matching fuzzy -modi combi -show combi -combi-modi run,drun"

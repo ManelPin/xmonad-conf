@@ -55,7 +55,8 @@ manageSpecific =
     , resource =? "vlc" -?> doFloat
     , resource =? "console" -?> tileBelowNoFocus
     , isRole =? gtkFile -?> forceCenterFloat
-    , isRole =? "pop-up" -?> doCenterFloat
+    -- , className =? Apps.passwordMgrClass -?> doIgnore
+    -- , isRole =? "pop-up" -?> doCenterFloat
     , isDialog -?> doCenterFloat
     , isInProperty "_NET_WM_WINDOW_TYPE" "_NET_WM_WINDOW_TYPE_SPLASH" -?> doCenterFloat -- TODO: Cleanup into 'isSplashScreen'
     , isFullscreen -?> doFullFloat

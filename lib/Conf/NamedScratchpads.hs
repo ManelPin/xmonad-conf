@@ -35,7 +35,7 @@ namedScratchpads =
   -- Password Manager
   [ NS Apps.passwordMgrClass
        Apps.passwordMgr
-       (title Apps.passwordMgrClass)
+       (className Apps.passwordMgrClass)
        float2_3x2_3
 
   -- Terminal
@@ -79,7 +79,7 @@ action = namedScratchpadAction     namedScratchpads
 manage = namedScratchpadManageHook namedScratchpads
 
 className n = ManageHook.className =? n
-title     n = ManageHook.title =? n
+-- title     n = ManageHook.title =? n
 -- role n      = (ManageHook.stringProperty "WM_WINDOW_ROLE") ?= n
 
 float2_3x2_3 = customFloating $ StackSet.RationalRect (1/6) (1/6) (2/3) (2/3)
