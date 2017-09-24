@@ -27,28 +27,28 @@ terminalScratchClass :: String
 terminalScratchClass = "st_SCRATCH"
 
 editor :: String
-editor = printf "st -x dst -c %s zsh -c '. $HOME/.zshrc;$HOME/bin/nvim'" editorClass
+editor = printf "st -x st.nvim -c %s zsh -c '. $HOME/.zshrc;$HOME/bin/nvim'" editorClass
 
 editorClass :: String
 editorClass = "st_EDITOR"
 
 dirciple :: String
-dirciple = printf "st -x dst -c %s zsh -c '. $HOME/.zshrc;$HOME/bin/ds'" dircipleClass
+dirciple = printf "st -x st.ds -c %s zsh -c '. $HOME/.zshrc;$HOME/bin/ds'" dircipleClass
 
 dircipleClass :: String
 dircipleClass = "st_DS"
 
 task :: String
-task = printf "termite -c $HOME/.config/termite-task/config -d $HOME/task --class='%s' -e \"zsh -c 'export HISTFILE=.taskhistory;export ZDOTDIR=$HOME/.task;zsh'\"" taskClass
+task = printf "st -x st.tw -c %s zsh -c 'cd $HOME/.task;export HISTFILE=.taskhistory;export ZDOTDIR=$HOME/.task;zsh'" taskClass
 
 taskClass :: String
-taskClass = "Termite_TASK"
+taskClass = "st_TASK"
 
 weechat :: String
-weechat = printf "termite -c $HOME/.config/termite-weechat/config -d $HOME --class='%s' -e \"zsh -c '. $HOME/.zshrc;weechat'\"" weechatClass
+weechat = printf "st -x st.wc -c %s zsh -c 'cd $HOME;. $HOME/.zshrc;weechat'" weechatClass
 
 weechatClass :: String
-weechatClass = "Termite_WEECHAT"
+weechatClass = "st_WEECHAT"
 
 discord :: String
 discord = "discord"
