@@ -15,22 +15,28 @@ module Conf.Applications where
 import Text.Printf
 
 terminal :: String
-terminal = printf "termite --class='%s'" terminalClass
+terminal = printf "st -c %s" terminalClass
 
 terminalClass :: String
-terminalClass = "Termite_TERM"
+terminalClass = "st_TERM"
 
 terminalScratch :: String
-terminalScratch = printf "termite --class='%s'" terminalScratchClass
+terminalScratch = printf "st -c %s" terminalScratchClass
 
 terminalScratchClass :: String
-terminalScratchClass = "Termite_SCRATCH"
+terminalScratchClass = "st_SCRATCH"
 
 editor :: String
-editor = printf "termite --class='%s' -e \"zsh -c '. $HOME/.zshrc;$HOME/bin/nvim'\"" editorClass
+editor = printf "dst -c %s zsh -c '. $HOME/.zshrc;$HOME/bin/nvim'" editorClass
 
 editorClass :: String
-editorClass = "Termite_EDITOR"
+editorClass = "dst_EDITOR"
+
+dirciple :: String
+dirciple = printf "dst -c %s zsh -c '. $HOME/.zshrc;$HOME/bin/ds'" dircipleClass
+
+dircipleClass :: String
+dircipleClass = "dst_DS"
 
 task :: String
 task = printf "termite -c $HOME/.config/termite-task/config -d $HOME/task --class='%s' -e \"zsh -c 'export HISTFILE=.taskhistory;export ZDOTDIR=$HOME/.task;zsh'\"" taskClass
@@ -49,12 +55,6 @@ discord = "discord"
 
 discordClass :: String
 discordClass = "discord"
-
-dirciple :: String
-dirciple = "$HOME/bin/gds"
-
-dircipleClass :: String
-dircipleClass = "Termite_DS"
 
 email :: String
 email = "gtk-launch thunderbird"
