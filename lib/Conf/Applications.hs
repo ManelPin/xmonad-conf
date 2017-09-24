@@ -27,16 +27,16 @@ terminalScratchClass :: String
 terminalScratchClass = "st_SCRATCH"
 
 editor :: String
-editor = printf "dst -c %s zsh -c '. $HOME/.zshrc;$HOME/bin/nvim'" editorClass
+editor = printf "st -x dst -c %s zsh -c '. $HOME/.zshrc;$HOME/bin/nvim'" editorClass
 
 editorClass :: String
-editorClass = "dst_EDITOR"
+editorClass = "st_EDITOR"
 
 dirciple :: String
-dirciple = printf "dst -c %s zsh -c '. $HOME/.zshrc;$HOME/bin/ds'" dircipleClass
+dirciple = printf "st -x dst -c %s zsh -c '. $HOME/.zshrc;$HOME/bin/ds'" dircipleClass
 
 dircipleClass :: String
-dircipleClass = "dst_DS"
+dircipleClass = "st_DS"
 
 task :: String
 task = printf "termite -c $HOME/.config/termite-task/config -d $HOME/task --class='%s' -e \"zsh -c 'export HISTFILE=.taskhistory;export ZDOTDIR=$HOME/.task;zsh'\"" taskClass
