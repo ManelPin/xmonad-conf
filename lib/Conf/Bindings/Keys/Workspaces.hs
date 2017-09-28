@@ -16,14 +16,13 @@ module Conf.Bindings.Keys.Workspaces
   ( workspaces
   ) where
 
-import Data.List
-        ( nub
-        , sortBy
-        , find
-        )
-
 import Conf.Bindings.Keys.Internal
         ( subKeys
+        )
+
+import Data.List
+        ( nub
+        , find
         )
 
 import qualified XMonad
@@ -54,16 +53,15 @@ workspaces c = subKeys "Workspaces & Projects" c
     , ( "M-a",   addName "Toggle last workspace"    toggleLast)
     ]
   ++ [ ("M-" ++ show i, addName "View ws" $ XMonad.windows $ IndependentScreens.onCurrentScreen StackSet.view w)
-     | (i, w) <- zip [0..9] (workspaces' c) ]
+     | (i, w) <- zip ([1..9] ++ [0]) (workspaces' c) ]
   ++ [ ("C-" ++ show i, addName "Move ws" $ XMonad.windows $ IndependentScreens.onCurrentScreen StackSet.shift w)
-     | (i, w) <- zip [0..9] (workspaces' c) ]
+     | (i, w) <- zip ([1..9] ++ [0]) (workspaces' c) ]
   )
 
 workspaces' :: XMonad.XConfig l -> [VirtualWorkspace]
-workspaces' = nub . sortWS . map IndependentScreens.unmarshallW . filterWS . XMonad.workspaces
+workspaces' = nub . map IndependentScreens.unmarshallW . filterWS . XMonad.workspaces
   where
-    filterWS = filter (/="0_NSP")
-    sortWS = sortBy (\a b -> compare a b)
+    filterWS = filter (/= NamedScratchpad.scratchpadWorkspaceTag)
 
 nextNonEmptyWS =
   CycleWS.findWorkspace getSortByIndexNoSP Prompt.Next CycleWS.HiddenNonEmptyWS 1 >>= \t ->
