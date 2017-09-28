@@ -7,27 +7,27 @@ buildonly=0
 warn=""
 
 while getopts "t:i:brw" opt; do
-	case $opt in
-		t)
-			tmpbase=$OPTARG
-			;;
-		i)
-			installdir=$OPTARG
-			;;
-		b)
-			buildonly=1
-			;;
-		w)
-			warn="-W"
-			;;
-		r)
-			restart=1
-			;;
-		\?)
-			echo "Invalid option: -$OPTARG" >&2
-			exit 1
-			;;
-	esac
+  case $opt in
+    t)
+      tmpbase=$OPTARG
+      ;;
+    i)
+      installdir=$OPTARG
+      ;;
+    b)
+      buildonly=1
+      ;;
+    w)
+      warn="-W"
+      ;;
+    r)
+      restart=1
+      ;;
+    \?)
+      echo "Invalid option: -$OPTARG" >&2
+      exit 1
+      ;;
+  esac
 done
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
@@ -43,16 +43,16 @@ ghc --make $WORKDIR/xmonad.hs $warn -i -ilib -dynamic -fforce-recomp -main-is ma
 code=$?
 
 if [[ $code != 0 ]]; then
-	echo "Error: ghc exited with code $code"
-	cat $WORKDIR/build.log
-	rm -rf $WORKDIR
-	exit 1
+  echo "Error: ghc exited with code $code"
+  cat $WORKDIR/build.log
+  rm -rf $WORKDIR
+  exit 1
 fi
 
 echo "Success!"
 
 if [[ $buildonly == 1 ]]; then
-	exit 0
+  exit 0
 fi
 
 echo "Installing to $installdir..."
@@ -61,6 +61,6 @@ rm -rf $HOME/.xmonad
 mv $WORKDIR $installdir
 
 if [[ $restart = 1 ]]; then
-	echo "Restarting XMonad..."
-	xmonad --restart
+  echo "Restarting XMonad..."
+  xmonad --restart
 fi
