@@ -17,25 +17,25 @@ module Conf.Theme.Sizes where
 import qualified Data.Word as Word
 
 gap:: Int
-gap = 20
+gap = 16
 
 gapSmall :: Int
-gapSmall = 10
+gapSmall = 8
 
 gapBig :: Int
-gapBig = 30
+gapBig = 32
 
 topbar :: Word.Word32
-topbar = 20
+topbar = 16
 
 tabbar :: Word.Word32
-tabbar = 40
+tabbar = 44
 
 border :: Word.Word32
 border = 0
 
 prompt :: Word.Word32
-prompt = 50
+prompt = 64
 
 status :: Word.Word32
-status = 20
+status = 16

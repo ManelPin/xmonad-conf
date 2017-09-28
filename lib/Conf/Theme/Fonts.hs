@@ -17,7 +17,7 @@ module Conf.Theme.Fonts
   , wideFont
   ) where
 
-getFont :: String -> Int -> String
+getFont :: String -> Float -> String
 getFont f s = f ++ ":size=" ++ (show s)
 
 getFontPx :: String -> Int -> String
@@ -27,12 +27,9 @@ withStyle :: String -> String -> String
 withStyle f s = f ++ ":style=" ++ s
 
 inputMono = "xft:InputMono Nerd Font:hinting=true"
--- dejaVu    = "xft:DejaVu Sans Mono for Powerline:hinting=true"
 euroStar  = "xft:Eurostar Black Extended:hinting=true"
 
-font      = getFont inputMono 8 --dejaVu   ++ ":size=10"
-titleFont = getFont inputMono 8 -- dejaVu   ++ ":size=8"
--- tabFont   = dejaVu   ++ ":style=Bold:size=8"
-bigFont   = getFont inputMono 14 --dejaVu   ++ ":size=14"
--- wideFont  = euroStar ++ ":style=Regular:pixelsize=180"
+font      = getFont inputMono 9
+titleFont = getFont inputMono 6
+bigFont   = getFont inputMono 14
 wideFont  = getFontPx (withStyle euroStar "Regular") 180
