@@ -25,7 +25,8 @@ module XMonad.Util.NamedScratchpad (
   allNamedScratchpadAction,
   namedScratchpadManageHook,
   namedScratchpadFilterOutWorkspace,
-  namedScratchpadFilterOutWorkspacePP
+  namedScratchpadFilterOutWorkspacePP,
+  scratchpadWorkspaceTag
   ) where
 
 import XMonad
