@@ -54,9 +54,9 @@ workspaces c = subKeys "Workspaces & Projects" c
     , ( "M-a",   addName "Toggle last workspace"    toggleLast)
     ]
   ++ [ ("M-" ++ show i, addName "View ws" $ XMonad.windows $ IndependentScreens.onCurrentScreen StackSet.view w)
-     | (i, w) <- zip ([1..9] ++ [0]) (workspaces' c) ]
+     | (i, w) <- zip [0..9] (workspaces' c) ]
   ++ [ ("C-" ++ show i, addName "Move ws" $ XMonad.windows $ IndependentScreens.onCurrentScreen StackSet.shift w)
-     | (i, w) <- zip ([1..9] ++ [0]) (workspaces' c) ]
+     | (i, w) <- zip [0..9] (workspaces' c) ]
   )
 
 workspaces' :: XMonad.XConfig l -> [VirtualWorkspace]
