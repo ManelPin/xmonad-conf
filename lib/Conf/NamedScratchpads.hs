@@ -32,11 +32,17 @@ import qualified XMonad.ManageHook as ManageHook
 import XMonad.ManageHook ((=?))
 
 namedScratchpads =
-  -- Password Manager
-  [ NS Apps.passwordMgrClass
-       Apps.passwordMgr
-       (className Apps.passwordMgrClass)
+  -- Enpass
+  [ NS Apps.enpassClass
+       Apps.enpass
+       (title Apps.enpassClass)
        float2_3x2_3
+
+  -- -- 1Password
+  -- , NS Apps.onepassClass
+  --      Apps.onepass
+  --      (wmName Apps.onepassWMName)
+  --      float2_3x2_3
 
   -- Terminal
   , NS Apps.terminalClass
@@ -72,15 +78,16 @@ namedScratchpads =
   , NS Apps.musicClass
        Apps.music
        (className Apps.musicClass)
-       float2_3x2_3
+       float3_4x3_4
   ]
 
 action = namedScratchpadAction     namedScratchpads
 manage = namedScratchpadManageHook namedScratchpads
 
 className n = ManageHook.className =? n
--- title     n = ManageHook.title =? n
--- role n      = (ManageHook.stringProperty "WM_WINDOW_ROLE") ?= n
+title     n = ManageHook.title     =? n
+-- appName   n = ManageHook.appName   =? n
+-- wmName    n = (ManageHook.stringProperty "WM_NAME") =? n
 
 float2_3x2_3 = customFloating $ StackSet.RationalRect (1/6) (1/6) (2/3) (2/3)
 float3_4x3_4 = customFloating $ StackSet.RationalRect (1/12) (1/12) (5/6) (5/6)

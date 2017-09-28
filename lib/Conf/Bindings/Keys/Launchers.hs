@@ -21,13 +21,8 @@ import qualified Conf.NamedScratchpads as NS
 
 import Conf.Bindings.Keys.Internal (subKeys)
 
-import qualified XMonad.ManageHook as ManageHook
-
 import XMonad (spawn)
-import XMonad.Actions.WindowGo (raiseNextMaybe)
 import XMonad.Util.NamedActions (addName)
-
-import XMonad.ManageHook ((=?))
 
 launchers c = subKeys "Launchers" c
   [ ("M-<Space>",  addName "Launcher" $ spawn Apps.launcher)
@@ -37,28 +32,13 @@ launchers c = subKeys "Launchers" c
   , ("M-\\",       addName "Browser"  $ spawn Apps.browser)
   -- , ("M-e",        addName "Email"    $ spawn Apps.email)
 
-  -- Only launch if not already running, otherwise cycle through matching applications
-  , ("M-S-<Return>", addName "Select or Launch Terminal" $ rrc Apps.terminal Apps.terminalClass)
-  , ("M-S-v",        addName "Select or Launch Editor"   $ rrc Apps.editor   Apps.editorClass)
-  , ("M-S-d",        addName "Select or Launch Dirciple" $ rrc Apps.dirciple Apps.dircipleClass)
-  , ("M-S-\\",       addName "Select or Launch Browser"  $ rrc Apps.browser  Apps.browserClass)
-  -- , ("M-S-e",        addName "Select or Launch Email"    $ rrc Apps.email    Apps.emailClass)
-
   -- NamedScratchpads
-  , ("M-p",               addName "Password Manager"        $ NS.action Apps.passwordMgrClass)
+  , ("M-p",               addName "Enpass"                  $ NS.action Apps.enpassClass)
+  , ("M-S-p",             addName "1Password"               $ NS.action Apps.onepassClass)
   , ("M-/",               addName "Terminal Scratchpad"     $ NS.action Apps.terminalClass)
   , ("M-s",               addName "Slack Scratchpad"        $ NS.action Apps.slackClass)
   , ("M-c",               addName "Weechat Scratchpad"      $ NS.action Apps.weechatClass)
   , ("M-S-c",             addName "Discord Scratchpad"      $ NS.action Apps.discordClass)
   , ("M-t",               addName "Task Scratchpad"         $ NS.action Apps.taskClass)
   , ("M-<XF86AudioPlay>", addName "Music Player Scratchpad" $ NS.action Apps.musicClass)
-
-  -- , ("M-s s",      addName "Cancel submap" $ return ())
-  -- , ("M-s M-s",    addName "Cancel submap" $ return ())
   ]
-
-rrc a c = raiseNextMaybe (spawn a) (className c)
--- rrt a c = raiseNextMaybe (spawn a) (title     c)
-
-className n = ManageHook.className =? n
--- title     n = ManageHook.title     =? n

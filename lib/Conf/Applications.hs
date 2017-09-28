@@ -80,11 +80,20 @@ music = "$HOME/bin/mellowplayer"
 musicClass :: String
 musicClass = "MellowPlayer"
 
-passwordMgr :: String
-passwordMgr = "chromium --app=chrome-extension://khgocmkkpikpnmmkgmdnfckapcdkgfaf/popup/popup.html"
+enpass :: String
+enpass = "gtk-launch enpass"
 
-passwordMgrClass :: String
-passwordMgrClass = "khgocmkkpikpnmmkgmdnfckapcdkgfaf__popup_popup.html"
+enpassClass :: String
+enpassClass = "Enpass"
+
+onepass :: String
+onepass = "chromium --app=chrome-extension://khgocmkkpikpnmmkgmdnfckapcdkgfaf/popup/popup.html"
+
+onepassWMName :: String
+onepassWMName = "1Password"
+
+onepassClass :: String
+onepassClass = "khgocmkkpikpnmmkgmdnfckapcdkgfaf__popup_popup.html"
 
 launcher :: String
 launcher = "rofi -matching fuzzy -modi combi -show combi -combi-modi run,drun"
