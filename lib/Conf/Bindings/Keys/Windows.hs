@@ -18,7 +18,7 @@ module Conf.Bindings.Keys.Windows
 
 import Conf.Bindings.Keys.Internal (subKeys, zipM, zipM', dirKeys, arrowKeys, dirs)
 
-import qualified Conf.Layouts.DS as DS
+import qualified Conf.Layouts.DST as DST
 import qualified Conf.Layouts.Tabs as Tabs
 
 import Conf.Theme (hotPrompt)
@@ -61,15 +61,15 @@ windows c = subKeys "Windows" c
 killAll = confirmPrompt hotPrompt "kill all" $ WithAll.killAll
 
 navD = bindOn LD
-  [ (Tabs.name, XMonad.windows     StackSet.focusDown)
-  , (DS.name,   XMonad.windows     StackSet.focusDown)
-  , ("",        SubLayouts.onGroup StackSet.focusDown')
+  [ (Tabs.name,  XMonad.windows     StackSet.focusDown)
+  , (DST.name,   XMonad.windows     StackSet.focusDown)
+  , ("",         SubLayouts.onGroup StackSet.focusDown')
   ]
 
 navU = bindOn LD
-  [ (Tabs.name, XMonad.windows     StackSet.focusUp)
-  , (DS.name,   XMonad.windows     StackSet.focusUp)
-  , ("",        SubLayouts.onGroup StackSet.focusUp')
+  [ (Tabs.name,   XMonad.windows     StackSet.focusUp)
+  , (DST.name,    XMonad.windows     StackSet.focusUp)
+  , ("",          SubLayouts.onGroup StackSet.focusUp')
   ]
 
 selectScreen sid = screenWorkspace sid >>= flip whenJust (Operations.windows . StackSet.view)

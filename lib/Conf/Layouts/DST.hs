@@ -2,7 +2,7 @@
 
 ----------------------------------------------------------------------------
 -- |
--- Module       : Conf.Layouts.DS
+-- Module       : Conf.Layouts.DST
 -- Copyright    : (c) maddy@na.ai
 -- License      : MIT
 --
@@ -11,8 +11,8 @@
 -- Portability  : unportable
 --
 ----------------------------------------------------------------------------
-module Conf.Layouts.DS
-  ( ds
+module Conf.Layouts.DST
+  ( dst
   , name
   ) where
 
@@ -34,14 +34,14 @@ import XMonad.Layout.WindowNavigation (windowNavigation)
 
 name = "DST"
 
-ds
+dst
   = named name -- Dirciple Tabbed
   $ avoidStruts
   $ windowNavigation
   $ ComboP.combineTwoP
     container
-    tabs
     dirciple
+    tabs
     props
 
 container
