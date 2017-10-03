@@ -51,7 +51,6 @@ import qualified Conf.Hooks.Fade as Hooks.Fade
 import qualified XMonad
 
 import qualified XMonad.Hooks.DynamicLog as DynamicLog
-import qualified XMonad.Hooks.EwmhDesktops as EwmhDesktops
 import qualified XMonad.Hooks.FadeWindows as FadeWindows
 
 import XMonad.Core
@@ -93,7 +92,6 @@ log :: [XMobarOption] -> X ()
 log bars
  = do
   FadeWindows.fadeWindowsLogHook Hooks.Fade.fade
-  EwmhDesktops.ewmhDesktopsLogHook
   forM_ bars $ \(XMobarOption sid focusPipe workspacesPipe) -> do
     DynamicLog.dynamicLogWithPP $ ppFocus      focusPipe      sid
     DynamicLog.dynamicLogWithPP $ ppWorkspaces workspacesPipe sid
