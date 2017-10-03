@@ -17,8 +17,9 @@ module Conf.Bindings.Keys.Layout
   ) where
 
 import qualified Conf.Theme.Sizes as Sizes
+import Conf.Layouts.DST as DST
 
-import Conf.Bindings.Keys.Internal (subKeys, tryMsgR)
+import Conf.Bindings.Keys.Internal (subKeys)
 
 import qualified Data.Map as Map
 
@@ -27,18 +28,15 @@ import qualified XMonad.StackSet as StackSet
 
 import qualified XMonad.Actions.WithAll as WithAll
 
-import qualified XMonad.Layout.BinarySpacePartition as BinarySpacePartition
 import qualified XMonad.Layout.MultiToggle as MultiToggle
 import qualified XMonad.Layout.MultiToggle.Instances as MultiToggle.Instances
--- import qualified XMonad.Layout.Reflect as Reflect
 import qualified XMonad.Layout.Gaps as Gaps
 import qualified XMonad.Layout.Spacing as Spacing
 import qualified XMonad.Layout.SubLayouts as SubLayouts
--- import qualified XMonad.Layout.LayoutCombinators as LayoutCombinators
-import qualified XMonad.Layout.WindowNavigation as WindowNavigation
 
 import qualified XMonad.Util.Paste as Paste
 
+import XMonad.Layout.LayoutCombinators (JumpToLayout(JumpToLayout))
 import XMonad.Util.NamedActions (addName)
 
 layout c = subKeys "Layout Management" c
@@ -47,7 +45,7 @@ layout c = subKeys "Layout Management" c
   , ( "M-<Tab>",   addName "Cycle all layouts"           cycleAll)
   , ( "M-C-<Tab>", addName "Cycle sublayout"             cycleSub)
 
-  -- , ( "M-S-d",     addName "Select layout 'DS'"          selectDS)
+  , ( "M-S-d",     addName "Select DST Layout"           $ selectDST)
 
   , ( "M-y",       addName "Float tiled w"               floatTiled)
   , ( "M-S-y",     addName "Tile all floating w"         tileFloating)
@@ -61,11 +59,7 @@ layout c = subKeys "Layout Management" c
   , ( "M-S--",   addName "Decrease gaps 10px"          $ decGaps 10)
   , ( "M-S-=",   addName "Increase gaps 10px"          $ incGaps 10)
 
-  -- , ( "M-r",       addName "Reflect/Rotate"              rotate)
-  -- , ( "M-S-r",     addName "Force Reflect (even on BSP)" reflect)
-  --
   , ( "M-f",       addName "Fullscreen"                  fullscreen)
-  , ( "M-S-f",     addName "Fake fullscreen"             fakeFullscreen)
 
   , ( "C-S-h",     addName "Ctrl-h passthrough"          hPass)
   , ( "C-S-j",     addName "Ctrl-j passthrough"          jPass)
@@ -75,10 +69,10 @@ layout c = subKeys "Layout Management" c
 
 reset c      = XMonad.setLayout   $ XMonad.layoutHook c
 
+selectDST    = XMonad.sendMessage $ JumpToLayout DST.name
+
 cycleAll     = XMonad.sendMessage XMonad.NextLayout
 cycleSub     = SubLayouts.toSubl  XMonad.NextLayout
-
--- selectDS     = XMonad.sendMessage $ LayoutCombinators.JumpToLayout "Flex Std 2/3"
 
 floatTiled   = XMonad.withFocused toggleFloat
 tileFloating = WithAll.sinkAll
@@ -102,18 +96,9 @@ resetGaps = do
   Spacing.setSpacing Sizes.gap
   return ()
 
--- rotate       = tryMsgR (BinarySpacePartition.Rotate) (MultiToggle.Toggle Reflect.REFLECTX)
--- reflect      = XMonad.sendMessage (MultiToggle.Toggle Reflect.REFLECTX)
-
 fullscreen = sequence_
   [ (XMonad.withFocused $ XMonad.windows . StackSet.sink)
   , (XMonad.sendMessage $ MultiToggle.Toggle MultiToggle.Instances.FULL)
-  ]
-
-fakeFullscreen = sequence_
-  [ (Paste.sendKey Paste.noModMask XMonad.xK_F11)
-  , (tryMsgR (BinarySpacePartition.ExpandTowards WindowNavigation.L) (XMonad.Shrink))
-  , (tryMsgR (BinarySpacePartition.ExpandTowards WindowNavigation.R) (XMonad.Expand))
   ]
 
 hPass = Paste.sendKey XMonad.controlMask XMonad.xK_h

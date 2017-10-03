@@ -40,26 +40,11 @@ layout
   = showWorkspaceName
   $ fullscreenFloat
   $ fullScreenToggle
-  $ fullBarToggle
-  $ mirrorToggle
-  $ reflectToggle
   $ Layouts.Flex.flex
     ||| Layouts.Tabs.tabs
     ||| Layouts.DST.dst
 
+
 showWorkspaceName = showWName' Theme.showWName
 
 fullScreenToggle = mkToggle (single MultiToggle.Instances.FULL)
-fullBarToggle    = mkToggle (single FULLBAR)
-mirrorToggle     = mkToggle (single MultiToggle.Instances.MIRROR)
-reflectToggle    = mkToggle (single Reflect.REFLECTX)
-
--- TODO: Move out of module?
-data FULLBAR =
-  FULLBAR
-  deriving (Read, Show, Eq, XMonad.Typeable)
-
-instance MultiToggle.Transformer FULLBAR XMonad.Window where
-  transform FULLBAR x k = k barFull (\_ -> x)
-
-barFull = avoidStruts $ Simplest.Simplest
