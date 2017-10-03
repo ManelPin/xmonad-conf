@@ -56,6 +56,12 @@ discord = "discord"
 discordClass :: String
 discordClass = "discord"
 
+filemanager :: String
+filemanager = "gtk-launch Thunar"
+
+filemanagerClass :: String
+filemanagerClass = "Thunar"
+
 email :: String
 email = "gtk-launch thunderbird"
 

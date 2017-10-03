@@ -62,6 +62,13 @@ namedScratchpads =
        (className Apps.discordClass)
        float3_4x3_4
 
+  -- File Manager
+  , NS Apps.filemanagerClass
+       Apps.filemanager
+       (className Apps.filemanagerClass)
+       float3_4x3_4
+
+
   -- Weechat
   , NS Apps.weechatClass
        Apps.weechat
