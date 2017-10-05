@@ -21,8 +21,13 @@ import qualified Conf.NamedScratchpads as NS
 
 import Conf.Bindings.Keys.Internal (subKeys)
 
+import qualified XMonad.ManageHook as ManageHook
+
 import XMonad (spawn)
+import XMonad.Actions.WindowGo (raiseNextMaybe)
 import XMonad.Util.NamedActions (addName)
+
+import XMonad.ManageHook ((=?))
 
 launchers c = subKeys "Launchers" c
   [ ("M-<Space>",  addName "Launcher" $ spawn Apps.launcher)
@@ -30,7 +35,8 @@ launchers c = subKeys "Launchers" c
   , ("M-d",        addName "Dirciple" $ spawn Apps.dirciple)
   , ("M-v",        addName "Editor"   $ spawn Apps.editor)
   , ("M-\\",       addName "Browser"  $ spawn Apps.browser)
-  -- , ("M-e",        addName "Email"    $ spawn Apps.email)
+
+  , ("M-S-e",        addName "Select or Launch Email" $ rrc Apps.email Apps.emailClass)
 
   -- NamedScratchpads
   , ("M-p",               addName "Enpass"                  $ NS.action Apps.enpassClass)
@@ -43,3 +49,6 @@ launchers c = subKeys "Launchers" c
   , ("M-t",               addName "Task Scratchpad"         $ NS.action Apps.taskClass)
   , ("M-<XF86AudioPlay>", addName "Music Player Scratchpad" $ NS.action Apps.musicClass)
   ]
+
+rrc a c = raiseNextMaybe (spawn a) (className c)
+className n = ManageHook.className =? n

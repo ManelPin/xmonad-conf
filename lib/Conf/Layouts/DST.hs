@@ -58,8 +58,5 @@ tabs
   = addTopBar
   $ Tabbed.addTabs Tabbed.shrinkText Theme.tabbed
   $ Simplest.Simplest
-  -- TODO: Make this group a subgroup which splits vertically?
 
 props = ComboP.ClassName Apps.dircipleClass
-
--- addTopBar = noFrillsDeco Tabbed.shrinkText Theme.topBar

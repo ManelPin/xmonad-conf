@@ -21,14 +21,7 @@ import qualified Conf.Layouts.Flex as Layouts.Flex
 import qualified Conf.Layouts.Tabs as Layouts.Tabs
 import qualified Conf.Layouts.DST as Layouts.DST
 
-import qualified XMonad
-
-import qualified XMonad.Layout.MultiToggle as MultiToggle
 import qualified XMonad.Layout.MultiToggle.Instances as MultiToggle.Instances
-import qualified XMonad.Layout.Reflect as Reflect
-import qualified XMonad.Layout.Simplest as Simplest
-
-import XMonad.Hooks.ManageDocks (avoidStruts)
 
 import XMonad.Layout.Fullscreen (fullscreenFloat)
 import XMonad.Layout.MultiToggle (mkToggle, single)

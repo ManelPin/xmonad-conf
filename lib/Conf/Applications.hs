@@ -63,10 +63,10 @@ filemanagerClass :: String
 filemanagerClass = "Thunar"
 
 email :: String
-email = "gtk-launch thunderbird"
+email = "gtk-launch mailspring"
 
 emailClass :: String
-emailClass = "Thunderbird"
+emailClass = "Mailspring"
 
 slack :: String
 slack = "gtk-launch slack"
