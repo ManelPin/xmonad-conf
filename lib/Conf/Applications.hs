@@ -16,24 +16,26 @@ import Text.Printf
 
 terminal :: String
 terminal = printf "st -c %s" terminalClass
+-- terminal = printf "st -c %s zsh -ic 'cd $HOME;. $HOME/.zshrc'" terminalClass
 
 terminalClass :: String
 terminalClass = "st_TERM"
 
 terminalScratch :: String
 terminalScratch = printf "st -c %s" terminalScratchClass
+-- terminalScratch = printf "st -c %s zsh -ic 'cd $HOME;. $HOME/.zshrc'" terminalScratchClass
 
 terminalScratchClass :: String
 terminalScratchClass = "st_SCRATCH"
 
 editor :: String
-editor = printf "st -x st.nvim -c %s zsh -c '. $HOME/.zshrc;$HOME/bin/nvim'" editorClass
+editor = printf "st -x st.nvim -c %s zsh -c 'cd $HOME;. $HOME/.zshrc;$HOME/bin/nvim'" editorClass
 
 editorClass :: String
 editorClass = "st_EDITOR"
 
 dirciple :: String
-dirciple = printf "st -x st.ds -c %s zsh -c '. $HOME/.zshrc;$HOME/bin/ds'" dircipleClass
+dirciple = printf "st -x st.ds -c %s zsh -c 'cd $HOME;. $HOME/.zshrc;$HOME/bin/ds'" dircipleClass
 
 dircipleClass :: String
 dircipleClass = "st_DS"

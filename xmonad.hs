@@ -1,3 +1,5 @@
+import qualified System.Directory as Directory
+
 import qualified Conf.XMonad
 
 import qualified Conf.Layouts.Nav2D
@@ -11,7 +13,6 @@ import qualified XMonad.Hooks.EwmhDesktops as EwmhDesktops
 import qualified XMonad.Util.NamedActions as NamedActions
 
 opts bars =
-  -- Conf.Projects.dynamicProjects $
   Navigation2D.withNavigation2DConfig Conf.Layouts.Nav2D.nav2D $
   EwmhDesktops.ewmh $
   NamedActions.addDescrKeys' ((Bindings.Keys.modMask, XMonad.xK_F1), Bindings.Show.show) Bindings.Keys.keys $
@@ -19,5 +20,7 @@ opts bars =
 
 main
   = do
+    home <- XMonad.io Directory.getHomeDirectory
+    XMonad.catchIO (Directory.setCurrentDirectory home)
     bars <- Hooks.Log.initBars
     XMonad.xmonad $ opts bars
