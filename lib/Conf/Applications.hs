@@ -31,6 +31,9 @@ terminalScratchClass = "st_SCRATCH"
 editor :: String
 editor = printf "st -x st.nvim -c %s zsh -c 'cd $HOME;. $HOME/.zshrc;$HOME/bin/nvim'" editorClass
 
+editorTmpl :: String
+editorTmpl = printf "st -x st.nvim -c %s zsh -c 'cd $HOME;. $HOME/.zshrc;$HOME/bin/nvim-tmpl'" editorClass
+
 editorClass :: String
 editorClass = "st_EDITOR"
 
@@ -65,10 +68,12 @@ filemanagerClass :: String
 filemanagerClass = "Thunar"
 
 email :: String
-email = "gtk-launch mailspring"
+-- email = "gtk-launch mailspring"
+email = ""
 
 emailClass :: String
-emailClass = "Mailspring"
+-- emailClass = "Mailspring"
+emailClass = ""
 
 slack :: String
 slack = "gtk-launch slack"

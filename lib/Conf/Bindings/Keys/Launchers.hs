@@ -30,11 +30,12 @@ import XMonad.Util.NamedActions (addName)
 import XMonad.ManageHook ((=?))
 
 launchers c = subKeys "Launchers" c
-  [ ("M-<Space>",  addName "Launcher" $ spawn Apps.launcher)
-  , ("M-<Return>", addName "Terminal" $ spawn Apps.terminal)
-  , ("M-d",        addName "Dirciple" $ spawn Apps.dirciple)
-  , ("M-v",        addName "Editor"   $ spawn Apps.editor)
-  , ("M-\\",       addName "Browser"  $ spawn Apps.browser)
+  [ ("M-<Space>",  addName "Launcher"     $ spawn Apps.launcher)
+  , ("M-<Return>", addName "Terminal"     $ spawn Apps.terminal)
+  , ("M-d",        addName "Dirciple"     $ spawn Apps.dirciple)
+  , ("M-v",        addName "Editor"       $ spawn Apps.editor)
+  , ("M-S-v",      addName "Editor Tmpl"  $ spawn Apps.editorTmpl)
+  , ("M-\\",       addName "Browser"      $ spawn Apps.browser)
 
   , ("M-S-e",        addName "Select or Launch Email" $ rrc Apps.email Apps.emailClass)
 
