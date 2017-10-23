@@ -22,19 +22,15 @@ import Conf.Bindings.Keys.Internal
 
 import Data.List
         ( nub
-        , find
         )
 
 import qualified XMonad
-import qualified XMonad.Core as Core
 import qualified XMonad.StackSet as StackSet
 import qualified XMonad.Prompt as Prompt
 
 import qualified XMonad.Actions.CycleWS as CycleWS
 
 import qualified XMonad.Layout.IndependentScreens as IndependentScreens
-
-import qualified XMonad.Hooks.WorkspaceHistory as WH
 
 import qualified XMonad.Util.NamedScratchpad as NamedScratchpad
 import qualified XMonad.Util.WorkspaceCompare as WorkspaceCompare
@@ -50,7 +46,7 @@ import XMonad.Util.NamedActions
 workspaces c = subKeys "Workspaces & Projects" c
   ( [ ( "M-`",   addName "Next non-empty workspace" nextNonEmptyWS)
     , ( "M-S-`", addName "Prev non-empty workspace" prevNonEmptyWS)
-    , ( "M-a",   addName "Toggle last workspace"    toggleLast)
+    , ( "M-a",   addName "Toggle last workspace"    CycleWS.toggleWS)
     ]
   ++ [ ("M-" ++ show i, addName "View ws" $ XMonad.windows $ IndependentScreens.onCurrentScreen StackSet.view w)
      | (i, w) <- zip ([1..9] ++ [0]) (workspaces' c) ]
@@ -73,18 +69,3 @@ prevNonEmptyWS =
 
 getSortByIndexNoSP =
   fmap (. NamedScratchpad.namedScratchpadFilterOutWorkspace) WorkspaceCompare.getSortByIndex
-
--- toggleLast = CycleWS.toggleWS' ["0_NSP"] -- Ignore NSP (Named Scratchpad)
-toggleLast
-  = do
-    lastViewedHidden --workspaces'
-    return ()
-
-lastViewedHidden :: XMonad.X (Maybe XMonad.WorkspaceId)
-lastViewedHidden = do
-    hs <- XMonad.gets $ map StackSet.tag . StackSet.hidden . Core.windowset
-    vs <- WH.workspaceHistory
-    return $ choose hs (find (`elem` hs) vs)
-    where choose []    _           = Nothing
-          choose (h:_) Nothing     = Just h
-          choose _     vh@(Just _) = vh
