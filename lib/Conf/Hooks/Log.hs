@@ -50,6 +50,8 @@ import qualified Conf.Hooks.Fade as Hooks.Fade
 
 import qualified XMonad
 
+import qualified XMonad.Actions.GroupNavigation as GroupNavigation
+
 import qualified XMonad.Hooks.DynamicLog as DynamicLog
 import qualified XMonad.Hooks.FadeWindows as FadeWindows
 
@@ -66,9 +68,8 @@ import XMonad.Util.Run
         ( unsafeSpawn
         )
 
-import XMonad.Hooks.DynamicLog as DynamicLog
+import XMonad.Hooks.DynamicLog
         ( xmobarColor
-        , shorten
         )
 
 import XMonad.Layout.IndependentScreens
@@ -92,6 +93,7 @@ log :: [XMobarOption] -> X ()
 log bars
  = do
   FadeWindows.fadeWindowsLogHook Hooks.Fade.fade
+  GroupNavigation.historyHook
   forM_ bars $ \(XMobarOption sid focusPipe workspacesPipe) -> do
     DynamicLog.dynamicLogWithPP $ ppFocus      focusPipe      sid
     DynamicLog.dynamicLogWithPP $ ppWorkspaces workspacesPipe sid

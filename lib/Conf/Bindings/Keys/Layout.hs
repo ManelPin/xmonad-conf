@@ -53,7 +53,8 @@ layout c = subKeys "Layout Management" c
   , ( "M-,",       addName "Decrease master windows"     decMaster)
   , ( "M-.",       addName "Increase master windows"     incMaster)
 
-  , ( "M-C--",   addName "Reset gaps"                  resetGaps)
+  , ( "M-C-S--", addName "Reset gaps"                  resetGaps)
+  , ( "M-C--",   addName "No gaps"                     noGaps)
   , ( "M--",     addName "Decrease gaps 5px"           $ decGaps 5)
   , ( "M-=",     addName "Increase gaps 5px"           $ incGaps 5)
   , ( "M-S--",   addName "Decrease gaps 10px"          $ decGaps 10)
@@ -90,8 +91,10 @@ modGaps m n = do
 decGaps n = modGaps Gaps.IncGap (n * (-1))
 incGaps = modGaps Gaps.IncGap
 
+noGaps = decGaps 100 -- this is a hacky way to reset gaps, but Layout.Gaps has no 'setGaps' message
+
 resetGaps = do
-  decGaps 100 -- this is a hacky way to reset gaps, but Layout.Gaps has no 'setGaps' message
+  noGaps
   incGaps Sizes.gap
   Spacing.setSpacing Sizes.gap
   return ()

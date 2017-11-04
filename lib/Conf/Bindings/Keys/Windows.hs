@@ -33,6 +33,7 @@ import qualified XMonad.Layout.SubLayouts as SubLayouts
 import XMonad (sendMessage, screenWorkspace, whenJust)
 import XMonad.Actions.CopyWindow (kill1)
 import XMonad.Actions.ConditionalKeys (bindOn, XCond(LD))
+import XMonad.Actions.GroupNavigation (nextMatch, Direction(History))
 import XMonad.Actions.Navigation2D (windowGo, windowSwap, screenGo, windowToScreen, screenSwap)
 import XMonad.Layout.WindowNavigation (Direction2D(L, R))
 import XMonad.Prompt.ConfirmPrompt (confirmPrompt)
@@ -51,6 +52,7 @@ windows c = subKeys "Windows" c
     , ("M-<KP_End>",      addName "Select left screen"   $ selectScreen 1)
     , ("M-<KP_Down>",     addName "Select main screen"   $ selectScreen 0)
     , ("M-<KP_Insert>",   addName "Select bottom screen" $ selectScreen 2)
+    , ("M-<period>",      addName "Select Prev Window"   $ nextMatch History (return True))
     ]
   ++ zipM  "M-C-"   "Merge w/sublayout"        dirKeys   dirs mergeSub
   ++ zipM' "M-"     "Navigate window"          dirKeys   dirs windowGo        True

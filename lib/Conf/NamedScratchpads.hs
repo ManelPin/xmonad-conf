@@ -38,41 +38,16 @@ namedScratchpads =
        (title Apps.enpassClass)
        float2_3x2_3
 
-  -- -- 1Password
-  -- , NS Apps.onepassClass
-  --      Apps.onepass
-  --      (wmName Apps.onepassWMName)
-  --      float2_3x2_3
-
   -- Terminal
   , NS Apps.terminalClass
        Apps.terminalScratch
        (className Apps.terminalScratchClass)
        float2_3x2_3
 
-  -- Slack
-  , NS Apps.slackClass
-       Apps.slack
-       (className Apps.slackClass)
-       float3_4x3_4
-
-  -- Discord
-  , NS Apps.discordClass
-       Apps.discord
-       (className Apps.discordClass)
-       float3_4x3_4
-
   -- File Manager
   , NS Apps.filemanagerClass
        Apps.filemanager
        (className Apps.filemanagerClass)
-       float3_4x3_4
-
-
-  -- Weechat
-  , NS Apps.weechatClass
-       Apps.weechat
-       (className Apps.weechatClass)
        float3_4x3_4
 
   -- Tasks
@@ -93,8 +68,6 @@ manage = namedScratchpadManageHook namedScratchpads
 
 className n = ManageHook.className =? n
 title     n = ManageHook.title     =? n
--- appName   n = ManageHook.appName   =? n
--- wmName    n = (ManageHook.stringProperty "WM_NAME") =? n
 
 float2_3x2_3 = customFloating $ StackSet.RationalRect (1/6) (1/6) (2/3) (2/3)
 float3_4x3_4 = customFloating $ StackSet.RationalRect (1/12) (1/12) (5/6) (5/6)

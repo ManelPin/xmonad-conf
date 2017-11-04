@@ -73,11 +73,18 @@ system c = subKeys "System" c
   , ( "<XF86AudioNext>",   addName "Audio Next"       audio_next)
   , ( "S-<XF86AudioPlay>", addName "Audio Favorite"   audio_fav)
 
-  , ( "M-S-1", addName "Screenshot All"             scrot_all)
-  , ( "M-S-2", addName "Screenshot Current Window"  scrot_foc_win)
-  , ( "M-S-3", addName "Screenshot Current Display" scrot_foc_disp)
-  , ( "M-S-4", addName "Screenshot Interactive"     scrot_int)
+  , ( "M-S-1", addName "Screenshot All"                        $ scrot_all       False)
+  , ( "M-S-2", addName "Screenshot Current Window"             $ scrot_foc_win   False)
+  , ( "M-S-3", addName "Screenshot Current Display"            $ scrot_foc_disp  False)
+  , ( "M-S-4", addName "Screenshot Interactive"                $ scrot_int       False)
+
+  , ( "M-C-1", addName "Screenshot All & Upload"               $ scrot_all      True)
+  , ( "M-C-2", addName "Screenshot Current Window & Upload"    $ scrot_foc_win  True)
+  , ( "M-C-3", addName "Screenshot Current Display & Upload"   $ scrot_foc_disp True)
+  , ( "M-C-4", addName "Screenshot Interactive & Upload"       $ scrot_int      True)
+
   , ( "M-S-5", addName "Screencast"                 scast)
+
   ]
 
 xm_restart         = spawn "xmonad --restart"
@@ -110,9 +117,14 @@ audio_prev = spawn "audioctl player previous"
 audio_next = spawn "audioctl player next"
 audio_fav  = spawn "audioctl player favorite"
 
-scrot_all      = spawn "screenshot -nx"
-scrot_foc_win  = spawn "screenshot -nxw"
-scrot_foc_disp = spawn "screenshot -nxd"
-scrot_int      = spawn "screenshot -nxi"
+ss a u
+  | u == True = scrot $ a ++ "u"
+  | otherwise = scrot a
+  where scrot a = spawn $ "screenshot " ++ a
+
+scrot_all      = ss "-nx"
+scrot_foc_win  = ss "-nxw"
+scrot_foc_disp = ss "-nxd"
+scrot_int      = ss "-nxi"
 
 scast     = spawn $ Apps.screencast

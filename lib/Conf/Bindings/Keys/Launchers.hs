@@ -37,15 +37,15 @@ launchers c = subKeys "Launchers" c
   , ("M-S-v",      addName "Editor Tmpl"  $ spawn Apps.editorTmpl)
   , ("M-\\",       addName "Browser"      $ spawn Apps.browser)
 
-  , ("M-S-e",        addName "Select or Launch Email" $ rrc Apps.email Apps.emailClass)
+  , ("M-s",        addName "Slack"        $ spawn Apps.slack)
+  , ("M-c",        addName "Weechat"      $ spawn Apps.weechat)
+  , ("M-S-c",      addName "Discord"      $ spawn Apps.discord)
+
+  , ("M-S-e",      addName "Select or Launch Email" $ rrc Apps.email Apps.emailClass)
 
   -- NamedScratchpads
   , ("M-p",               addName "Enpass"                  $ NS.action Apps.enpassClass)
-  , ("M-S-p",             addName "1Password"               $ NS.action Apps.onepassClass)
   , ("M-/",               addName "Terminal Scratchpad"     $ NS.action Apps.terminalClass)
-  , ("M-s",               addName "Slack Scratchpad"        $ NS.action Apps.slackClass)
-  , ("M-c",               addName "Weechat Scratchpad"      $ NS.action Apps.weechatClass)
-  , ("M-S-c",             addName "Discord Scratchpad"      $ NS.action Apps.discordClass)
   , ("M-S-f",             addName "File Manager Scratchpad" $ NS.action Apps.filemanagerClass)
   , ("M-t",               addName "Task Scratchpad"         $ NS.action Apps.taskClass)
   , ("M-<XF86AudioPlay>", addName "Music Player Scratchpad" $ NS.action Apps.musicClass)
