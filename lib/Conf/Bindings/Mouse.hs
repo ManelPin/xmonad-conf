@@ -35,29 +35,24 @@ focusFollowsMouse = False
 
 -- TODO: Clean up this mess
 mouse (XMonad.XConfig {XMonad.modMask = modMask}) =
--- mouse (XMonad.XConfig {}) =
+
+  -- Mod + Click - Drag windows
   Map.fromList $
   [ ( (modMask, XMonad.button1)
     , (\w ->
          XMonad.focus w >> XMonad.mouseMoveWindow w >>
          FloatSnap.ifClick (FloatSnap.snapMagicMove (Just 50) (Just 50) w) >>
          XMonad.windows StackSet.shiftMaster))
-  , ( (modMask .|. XMonad.shiftMask, XMonad.button1)
-    , (\w ->
-         XMonad.focus w >> XMonad.mouseMoveWindow w >>
-         FloatSnap.ifClick
-           (FloatSnap.snapMagicResize
-              [WindowNavigation.L, WindowNavigation.R, WindowNavigation.U, WindowNavigation.D]
-              (Just 50)
-              (Just 50)
-              w) >>
-         XMonad.windows StackSet.shiftMaster))
+
+  -- Mod + Right Click - Resize windows
   , ( (modMask, XMonad.button3)
     , (\w ->
          XMonad.focus w >> XMonad.mouseResizeWindow w >>
          FloatSnap.ifClick
            (FloatSnap.snapMagicResize [WindowNavigation.R, WindowNavigation.D] (Just 50) (Just 50) w) >>
          XMonad.windows StackSet.shiftMaster))
+
+  -- Mod + Shift + Right Click - Resize windows, constain aspect ratio to 1:1
   , ( (modMask .|. XMonad.shiftMask, XMonad.button3)
     , (\w ->
          XMonad.focus w >> ConstrainedResize.mouseResizeWindow w True >>
