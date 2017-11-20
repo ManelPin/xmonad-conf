@@ -71,8 +71,8 @@ layout c = subKeys "Layout Management" c
 reset c      = XMonad.setLayout   $ XMonad.layoutHook c
 
 selectDST    = do
-  noGaps
   XMonad.sendMessage $ JumpToLayout DST.name
+  noGaps
 
 cycleAll     = XMonad.sendMessage XMonad.NextLayout
 cycleSub     = SubLayouts.toSubl  XMonad.NextLayout
