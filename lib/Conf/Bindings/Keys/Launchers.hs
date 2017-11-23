@@ -44,7 +44,11 @@ launchers c = subKeys "Launchers" c
   , ("M-c",        addName "Weechat"      $ spawn Apps.weechat)
   , ("M-S-c",      addName "Discord"      $ spawn Apps.discord)
 
-  , ("M-S-e",      addName "Select or Launch Email" $ rrc Apps.email Apps.emailClass)
+  -- Run or Raise
+  , ("M-S-e",        addName "Select or Launch Email"    $ rrc Apps.email    Apps.emailClass)
+  , ("M-S-d",        addName "Select or Launch Dirciple" $ rrc Apps.dirciple Apps.dircipleClass)
+  , ("M-S-v",        addName "Select or Launch Editor"   $ rrc Apps.editor   Apps.editorClass)
+  , ("M-S-<Return>", addName "Select or Launch Terminal" $ rrc Apps.terminal Apps.terminalClass)
 
   -- NamedScratchpads
   , ("M-p",               addName "Enpass"                  $ NS.action Apps.enpassClass)
@@ -54,5 +58,5 @@ launchers c = subKeys "Launchers" c
   , ("M-<XF86AudioPlay>", addName "Music Player Scratchpad" $ NS.action Apps.musicClass)
   ]
 
-rrc a c = raiseNextMaybe (spawn a) (className c)
 className n = ManageHook.className =? n
+rrc a c = raiseNextMaybe (spawn a) (className c)

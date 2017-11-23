@@ -41,17 +41,14 @@ import XMonad.Util.NamedActions (addName)
 
 layout c = subKeys "Layout Management" c
   [ ( "M-S-<Tab>", addName "Reset layout"                $ reset c)
-
   , ( "M-<Tab>",   addName "Cycle all layouts"           cycleAll)
   , ( "M-C-<Tab>", addName "Cycle sublayout"             cycleSub)
-
-  , ( "M-S-d",     addName "Select DST Layout"           $ selectDST)
-
+  , ( "M-M1-d",    addName "Select DST Layout"           $ selectDST)
   , ( "M-y",       addName "Float tiled w"               floatTiled)
   , ( "M-S-y",     addName "Tile all floating w"         tileFloating)
-
   , ( "M-,",       addName "Decrease master windows"     decMaster)
   , ( "M-.",       addName "Increase master windows"     incMaster)
+  , ( "M-f",       addName "Fullscreen"                  fullscreen)
 
   , ( "M-C-S--", addName "Reset gaps"                  resetGaps)
   , ( "M-C--",   addName "No gaps"                     noGaps)
@@ -59,8 +56,6 @@ layout c = subKeys "Layout Management" c
   , ( "M-=",     addName "Increase gaps 5px"           $ incGaps 5)
   , ( "M-S--",   addName "Decrease gaps 10px"          $ decGaps 10)
   , ( "M-S-=",   addName "Increase gaps 10px"          $ incGaps 10)
-
-  , ( "M-f",       addName "Fullscreen"                  fullscreen)
 
   , ( "C-S-h",     addName "Ctrl-h passthrough"          hPass)
   , ( "C-S-j",     addName "Ctrl-j passthrough"          jPass)
