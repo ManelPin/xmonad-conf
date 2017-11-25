@@ -48,11 +48,31 @@ workspaces c = subKeys "Workspaces & Projects" c
     , ( "M-S-`", addName "Prev non-empty workspace" prevNonEmptyWS)
     , ( "M-a",   addName "Toggle last workspace"    CycleWS.toggleWS)
     ]
-  ++ [ ("M-" ++ show i, addName "View ws" $ XMonad.windows $ IndependentScreens.onCurrentScreen StackSet.view w)
+
+  ++ [ ("M-" ++ show i, addName "View ws" $ windowView w)
      | (i, w) <- zip ([1..9] ++ [0]) (workspaces' c) ]
-  ++ [ ("C-" ++ show i, addName "Move ws" $ XMonad.windows $ IndependentScreens.onCurrentScreen StackSet.shift w)
+
+  ++ [ ("C-" ++ show i, addName "Move window to ws" $ windowMove w)
+     | (i, w) <- zip ([1..9] ++ [0]) (workspaces' c) ]
+
+  ++ [ ("C-M1-" ++ show i, addName "Move window to & view ws" $ windowMoveView w)
      | (i, w) <- zip ([1..9] ++ [0]) (workspaces' c) ]
   )
+
+windowView w
+  = do
+    XMonad.windows $ IndependentScreens.onCurrentScreen StackSet.view w
+    return ()
+
+windowMove w
+  = do
+    XMonad.windows $ IndependentScreens.onCurrentScreen StackSet.shift w
+    return ()
+
+windowMoveView w
+  = do
+    windowMove w
+    windowView w
 
 workspaces' :: XMonad.XConfig l -> [VirtualWorkspace]
 workspaces' = nub . map IndependentScreens.unmarshallW . filterWS . XMonad.workspaces
