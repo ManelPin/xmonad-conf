@@ -56,6 +56,12 @@ namedScratchpads =
        (className Apps.taskClass)
        float2_3x2_3
 
+  -- Email
+  , NS Apps.emailScratchClass
+       Apps.emailScratch
+       (className Apps.emailScratchClass)
+       float3_4x3_4
+
   -- Music Player
   , NS Apps.musicClass
        Apps.music

@@ -45,13 +45,14 @@ launchers c = subKeys "Launchers" c
   , ("M-S-c",      addName "Discord"      $ spawn Apps.discord)
 
   -- Run or Raise
-  , ("M-S-e",        addName "Select or Launch Email"    $ rrc Apps.email    Apps.emailClass)
   , ("M-S-d",        addName "Select or Launch Dirciple" $ rrc Apps.dirciple Apps.dircipleClass)
   , ("M-S-v",        addName "Select or Launch Editor"   $ rrc Apps.editor   Apps.editorClass)
   , ("M-S-<Return>", addName "Select or Launch Terminal" $ rrc Apps.terminal Apps.terminalClass)
+  , ("M-S-e",        addName "Select or Launch Email"    $ rrc Apps.email    Apps.emailClass)
 
   -- NamedScratchpads
-  , ("M-p",               addName "Enpass"                  $ NS.action Apps.enpassClass)
+  , ("M-e",               addName "Email Scratchpad"        $ NS.action Apps.emailScratchClass)
+  , ("M-p",               addName "Enpass Scratchpad"       $ NS.action Apps.enpassClass)
   , ("M-/",               addName "Terminal Scratchpad"     $ NS.action Apps.terminalClass)
   , ("M-S-f",             addName "File Manager Scratchpad" $ NS.action Apps.filemanagerClass)
   , ("M-t",               addName "Task Scratchpad"         $ NS.action Apps.taskClass)

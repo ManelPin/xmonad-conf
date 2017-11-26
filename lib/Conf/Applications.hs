@@ -67,13 +67,20 @@ filemanager = "gtk-launch Thunar"
 filemanagerClass :: String
 filemanagerClass = "Thunar"
 
+_email :: String -> String
+_email c = printf "st -x st.mutt -c %s zsh -c 'cd $HOME;. $HOME/.zshrc;$HOME/bin/mutt'" c
+
 email :: String
--- email = "gtk-launch mailspring"
-email = ""
+email = _email emailClass
+
+emailScratch :: String
+emailScratch = _email emailScratchClass
 
 emailClass :: String
--- emailClass = "Mailspring"
-emailClass = ""
+emailClass = "st_MUTT"
+
+emailScratchClass :: String
+emailScratchClass = "st_MUTT_SCRATCH"
 
 slack :: String
 slack = "gtk-launch slack"
