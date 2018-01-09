@@ -54,7 +54,7 @@ namedScratchpads =
   , NS Apps.taskClass
        Apps.task
        (className Apps.taskClass)
-       float2_3x2_3
+       float3_4x3_4
 
   -- Email
   , NS Apps.emailScratchClass
