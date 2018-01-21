@@ -56,7 +56,7 @@ weechatClass :: String
 weechatClass = "st_WEECHAT"
 
 discord :: String
-discord = "discord"
+discord = "discord-canary"
 
 discordClass :: String
 discordClass = "discord"
