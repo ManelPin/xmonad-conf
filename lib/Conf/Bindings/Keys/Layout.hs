@@ -46,8 +46,8 @@ layout c = subKeys "Layout Management" c
   , ( "M-M1-d",    addName "Select DST Layout"           $ selectDST)
   , ( "M-y",       addName "Float tiled w"               floatTiled)
   , ( "M-S-y",     addName "Tile all floating w"         tileFloating)
-  , ( "M-,",       addName "Decrease master windows"     decMaster)
-  , ( "M-.",       addName "Increase master windows"     incMaster)
+  , ( "M-C-,",     addName "Decrease master windows"     decMaster)
+  , ( "M-C-.",     addName "Increase master windows"     incMaster)
   , ( "M-f",       addName "Fullscreen"                  fullscreen)
 
   , ( "M-C-S--", addName "Reset gaps"                  resetGaps)

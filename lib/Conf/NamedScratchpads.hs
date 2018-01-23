@@ -44,6 +44,12 @@ namedScratchpads =
        (className Apps.terminalScratchClass)
        float2_3x2_3
 
+  -- CLI File Manager
+  , NS Apps.cliFilemanagerClass
+       Apps.cliFilemanager
+       (className Apps.cliFilemanagerClass)
+       float3_4x3_4
+
   -- File Manager
   , NS Apps.filemanagerClass
        Apps.filemanager

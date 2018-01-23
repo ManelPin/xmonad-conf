@@ -67,6 +67,12 @@ filemanager = "gtk-launch Thunar"
 filemanagerClass :: String
 filemanagerClass = "Thunar"
 
+cliFilemanager :: String
+cliFilemanager = printf "st -x st.rngr -c %s zsh -c 'cd $HOME;. $HOME/.zshrc;/usr/bin/ranger'" cliFilemanagerClass
+
+cliFilemanagerClass :: String
+cliFilemanagerClass = "st_RANGER"
+
 _email :: String -> String
 _email c = printf "st -x st.mutt -c %s zsh -c 'cd $HOME;. $HOME/.zshrc;$HOME/bin/mutt'" c
 

@@ -51,12 +51,13 @@ launchers c = subKeys "Launchers" c
   , ("M-S-e",        addName "Select or Launch Email"    $ rrc Apps.email    Apps.emailClass)
 
   -- NamedScratchpads
-  , ("M-e",               addName "Email Scratchpad"        $ NS.action Apps.emailScratchClass)
-  , ("M-p",               addName "Enpass Scratchpad"       $ NS.action Apps.enpassClass)
-  , ("M-/",               addName "Terminal Scratchpad"     $ NS.action Apps.terminalClass)
-  , ("M-S-f",             addName "File Manager Scratchpad" $ NS.action Apps.filemanagerClass)
-  , ("M-t",               addName "Task Scratchpad"         $ NS.action Apps.taskClass)
-  , ("M-<XF86AudioPlay>", addName "Music Player Scratchpad" $ NS.action Apps.musicClass)
+  , ("M-e",               addName "Email Scratchpad"            $ NS.action Apps.emailScratchClass)
+  , ("M-p",               addName "Enpass Scratchpad"           $ NS.action Apps.enpassClass)
+  , ("M-/",               addName "Terminal Scratchpad"         $ NS.action Apps.terminalClass)
+  , ("M-.",               addName "CLI File Manager Scratchpad" $ NS.action Apps.cliFilemanagerClass)
+  , ("M-S-f",             addName "File Manager Scratchpad"     $ NS.action Apps.filemanagerClass)
+  , ("M-t",               addName "Task Scratchpad"             $ NS.action Apps.taskClass)
+  , ("M-<XF86AudioPlay>", addName "Music Player Scratchpad"     $ NS.action Apps.musicClass)
   ]
 
 className n = ManageHook.className =? n
