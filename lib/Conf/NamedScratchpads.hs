@@ -56,6 +56,12 @@ namedScratchpads =
        (className Apps.filemanagerClass)
        float3_4x3_4
 
+  -- Pomodoro
+  , NS Apps.pomClass
+       Apps.pom
+       (className Apps.pomClass)
+       float2_3x2_3
+
   -- Tasks
   , NS Apps.taskClass
        Apps.task

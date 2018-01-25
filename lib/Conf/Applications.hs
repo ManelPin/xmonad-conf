@@ -49,6 +49,12 @@ task = printf "st -x st.tw -c %s zsh -c 'cd $HOME/.task;export HISTFILE=.taskhis
 taskClass :: String
 taskClass = "st_TASK"
 
+pom :: String
+pom = printf "st -x st.pom -c %s zsh -c 'cd $HOME/.pom;export HISTFILE=.pomhistory;export ZDOTDIR=$HOME/.pom;zsh'" pomClass
+
+pomClass :: String
+pomClass = "st_pom"
+
 weechat :: String
 weechat = printf "st -x st.wc -c %s zsh -c 'cd $HOME;. $HOME/.zshrc;weechat'" weechatClass
 
