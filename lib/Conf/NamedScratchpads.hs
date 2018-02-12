@@ -62,6 +62,12 @@ namedScratchpads =
        (className Apps.pomClass)
        float2_3x2_3
 
+  -- Calculator
+  , NS Apps.calcClass
+       Apps.calc
+       (className Apps.calcClass)
+       float2_3x2_3
+
   -- Tasks
   , NS Apps.taskClass
        Apps.task

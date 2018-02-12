@@ -79,6 +79,13 @@ cliFilemanager = printf "st -x st.rngr -c %s zsh -c 'cd $HOME;. $HOME/.zshrc;/us
 cliFilemanagerClass :: String
 cliFilemanagerClass = "st_RANGER"
 
+calc :: String
+calc = printf "st -x st.calc -c %s zsh -c 'cd $HOME/.calc;. $HOME/.zshrc;R'" calcClass
+
+calcClass :: String
+calcClass = "st_CALC"
+
+
 _email :: String -> String
 _email c = printf "st -x st.mutt -c %s zsh -c 'cd $HOME;. $HOME/.zshrc;$HOME/bin/mutt'" c
 
