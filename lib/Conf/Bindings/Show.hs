@@ -29,7 +29,7 @@ show :: [((XMonad.KeyMask, XMonad.KeySym), NamedActions.NamedAction)] -> NamedAc
 show x =
   NamedActions.addName "Show Keybindings" $
   XMonad.io $ do
-    h <- Run.spawnPipe "zenity --text-info --font=terminus" -- TODO
+    h <- Run.spawnPipe "yad --text-info"
     Run.hPutStr h (unlines $ NamedActions.showKm x)
     IO.hClose h
     return ()
