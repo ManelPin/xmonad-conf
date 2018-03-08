@@ -38,7 +38,7 @@ editorClass :: String
 editorClass = "st_EDITOR"
 
 dirciple :: String
-dirciple = printf "st -x st.ds -c %s zsh -c 'cd $HOME;. $HOME/.zshrc;$HOME/bin/ds'" dircipleClass
+dirciple = printf "st -x st.ds -c %s zsh -c 'cd $HOME;. $HOME/.zshrc;TERM=xterm-256color $HOME/bin/ds'" dircipleClass
 
 dircipleClass :: String
 dircipleClass = "st_DS"
