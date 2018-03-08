@@ -38,6 +38,7 @@ import XMonad.Actions.Navigation2D (windowGo, windowSwap, screenGo, windowToScre
 import XMonad.Layout.WindowNavigation (Direction2D(L, R))
 import XMonad.Prompt.ConfirmPrompt (confirmPrompt)
 import XMonad.Util.NamedActions (addName)
+import XMonad.Util.NamedScratchpad (scratchpadWorkspaceTag)
 
 windows c = subKeys "Windows" c
   ( [ ("M-<Backspace>",   addName "Kill"                   kill1)
@@ -46,6 +47,7 @@ windows c = subKeys "Windows" c
     , ("M-;",             addName "Navigate tabs U"        navU)
     , ("C-'",             addName "Swap tab D"             swapD)
     , ("C-;",             addName "Swap tab U"             swapU)
+    , ("M-S-/",           addName "Move window to NSP"   $ shiftToNSP)
     , ("M-S-;",           addName "Navigate window L"    $ windowGo L True)
     , ("M-S-'",           addName "Navigate window R"    $ windowGo R True)
     , ("M-C-S-m",         addName "Combo swap"             comboSwap)
@@ -85,6 +87,8 @@ windowToScreen' d b = do
 
 swapD = XMonad.windows StackSet.swapDown
 swapU = XMonad.windows StackSet.swapUp
+
+shiftToNSP = XMonad.windows . StackSet.shift $ scratchpadWorkspaceTag
 
 comboSwap = sendMessage $ ComboP.SwapWindow
 mergeSub  = sendMessage . SubLayouts.pullGroup
