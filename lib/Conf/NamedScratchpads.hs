@@ -99,11 +99,6 @@ manage = namedScratchpadManageHook namedScratchpads
 className n = ManageHook.className =? n
 title     n = ManageHook.title     =? n
 
-float2_3x2_3 = customFloating $ StackSet.RationalRect (1/6) (1/6) (2/3) (2/3)
-float3_4x3_4 = customFloating $ StackSet.RationalRect (1/12) (1/12) (5/6) (5/6)
-
--- centerFloat (3/4) (3/4)
-
 centerFloat width height
   = customFloating $ StackSet.RationalRect marginLeft marginTop width height
     where
