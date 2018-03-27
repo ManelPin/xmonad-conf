@@ -85,6 +85,20 @@ calc = printf "st -x st.calc -c %s zsh -c 'cd $HOME/.calc;. $HOME/.zshrc;R'" cal
 calcClass :: String
 calcClass = "st_CALC"
 
+_man :: String -> String
+_man c = printf "st -x st.man -c %s zsh -c 'cd $HOME;. $HOME/.zshrc;manloop'" c
+
+man :: String
+man = _man manClass
+
+manScratch :: String
+manScratch = _man manScratchClass
+
+manClass :: String
+manClass = "st_MAN"
+
+manScratchClass :: String
+manScratchClass = "st_MAN_SCRATCH"
 
 _email :: String -> String
 _email c = printf "st -x st.mutt -c %s zsh -c 'cd $HOME;. $HOME/.zshrc;$HOME/bin/mutt'" c

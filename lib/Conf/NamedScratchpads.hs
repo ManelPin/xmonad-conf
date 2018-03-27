@@ -36,55 +36,61 @@ namedScratchpads =
   [ NS Apps.enpassClass
        Apps.enpass
        (title Apps.enpassClass)
-       float2_3x2_3
+       $ centerFloat (2/3) (2/3)
 
   -- Terminal
   , NS Apps.terminalClass
        Apps.terminalScratch
        (className Apps.terminalScratchClass)
-       float2_3x2_3
+       $ centerFloat (2/3) (2/3)
+
+  -- Manpager
+  , NS Apps.manScratchClass
+       Apps.manScratch
+       (className Apps.manScratchClass)
+       $ centerFloat (5/6) (9/10)
 
   -- CLI File Manager
   , NS Apps.cliFilemanagerClass
        Apps.cliFilemanager
        (className Apps.cliFilemanagerClass)
-       float3_4x3_4
+       $ centerFloat (3/4) (3/4)
 
   -- File Manager
   , NS Apps.filemanagerClass
        Apps.filemanager
        (className Apps.filemanagerClass)
-       float3_4x3_4
+       $ centerFloat (3/4) (3/4)
 
   -- Pomodoro
   , NS Apps.pomClass
        Apps.pom
        (className Apps.pomClass)
-       float2_3x2_3
+       $ centerFloat (2/3) (2/3)
 
   -- Calculator
   , NS Apps.calcClass
        Apps.calc
        (className Apps.calcClass)
-       float2_3x2_3
+       $ centerFloat (2/3) (2/3)
 
   -- Tasks
   , NS Apps.taskClass
        Apps.task
        (className Apps.taskClass)
-       float3_4x3_4
+       $ centerFloat (3/4) (3/4)
 
   -- Email
   , NS Apps.emailScratchClass
        Apps.emailScratch
        (className Apps.emailScratchClass)
-       float3_4x3_4
+       $ centerFloat (3/4) (3/4)
 
   -- Music Player
   , NS Apps.musicClass
        Apps.music
        (className Apps.musicClass)
-       float3_4x3_4
+       $ centerFloat (3/4) (3/4)
   ]
 
 action = namedScratchpadAction     namedScratchpads
@@ -95,3 +101,11 @@ title     n = ManageHook.title     =? n
 
 float2_3x2_3 = customFloating $ StackSet.RationalRect (1/6) (1/6) (2/3) (2/3)
 float3_4x3_4 = customFloating $ StackSet.RationalRect (1/12) (1/12) (5/6) (5/6)
+
+-- centerFloat (3/4) (3/4)
+
+centerFloat width height
+  = customFloating $ StackSet.RationalRect marginLeft marginTop width height
+    where
+      marginLeft = (1 - width) / 2
+      marginTop = (1 - height) / 2

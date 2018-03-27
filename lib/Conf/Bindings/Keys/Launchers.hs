@@ -38,6 +38,7 @@ launchers c = subKeys "Launchers" c
   , ("M-M1-v",      addName "Editor Tmpl"  $ spawn Apps.editorTmpl)
   , ("M-\\",        addName "Browser"      $ spawn Apps.browser)
   , ("M-S-\\",      addName "Alt Browser"  $ spawn Apps.altBrowser)
+  , ("M-S-m",       addName "Manpage"      $ spawn Apps.man)
 
   -- Communications
   , ("M-s",        addName "Slack"        $ spawn Apps.slack)
@@ -56,6 +57,7 @@ launchers c = subKeys "Launchers" c
   , ("M-S-p",             addName "Pomodoro Scratchpad"         $ NS.action Apps.pomClass)
   , ("M-,",               addName "Calculator Scratchpad"       $ NS.action Apps.calcClass)
   , ("M-/",               addName "Terminal Scratchpad"         $ NS.action Apps.terminalClass)
+  , ("M-m",               addName "Manpage Scratchpad"          $ NS.action Apps.manScratchClass)
   , ("M-.",               addName "CLI File Manager Scratchpad" $ NS.action Apps.cliFilemanagerClass)
   , ("M-S-f",             addName "File Manager Scratchpad"     $ NS.action Apps.filemanagerClass)
   , ("M-t",               addName "Task Scratchpad"             $ NS.action Apps.taskClass)
