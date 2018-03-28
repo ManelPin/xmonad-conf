@@ -127,6 +127,12 @@ browser = "gtk-launch chromium"
 browserClass :: String
 browserClass = "Chromium"
 
+browserScratch :: String
+browserScratch = "chromium --user-data-dir=$HOME/.config/chromium-scratch --class=Chromium_SCRATCH"
+
+browserScratchClass :: String
+browserScratchClass = "Chromium_SCRATCH"
+
 music :: String
 music = "$HOME/bin/mellowplayer"
 

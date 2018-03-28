@@ -57,6 +57,7 @@ launchers c = subKeys "Launchers" c
   , ("M-,",               addName "Calculator Scratchpad"       $ NS.action Apps.calcClass)
   , ("M-/",               addName "Terminal Scratchpad"         $ NS.action Apps.terminalClass)
   , ("M-m",               addName "Manpage Scratchpad"          $ NS.action Apps.manScratchClass)
+  , ("M-S-\\",            addName "Browser Scratchpad"          $ NS.action Apps.browserScratchClass)
   , ("M-.",               addName "CLI File Manager Scratchpad" $ NS.action Apps.cliFilemanagerClass)
   , ("M-S-f",             addName "File Manager Scratchpad"     $ NS.action Apps.filemanagerClass)
   , ("M-t",               addName "Task Scratchpad"             $ NS.action Apps.taskClass)

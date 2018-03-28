@@ -50,6 +50,12 @@ namedScratchpads =
        (className Apps.manScratchClass)
        $ centerFloat (5/6) (9/10)
 
+  -- Browser
+  , NS Apps.browserScratchClass
+       Apps.browserScratch
+       (className Apps.browserScratchClass)
+       $ centerFloat (3/4) (3/4)
+
   -- CLI File Manager
   , NS Apps.cliFilemanagerClass
        Apps.cliFilemanager
