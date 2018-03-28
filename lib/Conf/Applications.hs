@@ -127,12 +127,6 @@ browser = "gtk-launch chromium"
 browserClass :: String
 browserClass = "Chromium"
 
-altBrowser :: String
-altBrowser = "gtk-launch firefox-nightly"
-
-altBrowserClass :: String
-altBrowserClass = "FirefoxNightly"
-
 music :: String
 music = "$HOME/bin/mellowplayer"
 

@@ -37,7 +37,6 @@ launchers c = subKeys "Launchers" c
   , ("M-v",         addName "Editor"       $ spawn Apps.editor)
   , ("M-M1-v",      addName "Editor Tmpl"  $ spawn Apps.editorTmpl)
   , ("M-\\",        addName "Browser"      $ spawn Apps.browser)
-  , ("M-S-\\",      addName "Alt Browser"  $ spawn Apps.altBrowser)
   , ("M-S-m",       addName "Manpage"      $ spawn Apps.man)
 
   -- Communications
