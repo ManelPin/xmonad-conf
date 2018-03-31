@@ -1,5 +1,5 @@
 {-# LANGUAGE AllowAmbiguousTypes, DeriveDataTypeable,
-  TypeSynonymInstances, MultiParamTypeClasses #-}
+  TypeSynonymInstances, MultiParamTypeClasses, FlexibleContexts #-}
 
 ----------------------------------------------------------------------------
 -- |
@@ -13,12 +13,16 @@
 --
 ----------------------------------------------------------------------------
 module Conf.Layouts.Flex
-  ( flex
+  ( flexW
+  , flexS
+  , name
+  , nameW
+  , nameS
   ) where
 
 import qualified Conf.Theme as Theme
 
-import Conf.Layouts.Internal (addTopBar, trimNamed, suffixed, trimSuffixed)
+import Conf.Layouts.Internal (addTopBar, named)
 
 import Conf.Theme.Gaps (gaps, spacing)
 
@@ -36,18 +40,27 @@ import XMonad.Layout.WindowNavigation (windowNavigation)
 
 import XMonad.Layout.LayoutCombinators ((|||))
 
-flex
-  = trimNamed 5 "F"
+name = "F"
+
+nameW = name ++ " W BSP"
+nameS = name ++ " S 1/2"
+
+flex n l
+  = named n
   $ avoidStruts
   $ windowNavigation
   $ addTopBar
   $ Tabbed.addTabs Tabbed.shrinkText Theme.tabbed
   $ subLayout []
     (Simplest.Simplest ||| Accordion.Accordion)
-  $ layouts
-
-layouts
-  = gaps
+  $ gaps
   $ spacing
-  $ (trimSuffixed 1 "W BSP" $ hiddenWindows emptyBSP)
-  ||| (suffixed "S 1/2" $ ResizableTall.ResizableTall 1 (1 / 20) (1 / 2) [])
+  $ l
+
+flexW
+  = flex nameW
+  $ hiddenWindows emptyBSP
+
+flexS
+  = flex nameS
+  $ ResizableTall.ResizableTall 1 (1 / 20) (1 / 2) []

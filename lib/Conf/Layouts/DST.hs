@@ -32,10 +32,10 @@ import XMonad.Hooks.ManageDocks (avoidStruts)
 
 import XMonad.Layout.WindowNavigation (windowNavigation)
 
-name = "DST"
+name = "DST" -- Dirciple Tabbed
 
 dst
-  = named name -- Dirciple Tabbed
+  = named name
   $ avoidStruts
   $ windowNavigation
   $ ComboP.combineTwoP

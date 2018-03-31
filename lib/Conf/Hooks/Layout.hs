@@ -33,7 +33,8 @@ layout
   = showWorkspaceName
   $ fullscreenFloat
   $ fullScreenToggle
-  $ Layouts.Flex.flex
+  $ Layouts.Flex.flexW
+    ||| Layouts.Flex.flexS
     ||| Layouts.Tabs.tabs
     ||| Layouts.DST.dst
 

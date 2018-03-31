@@ -18,6 +18,8 @@ module Conf.Bindings.Keys.Layout
 
 import qualified Conf.Theme.Sizes as Sizes
 import Conf.Layouts.DST as DST
+import Conf.Layouts.Flex as Flex
+import Conf.Layouts.Tabs as Tabs
 
 import Conf.Bindings.Keys.Internal (subKeys)
 
@@ -40,33 +42,37 @@ import XMonad.Layout.LayoutCombinators (JumpToLayout(JumpToLayout))
 import XMonad.Util.NamedActions (addName)
 
 layout c = subKeys "Layout Management" c
-  [ ( "M-S-<Tab>", addName "Reset layout"                $ reset c)
-  , ( "M-<Tab>",   addName "Cycle all layouts"           cycleAll)
-  , ( "M-C-<Tab>", addName "Cycle sublayout"             cycleSub)
-  , ( "M-M1-d",    addName "Select DST Layout"           $ selectDST)
-  , ( "M-y",       addName "Float tiled w"               floatTiled)
-  , ( "M-S-y",     addName "Tile all floating w"         tileFloating)
-  , ( "M-C-,",     addName "Decrease master windows"     decMaster)
-  , ( "M-C-.",     addName "Increase master windows"     incMaster)
-  , ( "M-f",       addName "Fullscreen"                  fullscreen)
+  [ ( "M-S-<Tab>", addName "Reset layout"            $ reset c)
+  , ( "M-<Tab>",   addName "Cycle all layouts"       cycleAll)
+  , ( "M-C-<Tab>", addName "Cycle sublayout"         cycleSub)
+  , ( "M-y",       addName "Float tiled w"           floatTiled)
+  , ( "M-S-y",     addName "Tile all floating w"     tileFloating)
+  , ( "M-C-,",     addName "Decrease master windows" decMaster)
+  , ( "M-C-.",     addName "Increase master windows" incMaster)
+  , ( "M-f",       addName "Fullscreen"              fullscreen)
 
-  , ( "M-C-S--", addName "Reset gaps"                  resetGaps)
-  , ( "M-C--",   addName "No gaps"                     noGaps)
-  , ( "M--",     addName "Decrease gaps 5px"           $ decGaps 5)
-  , ( "M-=",     addName "Increase gaps 5px"           $ incGaps 5)
-  , ( "M-S--",   addName "Decrease gaps 10px"          $ decGaps 10)
-  , ( "M-S-=",   addName "Increase gaps 10px"          $ incGaps 10)
+  , ( "M1-1",    addName "Select Flex W BSP Layout" $ selectLayout Flex.nameW)
+  , ( "M1-2",    addName "Select Flex S 1/2 Layout" $ selectLayout Flex.nameS)
+  , ( "M1-3",    addName "Select Tabs Layout"       $ selectLayout Tabs.name)
+  , ( "M1-4",    addName "Select DST Layout"        $ selectLayout DST.name)
 
-  , ( "C-S-h",     addName "Ctrl-h passthrough"          hPass)
-  , ( "C-S-j",     addName "Ctrl-j passthrough"          jPass)
-  , ( "C-S-k",     addName "Ctrl-k passthrough"          kPass)
-  , ( "C-S-l",     addName "Ctrl-l passthrough"          lPass)
+  , ( "M-C-S--", addName "Reset gaps"                resetGaps)
+  , ( "M-C--",   addName "No gaps"                   noGaps)
+  , ( "M--",     addName "Decrease gaps 5px"         $ decGaps 5)
+  , ( "M-=",     addName "Increase gaps 5px"         $ incGaps 5)
+  , ( "M-S--",   addName "Decrease gaps 10px"        $ decGaps 10)
+  , ( "M-S-=",   addName "Increase gaps 10px"        $ incGaps 10)
+
+  , ( "C-S-h",     addName "Ctrl-h passthrough"      hPass)
+  , ( "C-S-j",     addName "Ctrl-j passthrough"      jPass)
+  , ( "C-S-k",     addName "Ctrl-k passthrough"      kPass)
+  , ( "C-S-l",     addName "Ctrl-l passthrough"      lPass)
   ]
 
 reset c      = XMonad.setLayout   $ XMonad.layoutHook c
 
-selectDST    = do
-  XMonad.sendMessage $ JumpToLayout DST.name
+selectLayout l = do
+  XMonad.sendMessage $ JumpToLayout l
   noGaps
 
 cycleAll     = XMonad.sendMessage XMonad.NextLayout
