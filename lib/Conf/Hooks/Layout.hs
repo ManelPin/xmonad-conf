@@ -20,6 +20,7 @@ import qualified Conf.Theme as Theme
 import qualified Conf.Layouts.Flex as Layouts.Flex
 import qualified Conf.Layouts.Tabs as Layouts.Tabs
 import qualified Conf.Layouts.DST as Layouts.DST
+import qualified Conf.Layouts.Stacked as Layouts.Stacked
 
 import qualified XMonad.Layout.MultiToggle.Instances as MultiToggle.Instances
 
@@ -37,6 +38,7 @@ layout
     ||| Layouts.Flex.flexS
     ||| Layouts.Tabs.tabs
     ||| Layouts.DST.dst
+    ||| Layouts.Stacked.stacked
 
 
 showWorkspaceName = showWName' Theme.showWName

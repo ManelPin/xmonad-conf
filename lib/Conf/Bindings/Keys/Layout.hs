@@ -20,6 +20,7 @@ import qualified Conf.Theme.Sizes as Sizes
 import Conf.Layouts.DST as DST
 import Conf.Layouts.Flex as Flex
 import Conf.Layouts.Tabs as Tabs
+import Conf.Layouts.Stacked as Stacked
 
 import Conf.Bindings.Keys.Internal (subKeys)
 
@@ -55,9 +56,11 @@ layout c = subKeys "Layout Management" c
   , ( "M1-2",    addName "Select Flex S 1/2 Layout" $ selectLayout Flex.nameS)
   , ( "M1-3",    addName "Select Tabs Layout"       $ selectLayout Tabs.name)
   , ( "M1-4",    addName "Select DST Layout"        $ selectLayout DST.name)
+  , ( "M1-5",    addName "Select Stacked Layout"    $ selectLayout Stacked.name)
 
-  , ( "M-C-S--", addName "Reset gaps"                resetGaps)
-  , ( "M-C--",   addName "No gaps"                   noGaps)
+  , ( "M-C-0",   addName "No gaps"                   $ setGaps 0)
+  , ( "M-C--",   addName "Reset gaps"                $ setGaps Sizes.gap)
+  , ( "M-C-=",   addName "Big gaps"                  $ setGaps Sizes.gapBig)
   , ( "M--",     addName "Decrease gaps 5px"         $ decGaps 5)
   , ( "M-=",     addName "Increase gaps 5px"         $ incGaps 5)
   , ( "M-S--",   addName "Decrease gaps 10px"        $ decGaps 10)
@@ -96,10 +99,10 @@ incGaps = modGaps Gaps.IncGap
 
 noGaps = decGaps 100 -- this is a hacky way to reset gaps, but Layout.Gaps has no 'setGaps' message
 
-resetGaps = do
+setGaps g = do
   noGaps
-  incGaps Sizes.gap
-  Spacing.setSpacing Sizes.gap
+  incGaps g
+  Spacing.setSpacing g
   return ()
 
 fullscreen = sequence_
