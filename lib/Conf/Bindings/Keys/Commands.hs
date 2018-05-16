@@ -22,8 +22,6 @@ import XMonad.Util.NamedActions (addName)
 
 import qualified XMonad.Hooks.DebugStack as DebugStack
 
-
-
 commands c = subKeys "Commands" c
   [ ( "M-<F2>", addName "Debug XMonad Stack (Current Workspace)"  DebugStack.debugStack)
   , ( "M-<F3>", addName "Debug XMonad Stack (All Workspaces)"     DebugStack.debugStackFull)
