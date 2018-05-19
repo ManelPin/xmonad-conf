@@ -60,8 +60,8 @@ windows c = subKeys "Windows" c
   ++ zipM' "M-"     "Navigate window"          dirKeys   dirs windowGo        True
   ++ zipM' "C-S-"   "Swap window"              dirKeys   dirs windowSwap      True
   ++ zipM' "M-S-"   "Navigate screen"          dirKeys   dirs screenGo        True
-  ++ zipM' "C-"     "Move window to screen"    dirKeys   dirs windowToScreen' True
-  ++ zipM' "M-"     "Swap workspace to screen" arrowKeys dirs screenSwap      True
+  ++ zipM' "M-"     "Move window to screen"    arrowKeys dirs windowToScreen' True
+  ++ zipM' "M-S-"   "Swap workspace to screen" arrowKeys dirs screenSwap      True
   )
 
 killAll = confirmPrompt hotPrompt "kill all" $ WithAll.killAll
