@@ -18,8 +18,6 @@ module Conf.Layouts.Stacked
 
 import Conf.Layouts.Internal (addTopBar, named)
 
-import qualified Conf.Theme as Theme
-
 import Conf.Theme.Gaps (gaps, spacing)
 
 import qualified XMonad.Layout.Column as Column
