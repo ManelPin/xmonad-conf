@@ -53,6 +53,7 @@ manageSpecific =
     , resource =? "desktop_window" -?> doIgnore
     , resource =? "stalonetray" -?> doIgnore
     , resource =? "vlc" -?> doFloat
+    , resource =? "feh" -?> forceCenterFloat
     , resource =? "console" -?> tileBelowNoFocus
     , isRole =? gtkFile -?> forceCenterFloat
     -- , className =? Apps.passwordMgrClass -?> doIgnore
