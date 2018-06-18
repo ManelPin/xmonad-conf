@@ -32,6 +32,8 @@ system c = subKeys "System" c
   , ( "M-C-q", addName "Rebuild & restart XMonad" xm_rebuild_restart)
   , ( "M-S-q", addName "Quit XMonad"              xm_quit)
 
+  , ( "M-`", addName "Synergy - Next Machine" syn_next_machine)
+
   -- MBP Keyboard
   , ( "C-S-<XF86PowerOff>", addName "Lock"     sys_lock)
   , ( "M-<XF86PowerOff>",   addName "Shutdown" sys_shutdown)
@@ -67,7 +69,6 @@ system c = subKeys "System" c
   , ( "S-<XF86AudioLowerVolume>", addName "Volume Super Down" vol_sdown)
   , ( "S-<XF86AudioRaiseVolume>", addName "Volume Super Up"   vol_sup)
 
-
   , ( "<XF86AudioPlay>",   addName "Audio Play/Pause" audio_play)
   , ( "<XF86AudioPrev>",   addName "Audio Prev"       audio_prev)
   , ( "<XF86AudioNext>",   addName "Audio Next"       audio_next)
@@ -91,6 +92,8 @@ xm_restart         = spawn "xmonad --restart"
 xm_rebuild_restart = spawn "$HOME/git/xmonad-conf/build.sh -r" -- TODO: Don't directly reference this path
 
 xm_quit = confirmPrompt hotPrompt "Quit XMonad" $ io (exitWith ExitSuccess)
+
+syn_next_machine = spawn "synctl -rX 500 -Y 300"
 
 sys_lock     = spawn "system lock"
 sys_reboot   = confirmPrompt hotPrompt "Reboot System"   $ spawn "reboot"
