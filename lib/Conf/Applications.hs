@@ -168,3 +168,6 @@ screencast = "peek"
 
 screencastClass :: String
 screencastClass = "Peek"
+
+qrGen :: String
+qrGen = "xcqr"

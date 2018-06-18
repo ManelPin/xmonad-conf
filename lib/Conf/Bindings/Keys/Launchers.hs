@@ -62,6 +62,9 @@ launchers c = subKeys "Launchers" c
   , ("M-S-f",             addName "File Manager Scratchpad"     $ NS.action Apps.filemanagerClass)
   , ("M-t",               addName "Task Scratchpad"             $ NS.action Apps.taskClass)
   , ("M-<XF86AudioPlay>", addName "Music Player Scratchpad"     $ NS.action Apps.musicClass)
+
+  -- Misc
+  , ( "M-<F4>", addName "Generate QR Code from Clipboard contents" $ spawn Apps.qrGen)
   ]
 
 className n = ManageHook.className =? n
