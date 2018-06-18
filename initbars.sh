@@ -16,7 +16,7 @@ main () {
 EOF
 )
 
-    xmobar -x $sid --add-command="$cmds" $basedir/xmobar.conf &
+    $basedir/xmobar.sh -x $sid --add-command="$cmds" $basedir/xmobar.conf &
   done
 }
 
