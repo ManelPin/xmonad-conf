@@ -30,7 +30,7 @@ import qualified XMonad.Actions.WithAll as WithAll
 import qualified XMonad.Layout.ComboP as ComboP
 import qualified XMonad.Layout.SubLayouts as SubLayouts
 
-import XMonad (sendMessage, screenWorkspace, whenJust)
+import XMonad (sendMessage, screenWorkspace, whenJust, spawn)
 import XMonad.Actions.CopyWindow (kill1)
 import XMonad.Actions.ConditionalKeys (bindOn, XCond(LD))
 import XMonad.Actions.GroupNavigation (nextMatch, Direction(History))
@@ -55,6 +55,8 @@ windows c = subKeys "Windows" c
     , ("M-<KP_Down>",     addName "Select main screen"   $ selectScreen 0)
     , ("M-<KP_Insert>",   addName "Select bottom screen" $ selectScreen 2)
     , ("M-<period>",      addName "Select Prev Window"   $ nextMatch History (return True))
+
+    , ("M-S-`", addName "Move cursor to active window" cursorToActiveWin)
     ]
   ++ zipM  "M-C-"   "Merge w/sublayout"        dirKeys   dirs mergeSub
   ++ zipM' "M-"     "Navigate window"          dirKeys   dirs windowGo        True
@@ -79,6 +81,10 @@ navU = bindOn LD
   ]
 
 selectScreen sid = screenWorkspace sid >>= flip whenJust (Operations.windows . StackSet.view)
+
+cursorToActiveWin
+  -- TODO: create a mousectl script for stuff like this
+  = spawn "xdotool getactivewindow mousemove --window '%1' 0 0 mousemove_relative --sync 1 1"
 
 windowToScreen' d b = do
   windowToScreen d b
