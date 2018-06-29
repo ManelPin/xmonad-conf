@@ -51,9 +51,9 @@ windows c = subKeys "Windows" c
     , ("M-S-;",           addName "Navigate window L"    $ windowGo L True)
     , ("M-S-'",           addName "Navigate window R"    $ windowGo R True)
     , ("M-C-S-m",         addName "Combo swap"             comboSwap)
-    , ("M-<KP_End>",      addName "Select left screen"   $ selectScreen 1)
-    , ("M-<KP_Down>",     addName "Select main screen"   $ selectScreen 0)
-    , ("M-<KP_Insert>",   addName "Select bottom screen" $ selectScreen 2)
+    , ("M-<KP_Left>",     addName "Select left screen"   $ selectScreen 0)
+    , ("M-<KP_Begin>",    addName "Select main screen"   $ selectScreen 1)
+    , ("M-<KP_Down>",     addName "Select bottom screen" $ selectScreen 2)
     , ("M-<period>",      addName "Select Prev Window"   $ nextMatch History (return True))
 
     , ("M-S-`", addName "Move cursor to active window" cursorToActiveWin)
