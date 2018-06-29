@@ -32,8 +32,6 @@ system c = subKeys "System" c
   , ( "M-C-q", addName "Rebuild & restart XMonad" xm_rebuild_restart)
   , ( "M-S-q", addName "Quit XMonad"              xm_quit)
 
-  , ( "M-`", addName "Synergy - Next Machine" syn_next_machine)
-
   -- MBP Keyboard
   , ( "C-S-<XF86PowerOff>", addName "Lock"     sys_lock)
   , ( "M-<XF86PowerOff>",   addName "Shutdown" sys_shutdown)
@@ -92,8 +90,6 @@ xm_restart         = spawn "xmonad --restart"
 xm_rebuild_restart = spawn "$HOME/git/xmonad-conf/build.sh -r" -- TODO: Don't directly reference this path
 
 xm_quit = confirmPrompt hotPrompt "Quit XMonad" $ io (exitWith ExitSuccess)
-
-syn_next_machine = spawn "synctl -rX 500 -Y 300"
 
 sys_lock     = spawn "system lock"
 sys_reboot   = confirmPrompt hotPrompt "Reboot System"   $ spawn "reboot"
