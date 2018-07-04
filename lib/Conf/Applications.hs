@@ -56,7 +56,10 @@ pomClass :: String
 pomClass = "st_pom"
 
 weechat :: String
-weechat = printf "st -x st.wc -c %s zsh -c 'cd $HOME;. $HOME/.zshrc;weechat'" weechatClass
+weechat = printf cmd weechatClass
+  where
+    cmd =  "st -x st.wc -c %s zsh -c 'cd $HOME;. $HOME/.zshrc;"
+        ++ "export DISABLE_AUTO_TITLE='true'; echo -en \"\\e]2;WeeChat\\a\"; weechat'"
 
 weechatClass :: String
 weechatClass = "st_WEECHAT"
