@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# bash "strict mode"
+# http://redsymbol.net/articles/unofficial-bash-strict-mode/
+set -euo pipefail
+IFS=$'\n\t'
+
 tmpbase="/tmp"
 installdir="$HOME/.xmonad"
 restart=0
@@ -60,7 +65,7 @@ echo "Installing to $installdir..."
 rm -rf $HOME/.xmonad
 mv $WORKDIR $installdir
 
-if [[ $restart = 1 ]]; then
+if [[ $restart == 1 ]]; then
   echo "Restarting XMonad..."
   xmonad --restart
 fi
