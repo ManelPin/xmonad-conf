@@ -52,11 +52,11 @@ layout c = subKeys "Layout Management" c
   , ( "M-C-.",     addName "Increase master windows" incMaster)
   , ( "M-f",       addName "Fullscreen"              fullscreen)
 
-  , ( "M1-1",    addName "Select Flex W BSP Layout" $ selectLayout Flex.nameW)
-  , ( "M1-2",    addName "Select Flex S 1/2 Layout" $ selectLayout Flex.nameS)
-  , ( "M1-3",    addName "Select Tabs Layout"       $ selectLayout Tabs.name)
-  , ( "M1-4",    addName "Select DST Layout"        $ selectLayout DST.name)
-  , ( "M1-5",    addName "Select Stacked Layout"    $ selectLayout Stacked.name)
+  , ( "<F1>",    addName "Select Flex W BSP Layout" $ selectLayout Flex.nameW)
+  , ( "<F2>",    addName "Select Flex S 1/2 Layout" $ selectLayout Flex.nameS)
+  , ( "<F3>",    addName "Select Tabs Layout"       $ selectLayout Tabs.name)
+  , ( "<F4>",    addName "Select DST Layout"        $ selectLayout DST.name)
+  , ( "<F5>",    addName "Select Stacked Layout"    $ selectLayout Stacked.name)
 
   , ( "M-C-0",   addName "No gaps"                   $ setGaps 0)
   , ( "M-C--",   addName "Reset gaps"                $ setGaps Sizes.gap)
