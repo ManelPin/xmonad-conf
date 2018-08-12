@@ -103,7 +103,7 @@ ppFocus pipe sid =
   whenCurrentOn sid
     DynamicLog.def
       { DynamicLog.ppTitle   = xmobarColor Colors.teal   "" . DynamicLog.shorten 50
-      , DynamicLog.ppLayout  = xmobarColor Colors.blue  ""
+      , DynamicLog.ppLayout  = xmobarColor Colors.blue   ""
       , DynamicLog.ppSep     = xmobarColor Colors.base2  "" " \\ "
       , DynamicLog.ppOrder   = \(_ws:layout:title:_) -> [layout, title]
       , DynamicLog.ppOutput  = appendFile pipe . decodeString . (++ "\n")
@@ -112,10 +112,10 @@ ppFocus pipe sid =
 ppWorkspaces' :: DynamicLog.PP
 ppWorkspaces' =
     DynamicLog.def
-      { DynamicLog.ppCurrent         = xmobarColor Colors.teal    "" . DynamicLog.wrap " " " "
-      , DynamicLog.ppVisible         = xmobarColor Colors.violet   "" . DynamicLog.wrap " " " "
-      , DynamicLog.ppUrgent          = xmobarColor Colors.red     "" . DynamicLog.wrap " " " "
-      , DynamicLog.ppHidden          = xmobarColor Colors.blue  "" . DynamicLog.wrap " " " "
+      { DynamicLog.ppCurrent         = xmobarColor Colors.teal   "" . DynamicLog.wrap " " " "
+      , DynamicLog.ppVisible         = xmobarColor Colors.violet "" . DynamicLog.wrap " " " "
+      , DynamicLog.ppUrgent          = xmobarColor Colors.red    "" . DynamicLog.wrap " " " "
+      , DynamicLog.ppHidden          = xmobarColor Colors.blue   "" . DynamicLog.wrap " " " "
       , DynamicLog.ppHiddenNoWindows = xmobarColor Colors.base3  "" . DynamicLog.wrap " " " "
       , DynamicLog.ppWsSep           = xmobarColor Colors.base2  "" "/"
       -- , DynamicLog.ppLayout          = xmobarColor Colors.blue  ""
