@@ -18,6 +18,7 @@ module Conf.Bindings.Keys.Windows
 
 import Conf.Bindings.Keys.Internal (subKeys, zipM, zipM', dirKeys, arrowKeys, dirs)
 
+import qualified Conf.Applications as Apps
 import qualified Conf.Layouts.DST as DST
 import qualified Conf.Layouts.Tabs as Tabs
 
@@ -40,6 +41,8 @@ import XMonad.Prompt.ConfirmPrompt (confirmPrompt)
 import XMonad.Util.NamedActions (addName)
 import XMonad.Util.NamedScratchpad (scratchpadWorkspaceTag)
 
+-- import XMonad ((.|.))
+
 windows c = subKeys "Windows" c
   ( [ ("M-<Backspace>",   addName "Kill"                   kill1)
     , ("M-S-<Backspace>", addName "Kill all"               killAll)
@@ -55,6 +58,8 @@ windows c = subKeys "Windows" c
     , ("M-<KP_Begin>",    addName "Select main screen"   $ selectScreen 1)
     , ("M-<KP_Down>",     addName "Select bottom screen" $ selectScreen 2)
     , ("M-<period>",      addName "Select Prev Window"   $ nextMatch History (return True))
+
+    , ("M-`",   addName "Dpyctl toggle" $ dpyctl "-n")
 
     , ("M-S-`", addName "Move cursor to active window" cursorToActiveWin)
     ]
@@ -98,3 +103,7 @@ shiftToNSP = XMonad.windows . StackSet.shift $ scratchpadWorkspaceTag
 
 comboSwap = sendMessage $ ComboP.SwapWindow
 mergeSub  = sendMessage . SubLayouts.pullGroup
+
+dpyctl p = do
+  spawn $ Apps.dpyctl ++ " " ++ p
+  return ()

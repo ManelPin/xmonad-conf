@@ -186,3 +186,6 @@ audioEqualizer = "qpaeq"
 
 audioEqualizerClass :: String
 audioEqualizerClass = "qpaeq"
+
+dpyctl :: String
+dpyctl = "dpyctl"

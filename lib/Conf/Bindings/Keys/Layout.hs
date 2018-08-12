@@ -35,7 +35,6 @@ import qualified XMonad.Layout.MultiToggle as MultiToggle
 import qualified XMonad.Layout.MultiToggle.Instances as MultiToggle.Instances
 import qualified XMonad.Layout.Gaps as Gaps
 import qualified XMonad.Layout.Spacing as Spacing
-import qualified XMonad.Layout.SubLayouts as SubLayouts
 
 import qualified XMonad.Util.Paste as Paste
 
@@ -43,9 +42,7 @@ import XMonad.Layout.LayoutCombinators (JumpToLayout(JumpToLayout))
 import XMonad.Util.NamedActions (addName)
 
 layout c = subKeys "Layout Management" c
-  [ ( "M-S-<Tab>", addName "Reset layout"            $ reset c)
-  , ( "M-<Tab>",   addName "Cycle all layouts"       cycleAll)
-  , ( "M-C-<Tab>", addName "Cycle sublayout"         cycleSub)
+  [ ( "M-S-F1", addName "Reset layout"            $ reset c)
   , ( "M-y",       addName "Float tiled w"           floatTiled)
   , ( "M-S-y",     addName "Tile all floating w"     tileFloating)
   , ( "M-C-,",     addName "Decrease master windows" decMaster)
@@ -77,9 +74,6 @@ reset c      = XMonad.setLayout   $ XMonad.layoutHook c
 selectLayout l = do
   XMonad.sendMessage $ JumpToLayout l
   noGaps
-
-cycleAll     = XMonad.sendMessage XMonad.NextLayout
-cycleSub     = SubLayouts.toSubl  XMonad.NextLayout
 
 floatTiled   = XMonad.withFocused toggleFloat
 tileFloating = WithAll.sinkAll
