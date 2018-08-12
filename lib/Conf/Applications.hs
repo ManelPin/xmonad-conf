@@ -180,3 +180,9 @@ volumeControl = "pavucontrol"
 
 volumeControlClass :: String
 volumeControlClass = "Pavucontrol"
+
+audioEqualizer :: String
+audioEqualizer = "qpaeq"
+
+audioEqualizerClass :: String
+audioEqualizerClass = "qpaeq"

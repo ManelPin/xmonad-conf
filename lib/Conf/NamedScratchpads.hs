@@ -103,6 +103,12 @@ namedScratchpads =
        Apps.volumeControl
        (className Apps.volumeControlClass)
        $ centerFloat (2/3) (2/3)
+
+  -- Volume Control
+  , NS Apps.audioEqualizerClass
+       Apps.audioEqualizer
+       (className Apps.audioEqualizerClass)
+       $ centerFloat (2/3) (2/3)
   ]
 
 action = namedScratchpadAction     namedScratchpads
