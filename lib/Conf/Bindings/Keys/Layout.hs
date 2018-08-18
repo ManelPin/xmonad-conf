@@ -56,8 +56,8 @@ layout c = subKeys "Layout Management" c
   , ( "<F5>",    addName "Select Stacked Layout"    $ selectLayout Stacked.name)
 
   , ( "M-C-0",   addName "No gaps"                   $ setGaps 0)
-  , ( "M-C--",   addName "Reset gaps"                $ setGaps Sizes.gap)
-  , ( "M-C-=",   addName "Big gaps"                  $ setGaps Sizes.gapBig)
+  , ( "M-C--",   addName "Reset gaps"                $ setGaps $ fromIntegral Sizes.gap)
+  , ( "M-C-=",   addName "Big gaps"                  $ setGaps $ fromIntegral Sizes.gapBig)
   , ( "M--",     addName "Decrease gaps 5px"         $ decGaps 5)
   , ( "M-=",     addName "Increase gaps 5px"         $ incGaps 5)
   , ( "M-S--",   addName "Decrease gaps 10px"        $ decGaps 10)
@@ -82,7 +82,7 @@ decMaster    = XMonad.sendMessage (XMonad.IncMasterN (-1))
 incMaster    = XMonad.sendMessage (XMonad.IncMasterN 1)
 
 modGaps m n = do
-  Spacing.incSpacing n
+  Spacing.incScreenWindowSpacing $ fromIntegral n
   mapM_
     (\d -> XMonad.sendMessage (m n d))
     [Gaps.L, Gaps.D, Gaps.U, Gaps.R]
@@ -96,7 +96,7 @@ noGaps = decGaps 100 -- this is a hacky way to reset gaps, but Layout.Gaps has n
 setGaps g = do
   noGaps
   incGaps g
-  Spacing.setSpacing g
+  Spacing.setScreenWindowSpacing $ fromIntegral g
   return ()
 
 fullscreen = sequence_

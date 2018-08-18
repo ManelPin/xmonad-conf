@@ -16,7 +16,7 @@ module Conf.Theme.Sizes where
 
 import qualified Data.Word as Word
 
-gap:: Int
+gap :: Int
 gap = 16
 
 gapSmall :: Int

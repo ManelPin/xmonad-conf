@@ -35,4 +35,4 @@ dirs      = [  D  ,   U  ,   L  ,   R  ]
 
 wsKeys = map show $ [1 .. 9] ++ [0]
 
-tryMsgR x y = sequence_ [(MessageFeedback.tryMessage_ x y), XMonad.refresh]
+tryMsgR x y = sequence_ [(MessageFeedback.tryMessageWithNoRefreshToCurrent x y), XMonad.refresh]

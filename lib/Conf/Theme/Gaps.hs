@@ -21,13 +21,17 @@ module Conf.Theme.Gaps
 
 import Conf.Theme.Sizes (gap, gapBig, gapSmall)
 
-import qualified XMonad.Layout.Spacing as Spacing
+import XMonad.Layout.Spacing (spacingRaw, Border(..))
 
 import XMonad.Layout.WindowNavigation (Direction2D(D, L, R, U))
 
 import qualified XMonad.Layout.Gaps as Gaps
 
-spacing = Spacing.spacing gap
+uniformBorder :: Integer -> Border
+uniformBorder i = Border i i i i
+
+spacing = spacingRaw False (uniformBorder g') True (uniformBorder g') True
+  where g' = fromIntegral gap
 
 -- TODO: Write a function to generate gaps for given px size
 gaps = Gaps.gaps [(U, gap), (D, gap), (L, gap), (R, gap)]
