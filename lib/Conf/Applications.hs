@@ -158,7 +158,7 @@ onepassClass :: String
 onepassClass = "khgocmkkpikpnmmkgmdnfckapcdkgfaf__popup_popup.html"
 
 launcher :: String
-launcher = "rofi -matching fuzzy -modi combi -show combi -combi-modi run,drun"
+launcher = "rofi -monitor -4 -matching fuzzy -modi combi -show combi -combi-modi run,drun"
 
 statusBar :: String
 statusBar = "xmobar"
