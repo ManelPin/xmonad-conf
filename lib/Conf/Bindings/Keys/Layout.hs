@@ -21,6 +21,7 @@ import Conf.Layouts.DST as DST
 import Conf.Layouts.Flex as Flex
 import Conf.Layouts.Tabs as Tabs
 import Conf.Layouts.Stacked as Stacked
+import Conf.Layouts.CDT as CDT
 
 import Conf.Bindings.Keys.Internal (subKeys)
 
@@ -54,6 +55,7 @@ layout c = subKeys "Layout Management" c
   , ( "<F3>",    addName "Select Tabs Layout"       $ selectLayout Tabs.name)
   , ( "<F4>",    addName "Select DST Layout"        $ selectLayout DST.name)
   , ( "<F5>",    addName "Select Stacked Layout"    $ selectLayout Stacked.name)
+  , ( "<F6>",    addName "Select CDT Layout"        $ selectLayout CDT.name)
 
   , ( "M-C-0",   addName "No gaps"                   $ setGaps 0)
   , ( "M-C--",   addName "Reset gaps"                $ setGaps $ fromIntegral Sizes.gap)
