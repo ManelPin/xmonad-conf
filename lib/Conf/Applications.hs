@@ -16,14 +16,12 @@ import Text.Printf
 
 terminal :: String
 terminal = printf "st -c %s" terminalClass
--- terminal = printf "st -c %s zsh -ic 'cd $HOME;. $HOME/.zshrc'" terminalClass
 
 terminalClass :: String
 terminalClass = "st_TERM"
 
 terminalScratch :: String
 terminalScratch = printf "st -c %s" terminalScratchClass
--- terminalScratch = printf "st -c %s zsh -ic 'cd $HOME;. $HOME/.zshrc'" terminalScratchClass
 
 terminalScratchClass :: String
 terminalScratchClass = "st_SCRATCH"
