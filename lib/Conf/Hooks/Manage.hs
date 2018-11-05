@@ -35,6 +35,7 @@ import XMonad (className, doFloat, doIgnore, resource)
 import XMonad.Hooks.InsertPosition (insertPosition)
 import XMonad.Hooks.ManageHelpers
        (doCenterFloat, doFullFloat, isDialog, isFullscreen, isInProperty)
+import XMonad.Util.NamedScratchpad (customFloating)
 import XMonad ((<&&>), (<+>), (=?))
 import XMonad.Hooks.ManageHelpers ((-?>))
 
@@ -53,7 +54,7 @@ manageSpecific =
     , resource =? "desktop_window" -?> doIgnore
     , resource =? "stalonetray" -?> doIgnore
     , resource =? "vlc" -?> doFloat
-    , resource =? "feh" -?> forceCenterFloat
+    , resource =? "feh" -?> centerFloat (3/4) (3/4)
     , resource =? "console" -?> tileBelowNoFocus
     , isRole =? gtkFile -?> forceCenterFloat
     -- , className =? Apps.passwordMgrClass -?> doIgnore
@@ -90,3 +91,9 @@ forceCenterFloat = ManageHelpers.doFloatDep move
     h = 1 / 2
     x = (1 - w) / 2
     y = (1 - h) / 2
+
+centerFloat width height
+  = customFloating $ StackSet.RationalRect marginLeft marginTop width height
+    where
+      marginLeft = (1 - width) / 2
+      marginTop = (1 - height) / 2
