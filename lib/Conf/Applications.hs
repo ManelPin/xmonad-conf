@@ -173,6 +173,9 @@ screencastClass = "Peek"
 qrGen :: String
 qrGen = "xcqr"
 
+clipView :: String
+clipView = "xcf"
+
 volumeControl :: String
 volumeControl = "pavucontrol"
 

@@ -66,8 +66,9 @@ launchers c = subKeys "Launchers" c
   , ("M-<XF86AudioMute>",   addName "Volume Control Scratchpad"   $ NS.action Apps.volumeControlClass)
   , ("M-S-<XF86AudioMute>", addName "Audio Eqalizer Scratchpad"   $ NS.action Apps.audioEqualizerClass)
 
-  -- Misc
+  -- Clipboard
   , ( "M-<F4>", addName "Generate QR Code from Clipboard contents" $ spawn Apps.qrGen)
+  , ( "M-<F5>", addName "View image from path in Clipboard contents" $ spawn Apps.clipView)
   ]
 
 className n = ManageHook.className =? n
