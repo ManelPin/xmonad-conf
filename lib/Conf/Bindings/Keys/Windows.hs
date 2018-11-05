@@ -20,6 +20,7 @@ import Conf.Bindings.Keys.Internal (subKeys, zipM, zipM', dirKeys, arrowKeys, di
 
 import qualified Conf.Applications as Apps
 import qualified Conf.Layouts.DST as DST
+import qualified Conf.Layouts.CDT as CDT
 import qualified Conf.Layouts.Tabs as Tabs
 
 import Conf.Theme (hotPrompt)
@@ -76,12 +77,14 @@ killAll = confirmPrompt hotPrompt "kill all" $ WithAll.killAll
 navD = bindOn LD
   [ (Tabs.name,  XMonad.windows     StackSet.focusDown)
   , (DST.name,   XMonad.windows     StackSet.focusDown)
+  , (CDT.name,   XMonad.windows     StackSet.focusDown)
   , ("",         SubLayouts.onGroup StackSet.focusDown')
   ]
 
 navU = bindOn LD
   [ (Tabs.name,   XMonad.windows     StackSet.focusUp)
   , (DST.name,    XMonad.windows     StackSet.focusUp)
+  , (CDT.name,    XMonad.windows     StackSet.focusUp)
   , ("",          SubLayouts.onGroup StackSet.focusUp')
   ]
 
