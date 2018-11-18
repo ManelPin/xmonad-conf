@@ -22,6 +22,7 @@ import qualified Conf.Layouts.Tabs as Layouts.Tabs
 import qualified Conf.Layouts.DST as Layouts.DST
 import qualified Conf.Layouts.Stacked as Layouts.Stacked
 import qualified Conf.Layouts.CDT as Layouts.CDT
+import qualified Conf.Layouts.Horizontal as Layouts.Horizontal
 
 import qualified XMonad.Layout.MultiToggle.Instances as MultiToggle.Instances
 
@@ -41,6 +42,7 @@ layout
     ||| Layouts.DST.dst
     ||| Layouts.Stacked.stacked
     ||| Layouts.CDT.cdt
+    ||| Layouts.Horizontal.horizontal
 
 
 showWorkspaceName = showWName' Theme.showWName

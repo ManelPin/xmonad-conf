@@ -22,6 +22,7 @@ import Conf.Layouts.Flex as Flex
 import Conf.Layouts.Tabs as Tabs
 import Conf.Layouts.Stacked as Stacked
 import Conf.Layouts.CDT as CDT
+import Conf.Layouts.Horizontal as Horizontal
 
 import Conf.Bindings.Keys.Internal (subKeys)
 
@@ -50,11 +51,12 @@ layout c = subKeys "Layout Management" c
   , ( "M-C-.",     addName "Increase master windows" incMaster)
   , ( "M-f",       addName "Fullscreen"              fullscreen)
 
-  , ( "<F1>",    addName "Select Flex W BSP Layout" $ selectLayout Flex.nameW)
-  , ( "<F2>",    addName "Select Flex S 1/2 Layout" $ selectLayout Flex.nameS)
+  , ( "<F2>",    addName "Select Flex W BSP Layout" $ selectLayout Flex.nameW)
+  , ( "C-<F2>",  addName "Select Flex S 1/2 Layout" $ selectLayout Flex.nameS)
   , ( "<F3>",    addName "Select Tabs Layout"       $ selectLayout Tabs.name)
   , ( "<F4>",    addName "Select DST Layout"        $ selectLayout DST.name)
   , ( "<F5>",    addName "Select Stacked Layout"    $ selectLayout Stacked.name)
+  , ( "C-<F5>",  addName "Select Horizontal Layout" $ selectLayout Horizontal.name)
   , ( "<F6>",    addName "Select CDT Layout"        $ selectLayout CDT.name)
 
   , ( "M-C-0",   addName "No gaps"                   $ setGaps 0)
