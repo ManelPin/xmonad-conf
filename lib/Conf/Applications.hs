@@ -81,7 +81,7 @@ cliFilemanagerClass :: String
 cliFilemanagerClass = "st_RANGER"
 
 calc :: String
-calc = printf "st -x st.calc -c %s zsh -c 'cd $HOME/.calc;. $HOME/.zshrc;R'" calcClass
+calc = printf "st -x st.calc -c %s zsh -c 'cd $HOME/.calc;. $HOME/.zshrc;./calc'" calcClass
 
 calcClass :: String
 calcClass = "st_CALC"
